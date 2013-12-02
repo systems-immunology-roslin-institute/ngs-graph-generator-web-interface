@@ -191,7 +191,9 @@
                     else
                         echo "<td>$minutes:$seconds</td>\n";
 
-                    if( $finished > 0 )
+                    if( $abort )
+                        echo "<td>Aborted</td>\n";
+                    else if( $finished > 0 )
                     {
                         $fileLinks = "";
 
@@ -220,10 +222,6 @@
                 else
                 {
                     echo "<td>Not started</td>\n";
-                    if( $abort )
-                        echo "<td>Aborted</td>\n";
-                    else
-                        echo "<td>Not started</td>\n";
                 }
 
                 echo "</tr>\n";

@@ -1,0 +1,175 @@
+label
+{
+    width: 45%;
+    clear: both;
+    float: left;
+    text-align: right;
+    margin-right: 0.5em;
+    display: block;
+}
+
+input
+{
+    background: darkgray;
+    border: 1px solid white;
+    color: white;
+}
+
+input.num
+{
+    background: darkgray;
+    border: 1px solid white;
+    color: white;
+    width:3em;
+    text-align: right;
+}
+
+select
+{
+    background: darkgray;
+    border: 1px solid white;
+    color: white;
+}
+
+fieldset
+{
+    padding: 0.5em;
+    margin: 0.5em;
+    background-color: darkgray;
+    border: 1px solid white;
+}
+
+fieldset.inner
+{
+    border: 1px dashed white;
+}
+
+legend
+{
+    background-color: darkgray;
+    font-weight: bold;
+    border: 1px solid white;
+    padding: 4px 8px;
+}
+
+body
+{
+    background: lightblue;
+    color: floralwhite;
+    font-family: sans-serif;
+}
+
+a:visited { color: white; }
+a:link { color: white; text-decoration: underline; }
+a:hover { color: red; text-decoration: underline; }
+a:active { color: red; }
+
+a.button:visited
+{
+    padding: 0.15em;
+    line-height: 2em;
+    background-color: white;
+    border: 1px solid gray;
+    color: black;
+    text-decoration: none;
+}
+
+a.button:link
+{
+    padding: 0.15em;
+    line-height: 2em;
+    background-color: white;
+    border: 1px solid gray;
+    color: black;
+    text-decoration: none;
+}
+
+a.button:hover
+{
+    border: 1px solid white;
+    background-color: gray;
+}
+
+a.button:active
+{
+    color: red;
+}
+
+div.headerfooter
+{
+    position: relative;
+    clear: both;
+    background-color: darkgray;
+    border: 1px solid white;
+    padding-left: 5mm;
+    background-image: url(roslin.png);
+    background-repeat: no-repeat;
+    background-position: right;
+    padding: 0.5em;
+}
+
+div.header
+{
+    height: 60px;
+    font-size: 50px;
+}
+
+div.footer
+{
+    height: 60px;
+    line-height: 60px;
+}
+
+table
+{
+	border-collapse: collapse;
+}
+
+tbody tr:hover td
+{
+	background: #404040;
+}
+
+tbody td img
+{
+	border: 0px;
+}
+
+thead th
+{
+	font-size: 14px;
+	text-align: center;
+	border: 1px solid white;
+	height: 40px;
+}
+
+tbody td
+{
+    padding: 0.5em;
+	font-size: 12px;
+    text-align: center;
+	background: #333333;
+	border: 1px solid white;
+	height: 40px;
+}
+
+#results_table
+{
+    width: 100%;
+}
+
+#control_buttons
+{
+    text-align: right;
+}
+
+#settings
+{
+    float: left;
+    width: 100%;
+}
+
+#genes
+{
+    width: 40%;
+}

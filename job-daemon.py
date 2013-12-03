@@ -42,7 +42,7 @@ def loadDbSettings():
     except:
         return False
 
-    if dbHost == None or dbUser == None or dbPass == None or dbName == None
+    if dbHost == None or dbUser == None or dbPass == None or dbName == None:
         return False
 
     return True

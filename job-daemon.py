@@ -19,11 +19,33 @@ import subprocess
 import glob
 from optparse import OptionParser
 import warnings
+import json
 
-dbHost          = "localhost"
-dbName          = "seq_graph"
-dbUser          = "root"
-dbPass          = "mysqlpass"
+dbHost = None
+dbUser = None
+dbPass = None
+dbName = None
+
+def loadDbSettings():
+    try:
+        dbSettingsFile = open('dbSettings.json')
+        dbSettingsData = json.load(dbSettingsFile)
+        global dbHost
+        global dbUser
+        global dbPass
+        global dbName
+        dbHost = dbSettingsData['dbHost']
+        dbUser = dbSettingsData['dbUser']
+        dbPass = dbSettingsData['dbPass']
+        dbName = dbSettingsData['dbName']
+        dbSettingsFile.close()
+    except:
+        return False
+
+    if dbHost == None or dbUser == None or dbPass == None or dbName == None
+        return False
+
+    return True
 
 dbSettingsTable = "settings"
 dbJobsTable     = "jobs"
@@ -385,6 +407,10 @@ def main():
 
     signal.signal(signal.SIGINT, sigHandler)
     signal.signal(signal.SIGTERM, sigHandler)
+
+    if not loadDbSettings():
+        print("Failed to load database settings")
+        return
 
     db = MySQLdb.connect(host = dbHost, user = dbUser, passwd = dbPass, db = dbName)
     if db != None and initialiseDb(db, options.formatDb, options.sqlFilename):

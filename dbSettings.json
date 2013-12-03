@@ -1,0 +1,7 @@
+{
+    // Fill in the real values below
+    "dbHost": "host",
+    "dbUser": "user",
+    "dbPass": "pass",
+    "dbName": "database"
+}

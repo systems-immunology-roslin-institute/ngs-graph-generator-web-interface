@@ -1,25 +1,22 @@
 <?php
-    // Change these to match your setup
-    $dbHost             = "localhost";
-    $dbUser             = "root";
-    $dbPassword         = "mysqlpass";
-    $dbName             = "seq_graph";
-
     $dbSettingsTable    = "settings";
     $dbJobsTable        = "jobs";
     $dbResultsTable     = "results";
     $dbInputsTable      = "inputs";
 
-    $viewWindow         = 10;
-
     function openDatabase( )
     {
-        global  $dbHost;
-        global  $dbUser;
-        global  $dbPassword;
-        global  $dbName;
+        $scriptDirectory = realpath(dirname(__FILE__));
+        $dbSettingsFile = $scriptDirectory . "/dbSettings.json";
+        $dbSettingsData = file_get_contents($dbSettingsFile);
+        $dbSettings = json_decode($dbSettingsData, true);
 
-        $db = mysql_connect( $dbHost, $dbUser, $dbPassword ) or
+        $dbHost = $dbSettings['dbHost'];
+        $dbUser = $dbSettings['dbUser'];
+        $dbPass = $dbSettings['dbPass'];
+        $dbName = $dbSettings['dbName'];
+
+        $db = mysql_connect( $dbHost, $dbUser, $dbPass ) or
             die( "Could not connect: " . mysql_error( ) );
 
         if( $db )

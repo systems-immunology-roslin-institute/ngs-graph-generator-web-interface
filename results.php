@@ -69,6 +69,7 @@
                         "$dbJobsTable.timequeued, " .
                         "$dbJobsTable.timestarted, " .
                         "$dbJobsTable.timefinished, " .
+                        "$dbJobsTable.exitcode, " .
                         "$dbJobsTable.email, " .
                         "$dbJobsTable.abort " .
                         "FROM $dbJobsTable";
@@ -152,6 +153,7 @@
                 $queued             = $row[ 'timequeued' ];
                 $started            = $row[ 'timestarted' ];
                 $finished           = $row[ 'timefinished' ];
+                $exitcode           = $row[ 'exitcode' ];
                 $email              = $row[ 'email' ];
                 $abort              = $row[ 'abort' ];
 
@@ -195,23 +197,30 @@
                         echo "<td>Aborted</td>\n";
                     else if( $finished > 0 )
                     {
-                        $fileLinks = "";
-
-                        $resultsQuery = "SELECT id, filename FROM $dbResultsTable " .
-                                    "WHERE jobid = '$jobId' ORDER BY filename";
-
-                        $resultsResult = mysql_query( $resultsQuery ) or
-                            die( "Query '$resultsQuery' failed: " . mysql_error( ) );
-
-                        while( $row = mysql_fetch_array( $resultsResult, MYSQL_ASSOC ) )
+                        if( $exitcode == 0 )
                         {
-                            $fileLinks = $fileLinks .
-                                "<a href=\"file.php?id=" . $row[ 'id' ] . "\">" .
-                                $row[ 'filename' ] . "</a> ";
-                        }
-                        mysql_free_result( $resultsResult );
+                            $fileLinks = "";
 
-                        echo "<td>$fileLinks</td>\n";
+                            $resultsQuery = "SELECT id, filename FROM $dbResultsTable " .
+                                "WHERE jobid = '$jobId' ORDER BY filename";
+
+                            $resultsResult = mysql_query( $resultsQuery ) or
+                                die( "Query '$resultsQuery' failed: " . mysql_error( ) );
+
+                            while( $row = mysql_fetch_array( $resultsResult, MYSQL_ASSOC ) )
+                            {
+                                $fileLinks = $fileLinks .
+                                    "<a href=\"file.php?id=" . $row[ 'id' ] . "\">" .
+                                    $row[ 'filename' ] . "</a> ";
+                            }
+                            mysql_free_result( $resultsResult );
+
+                            echo "<td>$fileLinks</td>\n";
+                        }
+                        else
+                        {
+                            echo "<td>FAILED (exit code $exitcode)</td>\n";
+                        }
                     }
                     else
                         echo "<td>" .

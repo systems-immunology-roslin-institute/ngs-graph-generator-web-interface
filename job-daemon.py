@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/opt/apps/python/2.7.3/bin/python
 #
 # Daemon for seq graph web frontend
 #
@@ -120,8 +120,9 @@ class JobThread(threading.Thread):
 
                 # Start script
                 scriptProcess = subprocess.Popen(scriptWithOptions, shell=True)
+                exitCode = scriptProcess.poll()
 
-                while not scriptProcess.poll():
+                while exitCode == None:
                     # Check for abort requests
                     if self.abort == False:
                         query = "SELECT abort FROM " + dbJobsTable + \
@@ -138,13 +139,15 @@ class JobThread(threading.Thread):
                             break
                             
                     time.sleep(3)
+                    exitCode = scriptProcess.poll()
 
                 # Wait for script to complete
                 scriptProcess.wait()
 
                 # Set finished time stamp
                 query = "UPDATE " + dbJobsTable + " SET timefinished = '" + \
-                    `int(time.time())` + "' WHERE id = '" + `int(self.jobId)` + "'"
+                    `int(time.time())` + "', exitcode = '" + `int(exitCode)` + \
+                    "' WHERE id = '" + `int(self.jobId)` + "'"
 
                 cursor = db.cursor()
                 cursor.execute(query)
@@ -342,10 +345,10 @@ def initialiseDb(db, formatDb, sqlFilename):
 
         if formatDb:
             print "Dropping all tables..."
-            cursor.execute("DROP TABLE " + dbSettingsTable)
-            cursor.execute("DROP TABLE " + dbJobsTable)
-            cursor.execute("DROP TABLE " + dbResultsTable)
-            cursor.execute("DROP TABLE " + dbInputsTable)
+            cursor.execute("DROP TABLE IF EXISTS " + dbSettingsTable)
+            cursor.execute("DROP TABLE IF EXISTS " + dbJobsTable)
+            cursor.execute("DROP TABLE IF EXISTS " + dbResultsTable)
+            cursor.execute("DROP TABLE IF EXISTS " + dbInputsTable)
 
         cursor.execute("CREATE TABLE IF NOT EXISTS " + dbSettingsTable + " (" + \
             "setting VARCHAR(255) PRIMARY KEY NOT NULL, " + \
@@ -357,6 +360,7 @@ def initialiseDb(db, formatDb, sqlFilename):
             "timequeued INT NOT NULL, " + \
             "timestarted INT NOT NULL, " + \
             "timefinished INT NOT NULL, " + \
+            "exitcode INT NOT NULL, " + \
             "arguments TEXT NOT NULL, " + \
             "resultsdir TEXT NOT NULL, " + \
             "abort INT NOT NULL, " + \
@@ -391,6 +395,7 @@ def initialiseDb(db, formatDb, sqlFilename):
             return False
         except:
             print("Failed to execute SQL")
+            print sys.exc_info()[0]
             return False
 
     return True

@@ -165,8 +165,8 @@ class JobThread(threading.Thread):
                         with open(layoutFilename, "rb") as layoutFile:
                             blob = layoutFile.read()
                             data = MySQLdb.Binary(blob)
-                            cursor = db.cursor()
                             layoutFilebasename = os.path.basename(layoutFilename)
+                            cursor = db.cursor()
                             cursor.execute("INSERT INTO " + dbResultsTable + " (jobid, filename, data) " + \
                                     "VALUES('" + `int(self.jobId)` + "', '" + layoutFilebasename + "', %s)", \
                                     (data,))

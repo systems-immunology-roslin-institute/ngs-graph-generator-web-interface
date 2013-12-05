@@ -92,13 +92,19 @@
                     {
                         $row = mysql_fetch_array( mysql_query( "SHOW TABLE STATUS LIKE '$dbJobsTable'" ) );
                         $nextJobId = $row['Auto_increment'];
-                        $outputDirectory = "./job-$nextJobId";
+                        $outputDirectory = getSetting("output-directory");
+                        if( $outputDirectory == "" )
+                            $outputDirectory = ".";
+                        $cacheDirectory = $outputDirectory;
+                        $outputDirectory .= "/job-$nextJobId";
 
                         // Add new job
                         $query = "INSERT INTO $dbJobsTable ( email, arguments, resultsdir ) " .
                             "VALUES ( " .
                             "'$email', " .
-                            "'-b $bam_file -t $tab_file -g $gtf_file -o $outputDirectory -d \"$genes\" -p $similarity -l $coverage', " .
+                            "'-b $bam_file -t $tab_file -g $gtf_file -o $outputDirectory " .
+                            "-c $cacheDirectory " .
+                            "-d \"$genes\" -p $similarity -l $coverage', " .
                             "'$outputDirectory'" .
                             ")";
                         $result = mysql_query( $query ) or

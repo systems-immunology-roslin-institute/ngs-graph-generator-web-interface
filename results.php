@@ -140,6 +140,7 @@
             echo "<table id=\"results_table\">\n";
             echo "<thead>\n";
             echo "<tr>\n";
+            echo "<th>ID</th>";
             echo "<th>Owner</th>";
             echo "<th>Arguments</th><th>Time queued</th>" .
                  "<th>Processing time</th><th>Result</th>\n";
@@ -158,6 +159,7 @@
                 $abort              = $row[ 'abort' ];
 
                 echo "<tr>\n";
+                echo "<td>$jobId</td>\n";
                 echo "<td>$email</td>\n";
 
                 if( $arguments != "" )

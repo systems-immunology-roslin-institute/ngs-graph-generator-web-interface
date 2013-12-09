@@ -205,6 +205,19 @@ def startJob(db, jobId, lock):
     return
 
 def indexInputFiles(db, extension):
+    cursor = db.cursor()
+    cursor.execute("SELECT filename FROM " + dbInputsTable)
+    result = cursor.fetchall()
+    db.commit()
+
+    for job in result:
+        filename = job[0]
+        if not os.path.isfile(filename):
+            print filename + " has gone away..."
+            cursor.execute("DELETE FROM " + dbInputsTable + \
+                    " WHERE filename='" + filename + "'")
+            db.commit()
+
     inputDirectory = os.path.abspath(getSetting(db, "input-directory"))
     cursor = db.cursor()
     for filename in glob.glob(inputDirectory + "/*." + extension):

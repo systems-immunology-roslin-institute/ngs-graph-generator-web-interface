@@ -126,14 +126,15 @@ class JobThread(threading.Thread):
                     # Check for abort requests
                     if self.abort == False:
                         query = "SELECT abort FROM " + dbJobsTable + \
-                                " WHERE id = '" + `int(self.jobId)` + "'"
+                                " WHERE id = '" + `int(jobId)` + "'"
                         cursor = db.cursor()
                         cursor.execute(query)
                         result = cursor.fetchone()
                         db.commit()
 
                         if result == None or result[0] != 0:
-                            print "Aborting job " + `int(self.jobId)`
+                            print "Aborting job " + `int(jobId)`
+                            exitCode = 15
                             self.abort = True
                             scriptProcess.terminate()
                             break
@@ -147,13 +148,13 @@ class JobThread(threading.Thread):
                 # Set finished time stamp
                 query = "UPDATE " + dbJobsTable + " SET timefinished = '" + \
                     `int(time.time())` + "', exitcode = '" + `int(exitCode)` + \
-                    "' WHERE id = '" + `int(self.jobId)` + "'"
+                    "' WHERE id = '" + `int(jobId)` + "'"
 
                 cursor = db.cursor()
                 cursor.execute(query)
                 db.commit()
 
-                print "Finished job " + `int(self.jobId)`
+                print "Finished job " + `int(jobId)`
 
                 resultsDir = os.path.abspath(resultsDir)
                 if os.path.exists(resultsDir):
@@ -168,7 +169,7 @@ class JobThread(threading.Thread):
                             layoutFilebasename = os.path.basename(layoutFilename)
                             cursor = db.cursor()
                             cursor.execute("INSERT INTO " + dbResultsTable + " (jobid, filename, data) " + \
-                                    "VALUES('" + `int(self.jobId)` + "', '" + layoutFilebasename + "', %s)", \
+                                    "VALUES('" + `int(jobId)` + "', '" + layoutFilebasename + "', %s)", \
                                     (data,))
                             db.commit()
 

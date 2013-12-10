@@ -209,15 +209,22 @@
                             $resultsResult = mysql_query( $resultsQuery ) or
                                 die( "Query '$resultsQuery' failed: " . mysql_error( ) );
 
-                            while( $row = mysql_fetch_array( $resultsResult, MYSQL_ASSOC ) )
+                            if( mysql_num_rows( $resultsResult ) > 0 )
                             {
-                                $fileLinks = $fileLinks .
-                                    "<a href=\"file.php?id=" . $row[ 'id' ] . "\">" .
-                                    $row[ 'filename' ] . "</a> ";
-                            }
-                            mysql_free_result( $resultsResult );
+                                while( $row = mysql_fetch_array( $resultsResult, MYSQL_ASSOC ) )
+                                {
+                                    $fileLinks = $fileLinks .
+                                        "<a href=\"file.php?id=" . $row[ 'id' ] . "\">" .
+                                        $row[ 'filename' ] . "</a> ";
+                                }
+                                mysql_free_result( $resultsResult );
 
-                            echo "<td>$fileLinks</td>\n";
+                                echo "<td>$fileLinks</td>\n";
+                            }
+                            else
+                            {
+                                echo "<td>No results</td>\n";
+                            }
                         }
                         else
                         {

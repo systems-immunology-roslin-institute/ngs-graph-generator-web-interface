@@ -190,10 +190,14 @@
                     if( $hours > 0 )
                     {
                         $minutes = str_pad( $minutes, 2, "0", STR_PAD_LEFT );
-                        echo "<td>$hours:$minutes:$seconds</td>\n";
+                        $duration = "$hours:$minutes:$seconds";
                     }
                     else
-                        echo "<td>$minutes:$seconds</td>\n";
+                    {
+                        $duration = "$minutes:$seconds";
+                    }
+
+                    echo "<td><a href=\"output.php?id=$jobId\">$duration</a></td>\n";
 
                     if( $abort )
                         echo "<td>Aborted</td>\n";

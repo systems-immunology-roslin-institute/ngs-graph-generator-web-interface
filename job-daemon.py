@@ -119,7 +119,8 @@ class JobThread(threading.Thread):
                 scriptWithOptions = script + " " + arguments
 
                 # Start script
-                scriptProcess = subprocess.Popen(scriptWithOptions, shell=True)
+                scriptProcess = subprocess.Popen(scriptWithOptions, shell=True, \
+                    stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
                 exitCode = scriptProcess.poll()
 
                 while exitCode == None:
@@ -143,11 +144,12 @@ class JobThread(threading.Thread):
                     exitCode = scriptProcess.poll()
 
                 # Wait for script to complete
-                scriptProcess.wait()
+                out, err = scriptProcess.communicate()
 
                 # Set finished time stamp
                 query = "UPDATE " + dbJobsTable + " SET timefinished = '" + \
                     `int(time.time())` + "', exitcode = '" + `int(exitCode)` + \
+                    "', output = '" + MySQLdb.escape_string(out) + \
                     "' WHERE id = '" + `int(jobId)` + "'"
 
                 cursor = db.cursor()
@@ -288,7 +290,7 @@ To: %s
 Subject: %s
 
 %s
-""" % (sender, ", ".join(to), "Job " + jobId + " results", body)
+""" % (sender, ", ".join(to), "seq-graph job " + jobId + " results", body)
 
     try:
         sendmailProcess = os.popen("sendmail -t -i", "w")
@@ -379,7 +381,8 @@ def initialiseDb(db, formatDb, sqlFilename):
             "resultsdir TEXT NOT NULL, " + \
             "abort INT NOT NULL, " + \
             "notified INT NOT NULL, " + \
-            "email TEXT NOT NULL" + \
+            "email TEXT NOT NULL, " + \
+            "output TEXT NOT NULL" + \
             ")")
 
         cursor.execute("CREATE TABLE IF NOT EXISTS " + dbResultsTable + " (" + \

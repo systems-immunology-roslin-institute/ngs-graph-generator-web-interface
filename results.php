@@ -218,7 +218,7 @@
                                 while( $row = mysql_fetch_array( $resultsResult, MYSQL_ASSOC ) )
                                 {
                                     $fileLinks = $fileLinks .
-                                        "<a href=\"file.php?id=" . $row[ 'id' ] . "\">" .
+                                        "<a href=\"file.php?fileId=" . $row[ 'id' ] . "&jobId=$jobId\">" .
                                         $row[ 'filename' ] . "</a> ";
                                 }
                                 mysql_free_result( $resultsResult );

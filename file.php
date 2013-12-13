@@ -3,11 +3,12 @@
 
     if( $db = openDatabase( ) )
     {
-        $id = isset($_GET[ 'id' ]) ? $_GET[ 'id' ] : NULL;
+        $fileId = isset($_GET[ 'fileId' ]) ? $_GET[ 'fileId' ] : NULL;
+        $jobId = isset($_GET[ 'jobId' ]) ? $_GET[ 'jobId' ] : NULL;
 
-        if( $id != NULL )
+        if( $fileId != NULL && $jobId != NULL )
         {
-            $query = "SELECT filename, data FROM $dbResultsTable WHERE id = '$id'";
+            $query = "SELECT filename FROM $dbResultsTable WHERE id = '$fileId'";
 
             // Run query to get the total number of rows
             $result = mysql_query( $query ) or
@@ -17,7 +18,10 @@
             {
                 $row = mysql_fetch_array( $result, MYSQL_ASSOC );
                 $filename = $row[ 'filename' ];
-                $data = $row[ 'data' ];
+                mysql_free_result( $result );
+                $outputDirectory = "/WWW/source/seq-graph.roslin.ed.ac.uk/output";
+                $jobDirectory = "$outputDirectory/job-$jobId";
+                $fqFilename = "$jobDirectory/$filename";
 
                 header('Content-Description: File Transfer');
                 header('Content-Type: application/octet-stream');
@@ -26,9 +30,9 @@
                 header('Expires: 0');
                 header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
                 header('Pragma: public');
-                header('Content-Length: ' . strlen($data));
+                header('Content-Length: ' . filesize($fqFilename));
 
-                echo $data;
+                include( $fqFilename );
             }
         }
 

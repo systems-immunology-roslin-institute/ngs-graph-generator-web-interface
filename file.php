@@ -32,7 +32,11 @@
                 header('Pragma: public');
                 header('Content-Length: ' . filesize($fqFilename));
 
-                include( $fqFilename );
+                // Read it off in chunks as the alternative include
+                // or file_get_contents methods exahust PHP memory limits
+                $file = fopen($fqFilename, "r");
+                while( !feof($file) )
+                    echo fread($file, 16 * 1024 * 1024);
             }
         }
 

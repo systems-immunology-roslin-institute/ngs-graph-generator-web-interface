@@ -164,15 +164,12 @@ class JobThread(threading.Thread):
                     layoutFilenames = glob.glob(resultsDir + "/*.layout")
 
                     for layoutFilename in layoutFilenames:
-                        print "...storing " + layoutFilename
+                        print "...indexing " + layoutFilename
                         with open(layoutFilename, "rb") as layoutFile:
-                            blob = layoutFile.read()
-                            data = MySQLdb.Binary(blob)
                             layoutFilebasename = os.path.basename(layoutFilename)
                             cursor = db.cursor()
-                            cursor.execute("INSERT INTO " + dbResultsTable + " (jobid, filename, data) " + \
-                                    "VALUES('" + `int(jobId)` + "', '" + layoutFilebasename + "', %s)", \
-                                    (data,))
+                            cursor.execute("INSERT INTO " + dbResultsTable + " (jobid, filename) " + \
+                                    "VALUES('" + `int(jobId)` + "', '" + layoutFilebasename + "')")
                             db.commit()
 
             self.lock.acquire()
@@ -388,8 +385,7 @@ def initialiseDb(db, formatDb, sqlFilename):
         cursor.execute("CREATE TABLE IF NOT EXISTS " + dbResultsTable + " (" + \
             "id INTEGER PRIMARY KEY AUTO_INCREMENT, " + \
             "jobid INT NOT NULL, " + \
-            "filename TEXT NOT NULL, " + \
-            "data LONGBLOB NOT NULL" + \
+            "filename TEXT NOT NULL" + \
             ")")
 
         cursor.execute("CREATE TABLE IF NOT EXISTS " + dbInputsTable + " (" + \

@@ -338,7 +338,7 @@ def purgeHistoricalJobs(db, lock):
     cursor = db.cursor()
 
     query = "SELECT id, resultsdir FROM " + dbJobsTable + \
-            " WHERE timefinished < '" + `int(cutoff)` + "'"
+            " WHERE timefinished > 0 AND timefinished < '" + `int(cutoff)` + "'"
     cursor.execute(query)
     result = cursor.fetchall()
     for job in result:

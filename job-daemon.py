@@ -20,6 +20,7 @@ import glob
 from optparse import OptionParser
 import warnings
 import json
+import shutil
 
 dbHost = None
 dbUser = None
@@ -329,6 +330,28 @@ def checkForCompleteJobs(db, lock):
             cursor.execute(query)
             db.commit()
 
+def purgeHistoricalJobs(db, lock):
+    """Remove old jobs in order to save disk space"""
+
+    now = time.time()
+    cutoff = now - (60 * 60 * 24 * 14)
+    cursor = db.cursor()
+
+    query = "SELECT id, resultsdir FROM " + dbJobsTable + \
+            " WHERE timefinished < '" + `int(cutoff)` + "'"
+    cursor.execute(query)
+    result = cursor.fetchall()
+    for job in result:
+        jobId = job[0]
+        resultsDir = job[1]
+        print "Job " + `int(jobId)` + " is old, purging"
+        cursor.execute("DELETE FROM " + dbResultsTable + " WHERE id='" + `int(jobId)` + "'")
+        db.commit()
+        cursor.execute("DELETE FROM " + dbJobsTable + " WHERE id='" + `int(jobId)` + "'")
+        db.commit()
+        if os.path.exists(resultsDir):
+            shutil.rmtree(resultsDir)
+
 def sigHandler(signal, stackFrame):
     """Signal handler"""
 
@@ -438,6 +461,7 @@ def main():
             updateAvailableInputFiles(db, lock)
             checkForNewJobs(db, lock)
             checkForCompleteJobs(db, lock)
+            purgeHistoricalJobs(db, lock)
 
             # Wait a bit
             time.sleep(3)

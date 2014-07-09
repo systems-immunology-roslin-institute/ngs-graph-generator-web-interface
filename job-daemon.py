@@ -162,7 +162,7 @@ class JobThread(threading.Thread):
                 resultsDir = os.path.abspath(resultsDir)
                 if os.path.exists(resultsDir):
                     print "Finding results in " + resultsDir
-                    layoutFilenames = glob.glob(resultsDir + "/*.layout")
+                    layoutFilenames = glob.glob(resultsDir + "/*.layout") + glob.glob(resultsDir + "/*.zip")
 
                     for layoutFilename in layoutFilenames:
                         print "...indexing " + layoutFilename

@@ -72,6 +72,7 @@
             $gtf_file = $_POST[ 'gtf_file' ];
             $similarity = $_POST[ 'similarity' ];
             $coverage = $_POST[ 'coverage' ];
+            $identical_unique = $_POST[ 'identical_unique' ];
             $genes = $_POST[ 'genes' ];
             $email = $_POST[ 'email' ];
 ?>
@@ -104,6 +105,7 @@
                             "'$email', " .
                             "'-b $bam_file -t $tab_file -g $gtf_file -o $outputDirectory " .
                             "-c $cacheDirectory " .
+                            ($identical_unique ? "-u " : "") .
                             "-d \"$genes\" -p $similarity -l $coverage', " .
                             "'$outputDirectory'" .
                             ")";
@@ -216,6 +218,10 @@
                     <p>
                         <label>Percentage sequence coverage</label>
                         <input class="num" type="text" name="coverage" value="55" /> %
+                    </p>
+                    <p>
+                        <label>Discard identical reads</label>
+                        <input type="checkbox" name="identical_unique" value="1" />
                     </p>
                     <p>
                         <label>Gene names</label> <input type="text" name="genes" id="genes" />

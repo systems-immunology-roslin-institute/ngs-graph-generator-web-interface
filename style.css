@@ -122,35 +122,45 @@ div.footer
 
 table
 {
-	border-collapse: collapse;
+    border-collapse: collapse;
 }
 
 tbody tr:hover td
 {
-	background: #404040;
+    background: #404040;
 }
 
 tbody td img
 {
-	border: 0px;
+    border: 0px;
 }
 
 thead th
 {
-	font-size: 14px;
-	text-align: center;
-	border: 1px solid white;
-	height: 40px;
+    font-size: 14px;
+    text-align: center;
+    border: 1px solid white;
+    height: 40px;
 }
 
 tbody td
 {
     padding: 0.5em;
-	font-size: 12px;
+    font-size: 12px;
     text-align: center;
-	background: #333333;
-	border: 1px solid white;
-	height: 40px;
+    background: #333333;
+    border: 1px solid white;
+    height: 40px;
+}
+
+td.success
+{
+}
+
+td.failure
+{
+    font-weight: bold;
+    background: #770000;
 }
 
 #results_table

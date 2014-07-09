@@ -197,7 +197,12 @@
                         $duration = "$minutes:$seconds";
                     }
 
-                    echo "<td><a href=\"output.php?id=$jobId\">$duration</a></td>\n";
+                    if( $exitcode == 0 )
+                        echo "<td class=\"success\">";
+                    else
+                        echo "<td class=\"failure\">";
+
+                    echo "<a href=\"output.php?id=$jobId\">$duration</a></td>\n";
 
                     if( $abort )
                         echo "<td>Aborted</td>\n";

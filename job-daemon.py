@@ -2,7 +2,7 @@
 #
 # Daemon for seq graph web frontend
 #
-# Copyright (C) The University of Edinburgh, 2013. All Rights Reserved.
+# Copyright (C) The University of Edinburgh, 2013-2014. All Rights Reserved.
 
 import os
 import sys
@@ -439,7 +439,7 @@ def initialiseDb(db, formatDb, sqlFilename):
 def main():
     """Main program"""
 
-    print "Sequence graph generation web frontend daemon\n(c) The Roslin Institute 2013\n"
+    print "Sequence graph generation web frontend daemon\n(c) The Roslin Institute 2013-2014\n"
 
     parser = OptionParser()
     parser.add_option("-f", "--format", action="store_true", dest="formatDb", default=False, help="format the database")

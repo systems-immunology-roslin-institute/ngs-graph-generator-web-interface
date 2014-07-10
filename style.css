@@ -95,6 +95,15 @@ a.button:active
     color: red;
 }
 
+a.zip
+{
+    font-weight: bold;
+    color: green;
+    display: block;
+}
+
+a.zip:hover { color: red; text-decoration: underline; }
+
 div.headerfooter
 {
     position: relative;

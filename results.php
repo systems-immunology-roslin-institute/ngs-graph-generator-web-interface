@@ -15,6 +15,17 @@
         <a href="results.php">Results</a>
     </div>
 <?php
+    function compareFilenames( $a, $b )
+    {
+        $extA = pathinfo( $a, PATHINFO_EXTENSION );
+        $extB = pathinfo( $b, PATHINFO_EXTENSION );
+
+        if( $extA == $extB )
+            return $a > $b;
+        else
+            return $extA > $extB;
+    }
+
     if( $db = openDatabase( ) )
     {
 ?>
@@ -220,13 +231,30 @@
 
                             if( mysql_num_rows( $resultsResult ) > 0 )
                             {
+                                $files = array();
                                 while( $row = mysql_fetch_array( $resultsResult, MYSQL_ASSOC ) )
-                                {
-                                    $fileLinks = $fileLinks .
-                                        "<a href=\"file.php?fileId=" . $row[ 'id' ] . "&jobId=$jobId\">" .
-                                        $row[ 'filename' ] . "</a> ";
-                                }
+                                    $files[] = $row[ 'filename' ];
                                 mysql_free_result( $resultsResult );
+
+                                usort( $files, 'compareFilenames' );
+
+                                foreach( $files as $file )
+                                {
+                                    $ext = pathinfo( $file, PATHINFO_EXTENSION );
+
+                                    if( $ext == "zip" )
+                                    {
+                                        $linkClass = "zip";
+                                    }
+                                    else
+                                    {
+                                        $linkClass = "";
+                                    }
+
+                                    $fileLinks = $fileLinks .
+                                        "<a class=\"$linkClass\" href=\"file.php?fileId=" . $row[ 'id' ] . "&jobId=$jobId\">" .
+                                        $file . "</a> ";
+                                }
 
                                 echo "<td>$fileLinks</td>\n";
                             }

@@ -57,16 +57,29 @@ exitNow         = 0
 activeJobs     = 0
 activeThreads   = []
 
-def getSetting(db, key):
+def executeSQLQuery(query):
+    try:
+        db = MySQLdb.connect(host = dbHost, user = dbUser, passwd = dbPass, db = dbName)
+
+        cursor = db.cursor()
+        cursor.execute(query)
+        result = cursor.fetchall()
+        db.commit()
+
+        db.close()
+    except MySQLdb.Error, e:
+        print "Query \"" + query + "\" failed to execute: \"" + e + "\""
+        return None
+
+    return result
+
+def getSetting(key):
     """Retrieve a setting from the database"""
 
-    query = "SELECT value FROM " + dbSettingsTable + " WHERE setting = '" + key + "'"
-    cursor = db.cursor()
-    cursor.execute(query)
-    result = cursor.fetchone()
+    result = executeSQLQuery("SELECT value FROM " + dbSettingsTable + " WHERE setting = '" + key + "'")
 
     if result != None:
-        return result[0]
+        return result[0][0]
     else:
         return ""
 
@@ -100,22 +113,16 @@ class JobThread(threading.Thread):
         self.lock.release()
 
         try:
-            db = MySQLdb.connect(host = dbHost, user = dbUser, passwd = dbPass, db = dbName)
+            script = getSetting("script-file")
 
-            script = getSetting(db, "script-file")
+            result = executeSQLQuery("SELECT id, arguments, resultsDir FROM " + \
+                    dbJobsTable + " WHERE id = '" + `int(self.jobId)` + "'")
 
-            cursor = db.cursor()
-
-            query = "SELECT id, arguments, resultsDir FROM " + \
-                    dbJobsTable + " WHERE id = '" + `int(self.jobId)` + "'"
-            cursor.execute(query)
-            result = cursor.fetchone()
-            db.commit()
-
-            if result != None:
-                jobId = result[0]
-                arguments = result[1]
-                resultsDir = result[2]
+            if len(result) == 1:
+                row = result[0]
+                jobId = row[0]
+                arguments = row[1]
+                resultsDir = row[2]
 
                 scriptWithOptions = script + " " + arguments
 
@@ -127,14 +134,10 @@ class JobThread(threading.Thread):
                 while exitCode == None:
                     # Check for abort requests
                     if self.abort == False:
-                        query = "SELECT abort FROM " + dbJobsTable + \
-                                " WHERE id = '" + `int(jobId)` + "'"
-                        cursor = db.cursor()
-                        cursor.execute(query)
-                        result = cursor.fetchone()
-                        db.commit()
+                        result = executeSQLQuery("SELECT abort FROM " + dbJobsTable + \
+                                " WHERE id = '" + `int(jobId)` + "'")
 
-                        if result == None or result[0] != 0:
+                        if result == None or result[0][0] != 0:
                             print "Aborting job " + `int(jobId)`
                             exitCode = 15
                             self.abort = True
@@ -148,14 +151,10 @@ class JobThread(threading.Thread):
                 out, err = scriptProcess.communicate()
 
                 # Set finished time stamp
-                query = "UPDATE " + dbJobsTable + " SET timefinished = '" + \
+                executeSQLQuery("UPDATE " + dbJobsTable + " SET timefinished = '" + \
                     `int(time.time())` + "', exitcode = '" + `int(exitCode)` + \
                     "', output = '" + MySQLdb.escape_string(out) + \
-                    "' WHERE id = '" + `int(jobId)` + "'"
-
-                cursor = db.cursor()
-                cursor.execute(query)
-                db.commit()
+                    "' WHERE id = '" + `int(jobId)` + "'")
 
                 print "Finished job " + `int(jobId)`
 
@@ -168,10 +167,10 @@ class JobThread(threading.Thread):
                         print "...indexing " + layoutFilename
                         with open(layoutFilename, "rb") as layoutFile:
                             layoutFilebasename = os.path.basename(layoutFilename)
-                            cursor = db.cursor()
-                            cursor.execute("INSERT INTO " + dbResultsTable + " (jobid, filename) " + \
+                            result = executeSQLQuery("INSERT INTO " + dbResultsTable + " (jobid, filename) " + \
                                     "VALUES('" + `int(jobId)` + "', '" + layoutFilebasename + "')")
-                            db.commit()
+                            if result == None:
+                              break
 
             self.lock.acquire()
             activeThreads.remove(self)
@@ -181,20 +180,18 @@ class JobThread(threading.Thread):
             print "Warning, unhandled exception in job thread"
             traceback.print_exc()
 
-        db.close()
-
-def startJob(db, jobId, lock):
+def startJob(jobId, lock):
     """Start a job"""
 
     global activeJobs
 
     print "Starting job " + `int(jobId)`
 
-    query = "UPDATE " + dbJobsTable + " SET timestarted = '" + \
-        `int(time.time())` + "' WHERE id = '" + `int(jobId)` + "'"
-    cursor = db.cursor()
-    cursor.execute(query)
-    db.commit()
+    result = executeSQLQuery("UPDATE " + dbJobsTable + " SET timestarted = '" + \
+        `int(time.time())` + "' WHERE id = '" + `int(jobId)` + "'")
+
+    if result == None:
+        return
 
     lock.acquire()
     activeJobs = activeJobs + 1
@@ -203,82 +200,74 @@ def startJob(db, jobId, lock):
     thread = JobThread(jobId, lock)
     thread.setName("job-" + `int(jobId)`)
     thread.start()
-    return
 
-def indexInputFiles(db, extension):
-    cursor = db.cursor()
-    cursor.execute("SELECT filename FROM " + dbInputsTable)
-    result = cursor.fetchall()
-    db.commit()
+def indexInputFiles(extension):
+    result = executeSQLQuery("SELECT filename FROM " + dbInputsTable)
+    if result == None:
+        return
 
     for job in result:
         filename = job[0]
         if not os.path.isfile(filename):
             print filename + " has gone away..."
-            cursor.execute("DELETE FROM " + dbInputsTable + \
+            executeSQLQuery("DELETE FROM " + dbInputsTable + \
                     " WHERE filename='" + filename + "'")
-            db.commit()
 
-    inputDirectory = os.path.abspath(getSetting(db, "input-directory"))
-    cursor = db.cursor()
+    inputDirectory = os.path.abspath(getSetting("input-directory"))
     for filename in glob.glob(inputDirectory + "/*." + extension):
-        cursor.execute("SELECT filename FROM " + dbInputsTable + \
+        result = executeSQLQuery("SELECT filename FROM " + dbInputsTable + \
                 " WHERE filename='" + filename + "'")
-        db.commit()
-        if cursor.fetchone() == None:
+        if len(result) == 0:
             print "Indexing " + filename + "..."
-            cursor.execute("INSERT INTO " + dbInputsTable + " "\
+            executeSQLQuery("INSERT INTO " + dbInputsTable + " "\
                     "(filename, type) " + \
                     "VALUES('" + filename + "', '" + extension + "')")
-            db.commit()
 
-def updateAvailableInputFiles(db, lock):
+def updateAvailableInputFiles(lock):
     """Update the list of input files that can be used"""
-    indexInputFiles(db, "tab")
-    indexInputFiles(db, "gtf")
-    indexInputFiles(db, "bam")
+    indexInputFiles("tab")
+    indexInputFiles("gtf")
+    indexInputFiles("bam")
 
-def checkForNewJobs(db, lock):
+def checkForNewJobs(lock):
     """Deal with any jobs that are waiting to start"""
 
     global activeJobs
 
-    maxJobs = getSetting(db, "max-jobs")
+    maxJobs = getSetting("max-jobs")
 
-    query = "SELECT id, timequeued, timestarted, timefinished " + \
+    result = executeSQLQuery("SELECT id, timequeued, timestarted, timefinished " + \
             "FROM " + dbJobsTable + " " + \
             "WHERE timestarted = '0' " + \
             "AND abort = '0' " + \
-            "ORDER BY id"
-    cursor = db.cursor()
-    cursor.execute(query)
-    result = cursor.fetchall()
-    db.commit()
+            "ORDER BY id")
+    if result == None:
+        return
 
     for job in result:
         lock.acquire()
 
         # Set queue time
         if job[1] == 0:
-            query = "UPDATE " + dbJobsTable + " SET timequeued = '" + \
-                `int(time.time())` + "' WHERE id = '" + `int(job[0])` + "'"
-            cursor = db.cursor()
-            cursor.execute(query)
-            db.commit()
+            result2 = executeSQLQuery("UPDATE " + dbJobsTable + " SET timequeued = '" + \
+                `int(time.time())` + "' WHERE id = '" + `int(job[0])` + "'")
+            if result2 == None:
+              lock.release()
+              break
 
         if activeJobs < int(maxJobs):
             lock.release()
-            startJob(db, job[0], lock)
+            startJob(job[0], lock)
         else:
             lock.release()
 
-def sendmail(db, jobId, recipient):
+def sendmail(jobId, recipient):
     # Send an email
-    sender = getSetting(db, "from-address")
+    sender = getSetting("from-address")
     to = []
     to.append(recipient)
 
-    url = getSetting(db, "base-url")
+    url = getSetting("base-url")
     body = "Results for job " + jobId + " are now available:\n" + \
                 url + "results.php?job=" + jobId + "\n"
 
@@ -300,55 +289,44 @@ Subject: %s
     except:
         print "WARNING: Failed to deliver"
 
-def checkForCompleteJobs(db, lock):
+def checkForCompleteJobs(lock):
     """Deal with any jobs that have just completed"""
 
-    cursor = db.cursor()
-
     # Set the finish time for any aborted jobs
-    query = "UPDATE " + dbJobsTable + \
+    result = executeSQLQuery("UPDATE " + dbJobsTable + \
             " SET timefinished = '" + \
             `int(time.time())` + "' " + \
             "WHERE timefinished = '0' " + \
-            "AND abort = '1'"
-    cursor.execute(query)
-    db.commit()
+            "AND abort = '1'")
+    if result == None:
+        return
 
-    query = "SELECT id, email, timefinished FROM " + dbJobsTable + \
-            " WHERE notified = '0'"
-    cursor.execute(query)
-    result = cursor.fetchall()
+    result = executeSQLQuery("SELECT id, email, timefinished FROM " + dbJobsTable + \
+            " WHERE notified = '0'")
     for job in result:
         if job[2] != 0:
             print "Job " + `int(job[0])` + " completed, notifying '" + job[1] + "'"
 
             # Send an email
-            sendmail(db, `int(job[0])`, job[1])
+            sendmail(`int(job[0])`, job[1])
 
-            query = "UPDATE " + dbJobsTable + " SET notified = '1'" + \
-                    " WHERE id = '" + `int(job[0])` + "'"
-            cursor.execute(query)
-            db.commit()
+            executeSQLQuery("UPDATE " + dbJobsTable + " SET notified = '1'" + \
+                    " WHERE id = '" + `int(job[0])` + "'")
 
-def purgeHistoricalJobs(db, lock):
+def purgeHistoricalJobs(lock):
     """Remove old jobs in order to save disk space"""
 
     now = time.time()
     cutoff = now - (60 * 60 * 24 * 14)
-    cursor = db.cursor()
 
-    query = "SELECT id, resultsdir FROM " + dbJobsTable + \
-            " WHERE timefinished > 0 AND timefinished < '" + `int(cutoff)` + "'"
-    cursor.execute(query)
-    result = cursor.fetchall()
+    result = executeSQLQuery("SELECT id, resultsdir FROM " + dbJobsTable + \
+            " WHERE timefinished > 0 AND timefinished < '" + `int(cutoff)` + "'")
     for job in result:
         jobId = job[0]
         resultsDir = job[1]
         print "Job " + `int(jobId)` + " is old, purging"
-        cursor.execute("DELETE FROM " + dbResultsTable + " WHERE id='" + `int(jobId)` + "'")
-        db.commit()
-        cursor.execute("DELETE FROM " + dbJobsTable + " WHERE id='" + `int(jobId)` + "'")
-        db.commit()
+        executeSQLQuery("DELETE FROM " + dbResultsTable + " WHERE id='" + `int(jobId)` + "'")
+        executeSQLQuery("DELETE FROM " + dbJobsTable + " WHERE id='" + `int(jobId)` + "'")
         if os.path.exists(resultsDir):
             shutil.rmtree(resultsDir)
 
@@ -358,22 +336,18 @@ def sigHandler(signal, stackFrame):
     global exitNow
     exitNow = exitNow + 1
 
+    # Abort any jobs that aren't yet finished
+    print "Caught signal, aborting jobs..."
+    executeSQLQuery("UPDATE " + dbJobsTable + \
+            " SET abort = '1'" + \
+            " AND timefinished = 0")
+    print "done."
+
+def initialiseDb(formatDb, sqlFilename):
     db = MySQLdb.connect(host = dbHost, user = dbUser, passwd = dbPass, db = dbName)
+    if db == None:
+      return False
 
-    if db != None:
-        # Abort any jobs that aren't yet finished
-        print "Caught signal, aborting jobs..."
-        query = "UPDATE " + dbJobsTable + \
-                " SET abort = '1'" + \
-                " AND timefinished = 0"
-        cursor = db.cursor()
-        cursor.execute(query)
-        db.commit()
-        print "done."
-
-        db.close()
-
-def initialiseDb(db, formatDb, sqlFilename):
     cursor = db.cursor()
 
     with warnings.catch_warnings():
@@ -433,7 +407,10 @@ def initialiseDb(db, formatDb, sqlFilename):
             print("Failed to execute SQL")
             print sys.exc_info()[0]
             return False
+        finally:
+            db.close()
 
+    db.close()
     return True
 
 def main():
@@ -453,15 +430,14 @@ def main():
         print("Failed to load database settings")
         return
 
-    db = MySQLdb.connect(host = dbHost, user = dbUser, passwd = dbPass, db = dbName)
-    if db != None and initialiseDb(db, options.formatDb, options.sqlFilename):
+    if initialiseDb(options.formatDb, options.sqlFilename):
         lock = threading.Lock()
 
         while exitNow == 0:
-            updateAvailableInputFiles(db, lock)
-            checkForNewJobs(db, lock)
-            checkForCompleteJobs(db, lock)
-            purgeHistoricalJobs(db, lock)
+            updateAvailableInputFiles(lock)
+            checkForNewJobs(lock)
+            checkForCompleteJobs(lock)
+            purgeHistoricalJobs(lock)
 
             # Wait a bit
             time.sleep(3)
@@ -476,8 +452,7 @@ def main():
         for thread in threadList:
             thread.join()
 
-        checkForCompleteJobs(db, lock)
-        db.close()
+        checkForCompleteJobs(lock)
 
 if __name__ == '__main__':
     try:

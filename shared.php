@@ -1,9 +1,4 @@
 <?php
-    $dbSettingsTable    = "settings";
-    $dbJobsTable        = "jobs";
-    $dbResultsTable     = "results";
-    $dbInputsTable      = "inputs";
-
     function openDatabase( )
     {
         $scriptDirectory = realpath(dirname(__FILE__));
@@ -16,11 +11,9 @@
         $dbPass = $dbSettings['dbPass'];
         $dbName = $dbSettings['dbName'];
 
-        $db = mysql_connect( $dbHost, $dbUser, $dbPass ) or
-            die( "Could not connect: " . mysql_error( ) );
-
-        if( $db )
-            mysql_select_db( $dbName, $db );
+        $db = new mysqli( $dbHost, $dbUser,  $dbPass, $dbName );
+        if( $db->connect_errno )
+            die( "Could not connect: " . $db->connect_error );
 
         return $db;
     }
@@ -29,24 +22,28 @@
     {
         global $dbSettingsTable;
 
-        $query = "SELECT * FROM $dbSettingsTable WHERE setting = '$key'";
-        $result = mysql_query( $query ) or
-            die( "Query '$query' failed: " . mysql_error( ) );
+        $db = openDatabase( );
+        $query = $db->prepare( "SELECT * FROM settings WHERE setting = ?" );
+        $query->bind_param( "s", $key );
+
+        $query->execute( );
+        $result = $query->get_result( );
+        $value = "";
 
         if( $result )
         {
-            $row = mysql_fetch_array( $result, MYSQL_ASSOC );
-            mysql_free_result( $result );
-
-            return $row['value'];
+            $row = $result->fetch_assoc( );
+            $value = $row['value'];
         }
-        else
-            return "";
+
+        $query->close( );
+        closeDatabase( $db );
+
+        return $value;
     }
 
     function closeDatabase( $db )
     {
-        if( $db )
-          mysql_close( $db );
+        $db->close( );
     }
 ?>

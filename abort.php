@@ -30,9 +30,11 @@
             if( $delete == 1 )
             {
                 // Delete job
-                $query = "DELETE FROM $dbJobsTable WHERE id = '$job'";
-                $result = mysql_query( $query ) or
-                    die( "Query '$query' failed: " . mysql_error( ) );
+                $query = $db->prepare( "DELETE FROM jobs WHERE id = ?" );
+                $query->bind_param( "s", $job );
+                $query->execute( )
+                    or die( "Query failed: " . $db->error );
+                $result = $query->get_result( );
 
                 echo "<p>Job $job deleted</p>\n";
                 echo "<a href=\"results.php\">Back</a>\n";
@@ -40,9 +42,11 @@
             else
             {
                 // Abort job
-                $query = "UPDATE $dbJobsTable SET abort = '1' WHERE id = '$job'";
-                $result = mysql_query( $query ) or
-                    die( "Query '$query' failed: " . mysql_error( ) );
+                $query = $db->prepare( "UPDATE jobs SET abort = '1' WHERE id = ?" );
+                $query->bind_param( "s", $job );
+                $query->execute( )
+                    or die( "Query failed: " . $db->error );
+                $result = $query->get_result( );
 
                 echo "<p>Job $job aborted</p>\n";
                 echo "<a href=\"results.php?job=$job\">Back</a>\n";
@@ -52,14 +56,13 @@
         {
             echo "No job number supplied\n";
         }
+
+        closeDatabase( $db );
+    }
 ?>
                 </fieldset>
             </p>
         </div>
     </form>
-<?php
-        closeDatabase( $db );
-    }
-?>
 </body>
 </html>

@@ -91,7 +91,9 @@
                     $emailCheck = '^[a-z0-9_\+-]+(\.[a-z0-9_\+-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*\.([a-z]{2,4})$';
                     if( eregi( $emailCheck, $email ) )
                     {
-                        $row = mysql_fetch_array( mysql_query( "SHOW TABLE STATUS LIKE '$dbJobsTable'" ) );
+                        $result = $db->query( "SHOW TABLE STATUS LIKE 'jobs'" )
+                            or die( "Query failed: " . $db->error );
+                        $row = $result->fetch_array( );
                         $nextJobId = $row['Auto_increment'];
                         $outputDirectory = getSetting("output-directory");
                         if( $outputDirectory == "" )
@@ -99,20 +101,19 @@
                         $cacheDirectory = $outputDirectory;
                         $outputDirectory .= "/job-$nextJobId";
 
-                        // Add new job
-                        $query = "INSERT INTO $dbJobsTable ( email, arguments, resultsdir ) " .
-                            "VALUES ( " .
-                            "'$email', " .
-                            "'-b $bam_file -t $tab_file -g $gtf_file -o $outputDirectory " .
-                            "-c $cacheDirectory " .
-                            ($identical_unique ? "-u " : "") .
-                            "-d \"$genes\" -p $similarity -l $coverage', " .
-                            "'$outputDirectory'" .
-                            ")";
-                        $result = mysql_query( $query ) or
-                            die( "Query '$query' failed: " . mysql_error( ) );
+                        $arguments = 
+                            "-b $bam_file -t $tab_file -g $gtf_file -o $outputDirectory " .
+                            "-c $cacheDirectory " . ($identical_unique ? "-u " : "") .
+                            "-d \"$genes\" -p $similarity -l $coverage";
 
-                        $jobId = mysql_insert_id( );
+                        // Add new job
+                        $query = $db->prepare( "INSERT INTO jobs ( email, arguments, resultsdir ) VALUES ( ?, ?, ? )" );
+                        $query->bind_param( "sss", $email, $arguments, $outputDirectory );
+
+                        $query->execute( )
+                            or die( "Query failed: " . $db->error );
+
+                        $jobId = $db->insert_id;
 
                         echo "<p>Queuing <a href=\"results.php?job=$jobId\">job $jobId</a></p>\n";
                         echo "<a href=\".\">Back</a>\n";
@@ -158,18 +159,15 @@
                         <label>BAM file</label>
                         <select name="bam_file">
 <?php
-            $inputsQuery = "SELECT filename FROM $dbInputsTable WHERE type = 'bam'";
+            $inputsResult = $db->query( "SELECT filename FROM inputs WHERE type = 'bam'" )
+                or die( "Query failed: " . $db->error );
 
-            $inputsResult = mysql_query( $inputsQuery ) or
-                die( "Query '$inputsQuery' failed: " . mysql_error( ) );
-
-            while( $row = mysql_fetch_array( $inputsResult, MYSQL_ASSOC ) )
+            while( $row = $inputsResult->fetch_assoc( ) )
             {
                 $filename = $row[ 'filename' ];
                 $absFilename = basename($filename);
                 echo "<option value=\"$filename\">$absFilename</option>";
             }
-            mysql_free_result( $inputsResult );
 ?>
                         </select>
                     </p>
@@ -177,12 +175,10 @@
                         <label>Chromosome length file</label>
                         <select name="tab_file">
 <?php
-            $inputsQuery = "SELECT filename FROM $dbInputsTable WHERE type = 'tab'";
+            $inputsResult = $db->query( "SELECT filename FROM inputs WHERE type = 'tab'" )
+                or die( "Query failed: " . $db->error );
 
-            $inputsResult = mysql_query( $inputsQuery ) or
-                die( "Query '$inputsQuery' failed: " . mysql_error( ) );
-
-            while( $row = mysql_fetch_array( $inputsResult, MYSQL_ASSOC ) )
+            while( $row = $inputsResult->fetch_assoc( ) )
             {
                 $filename = $row[ 'filename' ];
                 $absFilename = basename($filename);
@@ -196,12 +192,10 @@
                         <label>GTF file</label>
                         <select name="gtf_file">
 <?php
-            $inputsQuery = "SELECT filename FROM $dbInputsTable WHERE type = 'gtf'";
+            $inputsResult = $db->query( "SELECT filename FROM inputs WHERE type = 'gtf'" )
+                or die( "Query failed: " . $db->error );
 
-            $inputsResult = mysql_query( $inputsQuery ) or
-                die( "Query '$inputsQuery' failed: " . mysql_error( ) );
-
-            while( $row = mysql_fetch_array( $inputsResult, MYSQL_ASSOC ) )
+            while( $row = $inputsResult->fetch_assoc( ) )
             {
                 $filename = $row[ 'filename' ];
                 $absFilename = basename($filename);
@@ -227,13 +221,7 @@
                         <label>Gene names</label> <input type="text" name="genes" id="genes" />
                     </p>
                     <p>
-                        <label>Email results to</label> <input type="text" name="email" id="email"
-<?php
-            $emailCookie = $_COOKIE[ 'seqgraph_email' ];
-            if( $emailCookie != NULL )
-                echo " value=\"$emailCookie\" ";
-?>
-                        />
+                        <label>Email</label> <input type="text" name="email" id="email" />
                     </p>
                     <p id="control_buttons">
                         <a class="button" id="queueLink" href="#queueLink"

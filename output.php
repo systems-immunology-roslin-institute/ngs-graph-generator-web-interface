@@ -7,15 +7,16 @@
 
         if( $id != NULL )
         {
-            $query = "SELECT output FROM $dbJobsTable WHERE id = '$id'";
+            $query = $db->prepare( "SELECT output FROM jobs WHERE id = ?" );
+            $query->bind_param( "s", $id );
 
-            // Run query to get the total number of rows
-            $result = mysql_query( $query ) or
-                die( "Query '$query' failed: " . mysql_error( ) );
+            $query->execute( )
+                or die( "Query failed: " . $db->error );
+            $result = $query->get_result( );
 
-            if( $result && mysql_num_rows( $result ) == 1 )
+            if( $result && $result->num_rows == 1 )
             {
-                $row = mysql_fetch_array( $result, MYSQL_ASSOC );
+                $row = $result->fetch_assoc( );
                 $output = $row[ 'output' ];
 
                 header('Content-Type: text/plain');

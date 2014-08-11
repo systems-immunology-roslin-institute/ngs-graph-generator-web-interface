@@ -42,12 +42,12 @@
                         <select name="email" onchange="emailFilter.submit( )">
                             <option value="">No filter</option>
 <?php
-        $query = "SELECT DISTINCT email FROM $dbJobsTable ORDER BY email";
+        $query = $db->prepare( "SELECT DISTINCT email FROM jobs ORDER BY email" );
+        $query->execute( )
+            or die( "Query failed: " . $db->error );
+        $result = $query->get_result( );
 
-        $result = mysql_query( $query ) or
-            die( "Query '$query' failed: " . mysql_error( ) );
-
-        while( $row = mysql_fetch_array( $result, MYSQL_ASSOC ) )
+        while( $row = $result->fetch_assoc( ) )
         {
             $email = $row[ 'email' ];
 
@@ -57,7 +57,7 @@
                 echo "            <option value=\"$email\">$email</option>\n";
         }
 
-        mysql_free_result( $result );
+        $query->close( );
 ?>
                         </select>
                     </p>
@@ -76,69 +76,82 @@
         $inprogress = isset($_GET[ 'inprogress' ]) ? $_GET[ 'inprogress' ] : NULL;
         $email      = isset($_GET[ 'email' ]) ? $_GET[ 'email' ] : NULL;
 
-        $query = "SELECT " .
-                        "$dbJobsTable.id, " .
-                        "$dbJobsTable.arguments, " .
-                        "$dbJobsTable.timequeued, " .
-                        "$dbJobsTable.timestarted, " .
-                        "$dbJobsTable.timefinished, " .
-                        "$dbJobsTable.exitcode, " .
-                        "$dbJobsTable.email, " .
-                        "$dbJobsTable.abort " .
-                        "FROM $dbJobsTable";
+        $queryText = "SELECT " .
+                        "jobs.id, " .
+                        "jobs.arguments, " .
+                        "jobs.timequeued, " .
+                        "jobs.timestarted, " .
+                        "jobs.timefinished, " .
+                        "jobs.exitcode, " .
+                        "jobs.email, " .
+                        "jobs.abort " .
+                        "FROM jobs";
 
         if( $job != NULL )
         {
             $title = "Job $job";
-            $query = $query . " WHERE id = '$job'";
+            $queryText = $queryText . " WHERE id = ?";
+            $param = $job;
 
-            $abortQuery = "SELECT id FROM $dbJobsTable " .
-                          "WHERE timefinished = '0'";
+            $abortQuery = $db->prepare( "SELECT id FROM jobs WHERE timefinished = '0'" );
 
-            $result = mysql_query( $abortQuery ) or
-                die( "Query '$jobQuery' failed: " . mysql_error( ) );
+            $abortQuery->execute( )
+                or die( "Query failed: " . $db->error );
+            $result = $abortQuery->get_result( );
 
             // Abort
-            if( mysql_num_rows( $result ) > 0 )
+            if( $result->num_rows > 0 )
             {
                 $links = $links . "<a class=\"button\"" .
                     " href=\"abort.php?job=$job\">Abort</a>\n";
             }
+
+            $abortQuery->close( );
         }
         else if( $inprogress != NULL )
         {
             $title = "In progress";
-            $query = $query . " WHERE timefinished = '0'";
+            $queryText = $queryText . " WHERE timefinished = '0'";
         }
         else if( $email != NULL )
         {
             $title = "Owned by $email";
-            $query = $query . " WHERE email = '$email'";
+            $queryText = $queryText . " WHERE email = ?";
+            $param = $email;
 
-            $jobQuery = "SELECT id FROM $dbJobsTable " .
-                        "WHERE email = '$email' ORDER BY id";
+            $jobQuery = $db->prepare( "SELECT id FROM jobs " .
+                "WHERE email = ? ORDER BY id" );
+            $jobQuery->bind_param( "s", $email );
 
-            $result = mysql_query( $jobQuery ) or
-                die( "Query '$jobQuery' failed: " . mysql_error( ) );
+            $jobQuery->execute( )
+                or die( "Query failed: " . $db->error );
+            $result = $jobQuery->get_result( );
 
             $links = "Jobs: ";
-            while( $row = mysql_fetch_array( $result, MYSQL_ASSOC ) )
+            while( $row = $result->fetch_assoc( ) )
             {
                 $links = $links . "<a class=\"button\"" .
                     " href=\"results.php?job=" . $row[ 'id' ] . "\">" .
                     $row[ 'id' ] . "</a> ";
             }
-            mysql_free_result( $result );
+
+            $jobQuery->close( );
         }
         else
             $title = "All ";
 
-        $query = $query . " ORDER BY timequeued DESC, resultsdir ASC ";
+        $queryText = $queryText . " ORDER BY timequeued DESC, resultsdir ASC ";
+
+        $query = $db->prepare( $queryText );
+
+        if( $param )
+            $query->bind_param( "s", $param );
 
         // Run query to get the total number of rows
-        $result = mysql_query( $query ) or
-            die( "Query '$query' failed: " . mysql_error( ) );
-        $totalRows = mysql_num_rows( $result );
+        $query->execute( )
+            or die( "Query failed: " . $db->error );
+        $result = $query->get_result( );
+        $totalRows = $result->num_rows;
 
         $url = "results.php?";
         if( $job != NULL )
@@ -148,7 +161,7 @@
         if( $inprogress != NULL )
             $url = $url . "inprogress=$inprogress&";
 
-        if( $result && mysql_num_rows( $result ) > 0 )
+        if( $result && $totalRows > 0 )
         {
             echo "<table id=\"results_table\">\n";
             echo "<thead>\n";
@@ -160,7 +173,7 @@
             echo "</tr>\n";
             echo "</thead>\n";
             echo "<tbody>\n";
-            while( ( $row = mysql_fetch_array( $result, MYSQL_ASSOC ) ) )
+            while( ( $row = $result->fetch_assoc( ) ) )
             {
                 $jobId              = $row[ 'id' ];
                 $arguments          = $row[ 'arguments' ];
@@ -225,18 +238,19 @@
                         {
                             $fileLinks = "";
 
-                            $resultsQuery = "SELECT id, filename FROM $dbResultsTable " .
-                                "WHERE jobid = '$jobId' ORDER BY filename";
+                            $resultsQuery = $db->prepare( "SELECT id, filename FROM results " .
+                                "WHERE jobid = ? ORDER BY filename" );
+                            $resultsQuery->bind_param( "s", $jobId );
 
-                            $resultsResult = mysql_query( $resultsQuery ) or
-                                die( "Query '$resultsQuery' failed: " . mysql_error( ) );
+                            $resultsQuery->execute( )
+                                or die( "Query failed: " . $db->error );
+                            $resultsResult = $resultsQuery->get_result( );
 
-                            if( mysql_num_rows( $resultsResult ) > 0 )
+                            if( $resultsResult->num_rows > 0 )
                             {
                                 $files = array();
-                                while( $row = mysql_fetch_array( $resultsResult, MYSQL_ASSOC ) )
+                                while( $row = $resultsResult->fetch_assoc( ) )
                                     $files[] = array( 'id' => $row[ 'id' ], 'filename' => $row[ 'filename' ] );
-                                mysql_free_result( $resultsResult );
 
                                 usort( $files, 'compareFilenames' );
 
@@ -265,6 +279,8 @@
                             {
                                 echo "<td>No results</td>\n";
                             }
+
+                            $resultsQuery->close( );
                         }
                         else
                         {
@@ -287,12 +303,13 @@
             echo "</tbody>\n";
             echo "</table>\n";
 
-            mysql_free_result( $result );
         }
         else
         {
             echo "<p>No results</p>\n";
         }
+
+        $query->close( );
 ?>
                 </fieldset>
             </p>

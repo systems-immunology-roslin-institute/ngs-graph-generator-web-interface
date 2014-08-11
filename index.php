@@ -213,15 +213,15 @@
                     </p>
                     <p>
                         <label>Percentage sequence similarity</label>
-                        <input class="num" type="text" name="similarity" value="85" /> %
+                        <input class="num" type="text" name="similarity" value="98" /> %
                     </p>
                     <p>
                         <label>Percentage sequence coverage</label>
-                        <input class="num" type="text" name="coverage" value="55" /> %
+                        <input class="num" type="text" name="coverage" value="31" /> %
                     </p>
                     <p>
                         <label>Discard identical reads</label>
-                        <input type="checkbox" name="identical_unique" value="1" />
+                        <input type="checkbox" name="identical_unique" value="1" checked/>
                     </p>
                     <p>
                         <label>Gene names</label> <input type="text" name="genes" id="genes" />

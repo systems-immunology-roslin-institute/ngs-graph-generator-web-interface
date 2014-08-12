@@ -137,7 +137,7 @@ class JobThread(threading.Thread):
                         result = executeSQLQuery("SELECT abort FROM " + dbJobsTable + \
                                 " WHERE id = '" + `int(jobId)` + "'")
 
-                        if result == None or result[0][0] != 0:
+                        if len(result) == 0 or result[0][0] != 0:
                             print "Aborting job " + `int(jobId)`
                             exitCode = 15
                             self.abort = True

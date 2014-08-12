@@ -8,15 +8,16 @@
 
         if( $fileId != NULL && $jobId != NULL )
         {
-            $query = "SELECT filename FROM $dbResultsTable WHERE id = '$fileId'";
+            $query = $db->prepare( "SELECT filename FROM results WHERE id = ?" );
+            $query->bind_param( "s", $fileId );
 
-            // Run query to get the total number of rows
-            $result = mysql_query( $query ) or
-                die( "Query '$query' failed: " . mysql_error( ) );
+            $query->execute( )
+                or die( "Query failed: " . $db->error );
+            $result = $query->get_result( );
 
-            if( $result && mysql_num_rows( $result ) == 1 )
+            if( $result && $result->num_rows == 1 )
             {
-                $row = mysql_fetch_array( $result, MYSQL_ASSOC );
+                $row = $result->fetch_assoc( );
                 $filename = $row[ 'filename' ];
                 mysql_free_result( $result );
                 $outputDirectory = "/WWW/source/seq-graph.roslin.ed.ac.uk/output";

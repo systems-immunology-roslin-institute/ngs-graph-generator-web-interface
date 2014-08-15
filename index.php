@@ -65,6 +65,12 @@
     {
         if( $_GET[ 'action' ] == 'submit' )
         {
+?>
+    <div id="queued">
+        <p>
+            <form>
+                <fieldset>
+<?php
             takeLock( );
 
             $bam_file = $_POST[ 'bam_file' ];
@@ -75,12 +81,6 @@
             $identical_unique = $_POST[ 'identical_unique' ];
             $genes = $_POST[ 'genes' ];
             $email = $_POST[ 'email' ];
-?>
-    <div id="queued">
-        <p>
-            <form>
-                <fieldset>
-<?php
             $geneCheck = '^[a-zA-Z0-9, \t\n]+$';
             if( strlen( $genes ) != 0 && eregi( $geneCheck, $genes ) )
             {
@@ -91,6 +91,16 @@
                     $emailCheck = '^[a-z0-9_\+-]+(\.[a-z0-9_\+-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*\.([a-z]{2,4})$';
                     if( eregi( $emailCheck, $email ) )
                     {
+                        // Has the email address been checked that it is real
+                        $query = $db->prepare( "SELECT DISTINCT validated FROM jobs WHERE email = ? AND validated = '1'" );
+                        $query->bind_param( "s", $email );
+
+                        $query->execute( )
+                            or die( "Query failed: " . $db->error );
+
+                        $result = $query->get_result( );
+                        $validated = ( $result->num_rows > 0 );
+
                         $result = $db->query( "SHOW TABLE STATUS LIKE 'jobs'" )
                             or die( "Query failed: " . $db->error );
                         $row = $result->fetch_array( );
@@ -115,7 +125,12 @@
 
                         $jobId = $db->insert_id;
 
-                        echo "<p>Queuing <a href=\"results.php?job=$jobId\">job $jobId</a></p>\n";
+                        if( $validated )
+                            echo "<p>Queuing <a href=\"results.php?job=$jobId\">job $jobId</a></p>\n";
+                        else
+                            echo "<p>Your email address requires validation, " .
+                                "please click on the link that has been sent to you</p>\n";
+
                         echo "<a href=\".\">Back</a>\n";
                     }
                     else
@@ -135,14 +150,62 @@
                 echo "<p>No gene list supplied or malformed</p>\n";
                 echo "<a href=\".\">Back</a>\n";
             }
+
+            releaseLock( );
 ?>
                 </fieldset>
             </form>
         </p>
     </div>
 <?php
+        }
+        else if( $_GET[ 'action' ] == 'validate' )
+        {
+?>
+    <div id="queued">
+        <p>
+            <fieldset>
+<?php
+            takeLock( );
+
+            $token = $_GET[ 'token' ];
+
+            $query = $db->prepare( "SELECT id, email FROM jobs WHERE token = ? AND validated = '0'" );
+            $query->bind_param( "s", $token );
+
+            $query->execute( )
+                or die( "Query failed: " . $db->error );
+            $result = $query->get_result( );
+
+            if( $result->num_rows > 0 )
+            {
+                echo "<p>Your queued jobs will now be executed:</p><p>\n";
+                while( $row = $result->fetch_assoc( ) )
+                {
+                    $jobId = $row[ 'id' ];
+                    $email = $row[ 'email' ];
+                    echo "<a href=\"results.php?job=$jobId\">Job $jobId</a>\n";
+                }
+
+                echo "</p>\n";
+
+                $query = $db->prepare( "UPDATE jobs SET validated = '1' WHERE email = ?" );
+                $query->bind_param( "s", $email );
+
+                $query->execute( )
+                    or die( "Query failed: " . $db->error );
+            }
+            else
+            {
+                echo "<p>This validation token has expired, please try again</p>\n";
+            }
 
             releaseLock( );
+?>
+            </fieldset>
+        </p>
+    </div>
+<?php
         }
         else
         {

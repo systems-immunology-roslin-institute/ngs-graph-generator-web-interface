@@ -22,33 +22,50 @@
 <?php
     if( $db = openDatabase( ) )
     {
-        $job    = $_GET[ 'job' ];
-        $delete = $_GET[ 'delete' ];
+        $job     = $_GET[ 'job' ];
+        $confirm = $_GET[ 'confirm' ];
+        $token   = $_GET[ 'token' ];
 
-        if( $job != NULL )
+        if( $confirm == NULL )
         {
-            if( $delete == 1 )
-            {
-                // Delete job
-                $query = $db->prepare( "DELETE FROM jobs WHERE id = ?" );
-                $query->bind_param( "s", $job );
-                $query->execute( )
-                    or die( "Query failed: " . $db->error );
-                $result = $query->get_result( );
+            $query = $db->prepare( "SELECT id FROM jobs WHERE id = ? AND token = ? AND timefinished != '0'" );
+            $query->bind_param( "ss", $job, $token );
 
-                echo "<p>Job $job deleted</p>\n";
-                echo "<a href=\"results.php\">Back</a>\n";
+            $query->execute( )
+                or die( "Query failed: " . $db->error );
+
+            $result = $query->get_result( );
+            $alreadyAborted = ( $result->num_rows > 0 );
+
+            if( $alreadyAborted )
+            {
+                echo "<p><a href=\"results.php?job=$job\">Job $job</a> already finished</p>\n";
+                echo "<a href=\"results.php?job=$job\">Back</a>\n";
             }
             else
             {
-                // Abort job
-                $query = $db->prepare( "UPDATE jobs SET abort = '1' WHERE id = ?" );
-                $query->bind_param( "s", $job );
-                $query->execute( )
-                    or die( "Query failed: " . $db->error );
-                $result = $query->get_result( );
+                echo "<p>Abort job $job?</p>\n";
+                echo "<a href=\"" . $_SERVER[REQUEST_URI] . "&confirm=1\">Yes</a>\n";
+                echo "<a href=\"results.php?job=$job\">No</a>\n";
+            }
+        }
+        else if( $job != NULL )
+        {
+            // Abort job
+            $query = $db->prepare( "UPDATE jobs SET abort = '1' WHERE id = ? AND token = ? AND timefinished = '0'" );
+            $query->bind_param( "ss", $job, $token );
+            $query->execute( )
+                or die( "Query failed: " . $db->error );
+            $result = $query->get_result( );
 
+            if( $query->affected_rows > 0 )
+            {
                 echo "<p>Job $job aborted</p>\n";
+                echo "<a href=\"results.php?job=$job\">Back</a>\n";
+            }
+            else
+            {
+                echo "<p>Could not abort job $job</p>\n";
                 echo "<a href=\"results.php?job=$job\">Back</a>\n";
             }
         }

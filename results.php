@@ -39,31 +39,7 @@
                     <p>
                         <a class="button" href="results.php">All results</a>
                         <a class="button" href="results.php?inprogress=1">In progress</a>
-                        <select name="email" onchange="emailFilter.submit( )">
-                            <option value="">No filter</option>
-<?php
-        $query = $db->prepare( "SELECT DISTINCT email FROM jobs ORDER BY email" );
-        $query->execute( )
-            or die( "Query failed: " . $db->error );
-        $result = $query->get_result( );
-
-        while( $row = $result->fetch_assoc( ) )
-        {
-            $email = $row[ 'email' ];
-
-            if( $_GET[ 'email' ] == $email )
-                echo "            <option value=\"$email\" selected>$email</option>\n";
-            else
-                echo "            <option value=\"$email\">$email</option>\n";
-        }
-
-        $query->close( );
-?>
-                        </select>
                     </p>
-                    <noscript>
-                        <input type="submit" value="Filter by owner" />
-                    </noscript>
                 </fieldset>
             </p>
         </div>
@@ -83,62 +59,27 @@
                         "jobs.timestarted, " .
                         "jobs.timefinished, " .
                         "jobs.exitcode, " .
-                        "jobs.email, " .
                         "jobs.abort " .
                         "FROM jobs";
 
         if( $job != NULL )
         {
-            $title = "Job $job";
             $queryText = $queryText . " WHERE id = ?";
             $param = $job;
-
-            $abortQuery = $db->prepare( "SELECT id FROM jobs WHERE timefinished = '0'" );
-
-            $abortQuery->execute( )
-                or die( "Query failed: " . $db->error );
-            $result = $abortQuery->get_result( );
-
-            // Abort
-            if( $result->num_rows > 0 )
-            {
-                $links = $links . "<a class=\"button\"" .
-                    " href=\"abort.php?job=$job\">Abort</a>\n";
-            }
-
-            $abortQuery->close( );
         }
         else if( $inprogress != NULL )
         {
-            $title = "In progress";
             $queryText = $queryText . " WHERE timefinished = '0'";
         }
         else if( $email != NULL )
         {
-            $title = "Owned by $email";
             $queryText = $queryText . " WHERE email = ?";
             $param = $email;
-
-            $jobQuery = $db->prepare( "SELECT id FROM jobs " .
-                "WHERE email = ? ORDER BY id" );
-            $jobQuery->bind_param( "s", $email );
-
-            $jobQuery->execute( )
-                or die( "Query failed: " . $db->error );
-            $result = $jobQuery->get_result( );
-
-            $links = "Jobs: ";
-            while( $row = $result->fetch_assoc( ) )
-            {
-                $links = $links . "<a class=\"button\"" .
-                    " href=\"results.php?job=" . $row[ 'id' ] . "\">" .
-                    $row[ 'id' ] . "</a> ";
-            }
-
-            $jobQuery->close( );
         }
         else
-            $title = "All ";
+        {
+            $queryText = $queryText . " WHERE validated = '1'";
+        }
 
         $queryText = $queryText . " ORDER BY timequeued DESC, resultsdir ASC ";
 
@@ -167,7 +108,6 @@
             echo "<thead>\n";
             echo "<tr>\n";
             echo "<th>ID</th>";
-            echo "<th>Owner</th>";
             echo "<th>Arguments</th><th>Time queued</th>" .
                  "<th>Processing time</th><th>Result</th>\n";
             echo "</tr>\n";
@@ -181,12 +121,10 @@
                 $started            = $row[ 'timestarted' ];
                 $finished           = $row[ 'timefinished' ];
                 $exitcode           = $row[ 'exitcode' ];
-                $email              = $row[ 'email' ];
                 $abort              = $row[ 'abort' ];
 
                 echo "<tr>\n";
                 echo "<td>$jobId</td>\n";
-                echo "<td>$email</td>\n";
 
                 if( $arguments != "" )
                     echo "<td>$arguments</td>\n";
@@ -288,10 +226,9 @@
                         }
                     }
                     else
-                        echo "<td>" .
-                                "<a class=\"button\" href=\"abort.php?job=$jobId\">Abort</a> " .
-                                "<a class=\"button\" href=\"abort.php?job=$jobId&delete=1\">Delete</a>" .
-                            "</td>\n";
+                    {
+                        echo "<td>In progress</td>\n";
+                    }
                 }
                 else
                 {

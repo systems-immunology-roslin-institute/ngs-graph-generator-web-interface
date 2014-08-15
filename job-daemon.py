@@ -107,7 +107,7 @@ class ConsoleReadingThread(threading.Thread):
 
         try:
             allOutput = ""
-            for line in iter(self.out.readline, b''):
+            for line in iter(self.out.readline, ''):
                 allOutput = allOutput + line
                 executeSQLQuery("UPDATE " + dbJobsTable + " SET output = '" + \
                     MySQLdb.escape_string(allOutput) + \
@@ -497,7 +497,7 @@ def initialiseDb(formatDb, sqlFilename):
             "email TEXT NOT NULL, " + \
             "validated TINYINT NOT NULL, " + \
             "token TEXT NOT NULL, " + \
-            "output TEXT NOT NULL" + \
+            "output MEDIUMTEXT NOT NULL" + \
             ")")
 
         cursor.execute("CREATE TABLE IF NOT EXISTS " + dbResultsTable + " (" + \

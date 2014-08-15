@@ -12,7 +12,7 @@ import time
 import signal
 import threading
 import smtplib
-from email.MIMEText import MIMEText
+from email.mime.text import MIMEText
 import urlparse
 import traceback
 import subprocess
@@ -21,6 +21,7 @@ from optparse import OptionParser
 import warnings
 import json
 import shutil
+import urllib
 
 dbHost = None
 dbUser = None
@@ -93,6 +94,30 @@ def isNumber(string):
 
     return True
 
+class ConsoleReadingThread(threading.Thread):
+    def __init__(self, out, jobId):
+        """Constructor for job thread"""
+
+        threading.Thread.__init__(self)
+        self.out = out
+        self.jobId  = jobId
+
+    def run(self):
+        """Main thread functionality"""
+
+        try:
+            allOutput = ""
+            for line in iter(self.out.readline, b''):
+                allOutput = allOutput + line
+                executeSQLQuery("UPDATE " + dbJobsTable + " SET output = '" + \
+                    MySQLdb.escape_string(allOutput) + \
+                    "' WHERE id = '" + `int(self.jobId)` + "'")
+            self.out.close()
+
+        except:
+            print "Warning, unhandled exception in console reading thread"
+            traceback.print_exc()
+
 class JobThread(threading.Thread):
     def __init__(self, jobId, lock):
         """Constructor for job thread"""
@@ -113,6 +138,7 @@ class JobThread(threading.Thread):
         self.lock.release()
 
         try:
+            consoleReadingThread = None
             script = getSetting("script-file")
 
             result = executeSQLQuery("SELECT id, arguments, resultsDir FROM " + \
@@ -129,6 +155,11 @@ class JobThread(threading.Thread):
                 # Start script
                 scriptProcess = subprocess.Popen(scriptWithOptions, shell=True, \
                     stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+
+                consoleReadingThread = ConsoleReadingThread(scriptProcess.stdout, jobId)
+                consoleReadingThread.setName("job-" + `int(jobId)` + "-reader")
+                consoleReadingThread.start()
+
                 exitCode = scriptProcess.poll()
 
                 while exitCode == None:
@@ -148,12 +179,13 @@ class JobThread(threading.Thread):
                     exitCode = scriptProcess.poll()
 
                 # Wait for script to complete
-                out, err = scriptProcess.communicate()
+                consoleReadingThread.join()
+                consoleReadingThread = None
+                scriptProcess.wait()
 
                 # Set finished time stamp
                 executeSQLQuery("UPDATE " + dbJobsTable + " SET timefinished = '" + \
                     `int(time.time())` + "', exitcode = '" + `int(exitCode)` + \
-                    "', output = '" + MySQLdb.escape_string(out) + \
                     "' WHERE id = '" + `int(jobId)` + "'")
 
                 print "Finished job " + `int(jobId)`
@@ -179,6 +211,9 @@ class JobThread(threading.Thread):
         except:
             print "Warning, unhandled exception in job thread"
             traceback.print_exc()
+        finally:
+            if consoleReadingThread != None:
+                consoleReadingThread.join()
 
 def startJob(jobId, lock):
     """Start a job"""
@@ -229,6 +264,99 @@ def updateAvailableInputFiles(lock):
     indexInputFiles("gtf")
     indexInputFiles("bam")
 
+def sendmail(recipient, subject, body):
+    # Send an email
+    sender = getSetting("from-address")
+
+    message = MIMEText(body)
+    message["From"] = sender
+    message["To"] = recipient
+    message["Subject"] = subject
+
+    try:
+        sendmailProcess = subprocess.Popen(["sendmail", "-t"], stdin=subprocess.PIPE)
+        sendmailProcess.communicate(message.as_string())
+        if sendmailProcess.returncode != 0:
+            print "WARNING: sendmail exit status", sendmailProcess.returncode
+
+        print "Emailed " + recipient + " \"" + subject + "\""
+
+    except:
+        print "WARNING: Failed to deliver"
+
+def purgeJob(jobId):
+    """Remove old job to save disk space"""
+
+    print "Purging job " + `int(jobId)`
+    result = executeSQLQuery("SELECT resultsdir FROM " + dbJobsTable + \
+            " WHERE id = '" + `int(jobId)` + "'")
+    if len(result) == 0:
+        return
+
+    resultsDir = result[0][0]
+
+    executeSQLQuery("DELETE FROM " + dbResultsTable + " WHERE id='" + `int(jobId)` + "'")
+    executeSQLQuery("DELETE FROM " + dbJobsTable + " WHERE id='" + `int(jobId)` + "'")
+    if os.path.exists(resultsDir):
+        shutil.rmtree(resultsDir)
+
+def checkForUnvalidatedEmailAddresses(lock):
+    """Check if there are any jobs whose email addresses have not yet been checked"""
+
+    # Avoid revalidating email addresses
+    result = executeSQLQuery("SELECT DISTINCT email, token " + \
+            "FROM " + dbJobsTable + " " + \
+            "WHERE validated = '1' " + \
+            "ORDER BY id")
+    for job in result:
+        email = job[0]
+        token = job[1]
+        executeSQLQuery("UPDATE " + dbJobsTable + \
+            " SET validated = '1'," + \
+            " token = '" + token + "'" + \
+            " WHERE email = '" + email + "'")
+
+    result = executeSQLQuery("SELECT id, email, token, timequeued " + \
+            "FROM " + dbJobsTable + " " + \
+            "WHERE validated = '0' " + \
+            "ORDER BY id")
+    if result == None:
+        return
+
+    for job in result:
+        jobId = job[0]
+        email = job[1]
+        token = job[2]
+        timequeued = int(job[3])
+
+        if len(token) == 0:
+            # Generate token
+            newToken = os.urandom(16).encode('hex')
+
+            print "Validating " + email + " with token " + newToken
+
+            # Send email
+            subject = "seq-graph needs to validate your email address"
+            url = getSetting("base-url")
+            body = "Click the following URL to proceed:\n" + \
+                url + "index.php?action=validate" + \
+                "&token=" + newToken
+
+            sendmail(email, subject, body)
+
+            # Update table with token
+            executeSQLQuery("UPDATE " + dbJobsTable + \
+                    " SET token = '" + \
+                    newToken + "' " + \
+                    "WHERE email = '" + email + "'")
+        else:
+            now = time.time()
+            cutoff = now - (60 * 60 * 2) # 2 hours
+            if timequeued < cutoff:
+                print "Email " + email + " validation timed out"
+                purgeJob(jobId)
+
+
 def checkForNewJobs(lock):
     """Deal with any jobs that are waiting to start"""
 
@@ -236,7 +364,7 @@ def checkForNewJobs(lock):
 
     maxJobs = getSetting("max-jobs")
 
-    result = executeSQLQuery("SELECT id, timequeued, timestarted, timefinished " + \
+    result = executeSQLQuery("SELECT id, timequeued, validated, email, token " + \
             "FROM " + dbJobsTable + " " + \
             "WHERE timestarted = '0' " + \
             "AND abort = '0' " + \
@@ -247,47 +375,34 @@ def checkForNewJobs(lock):
     for job in result:
         lock.acquire()
 
+        jobId = `int(job[0])`
+        timeQueued = job[1]
+        validated = job[2]
+        email = job[3]
+        token = job[4]
+
         # Set queue time
-        if job[1] == 0:
+        if timeQueued == 0:
             result2 = executeSQLQuery("UPDATE " + dbJobsTable + " SET timequeued = '" + \
-                `int(time.time())` + "' WHERE id = '" + `int(job[0])` + "'")
+                `int(time.time())` + "' WHERE id = '" + jobId + "'")
             if result2 == None:
               lock.release()
               break
 
-        if activeJobs < int(maxJobs):
+        if validated != 0 and activeJobs < int(maxJobs):
             lock.release()
             startJob(job[0], lock)
+
+            # Send email
+            subject = "seq-graph job " + jobId + " started"
+            url = getSetting("base-url")
+            body = "Click the following URL to abort the job:\n" + \
+                url + "abort.php?job=" + jobId + \
+                "&token=" + token
+
+            sendmail(email, subject, body)
         else:
             lock.release()
-
-def sendmail(jobId, recipient):
-    # Send an email
-    sender = getSetting("from-address")
-    to = []
-    to.append(recipient)
-
-    url = getSetting("base-url")
-    body = "Results for job " + jobId + " are now available:\n" + \
-                url + "results.php?job=" + jobId + "\n"
-
-    message = """\
-From: %s
-To: %s
-Subject: %s
-
-%s
-""" % (sender, ", ".join(to), "seq-graph job " + jobId + " results", body)
-
-    try:
-        sendmailProcess = os.popen("sendmail -t -i", "w")
-        sendmailProcess.write(message)
-        status = sendmailProcess.close()
-        if status:
-            print "WARNING: sendmail exit status", status
-
-    except:
-        print "WARNING: Failed to deliver"
 
 def checkForCompleteJobs(lock):
     """Deal with any jobs that have just completed"""
@@ -304,31 +419,35 @@ def checkForCompleteJobs(lock):
     result = executeSQLQuery("SELECT id, email, timefinished FROM " + dbJobsTable + \
             " WHERE notified = '0'")
     for job in result:
+        jobId = `int(job[0])`
+        email = job[1]
         if job[2] != 0:
-            print "Job " + `int(job[0])` + " completed, notifying '" + job[1] + "'"
-
             # Send an email
-            sendmail(`int(job[0])`, job[1])
+            subject = "seq-graph job " + jobId + " results"
+            url = getSetting("base-url")
+            body = "Results for job " + jobId + " are now available:\n" + \
+                url + "results.php?job=" + jobId + "\n\n" + \
+                "All of your results:\n" + \
+                url + "results.php?email=" + urllib.quote_plus(email) + "\n"
+
+            sendmail(email, subject, body)
 
             executeSQLQuery("UPDATE " + dbJobsTable + " SET notified = '1'" + \
-                    " WHERE id = '" + `int(job[0])` + "'")
+                    " WHERE id = '" + jobId + "'")
 
 def purgeHistoricalJobs(lock):
     """Remove old jobs in order to save disk space"""
 
     now = time.time()
-    cutoff = now - (60 * 60 * 24 * 14)
+    cutoff = now - (60 * 60 * 24 * 7) # 1 week
 
     result = executeSQLQuery("SELECT id, resultsdir FROM " + dbJobsTable + \
             " WHERE timefinished > 0 AND timefinished < '" + `int(cutoff)` + "'")
     for job in result:
         jobId = job[0]
         resultsDir = job[1]
-        print "Job " + `int(jobId)` + " is old, purging"
-        executeSQLQuery("DELETE FROM " + dbResultsTable + " WHERE id='" + `int(jobId)` + "'")
-        executeSQLQuery("DELETE FROM " + dbJobsTable + " WHERE id='" + `int(jobId)` + "'")
-        if os.path.exists(resultsDir):
-            shutil.rmtree(resultsDir)
+        print "Job " + `int(jobId)` + " is old"
+        purgeJob(jobId)
 
 def sigHandler(signal, stackFrame):
     """Signal handler"""
@@ -376,6 +495,8 @@ def initialiseDb(formatDb, sqlFilename):
             "abort INT NOT NULL, " + \
             "notified INT NOT NULL, " + \
             "email TEXT NOT NULL, " + \
+            "validated TINYINT NOT NULL, " + \
+            "token TEXT NOT NULL, " + \
             "output TEXT NOT NULL" + \
             ")")
 
@@ -436,6 +557,7 @@ def main():
         while exitNow == 0:
             updateAvailableInputFiles(lock)
             checkForNewJobs(lock)
+            checkForUnvalidatedEmailAddresses(lock)
             checkForCompleteJobs(lock)
             purgeHistoricalJobs(lock)
 

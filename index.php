@@ -25,8 +25,6 @@
 <body>
     <div class="headerfooter">
         <div class="header">NGS graph generator</div>
-        <a href=".">Scheduler</a>
-        <a href="results.php">Results</a>
     </div>
 <?php
     // This lock may not be strictly necessary, but

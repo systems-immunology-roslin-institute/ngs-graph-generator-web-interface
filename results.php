@@ -11,8 +11,7 @@
 <body>
     <div class="headerfooter">
         <div class="header">NGS graph generator</div>
-        <a href=".">Scheduler</a>
-        <a href="results.php">Results</a>
+        <a href=".">Create new job</a>
     </div>
 <?php
     function compareFilenames( $a, $b )

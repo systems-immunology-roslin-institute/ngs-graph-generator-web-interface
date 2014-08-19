@@ -339,6 +339,19 @@ def purgeJob(jobId):
     if os.path.exists(resultsDir):
         shutil.rmtree(resultsDir)
 
+def purgeJobsWhereResultsDirIsMissing(lock):
+    result = executeSQLQuery("SELECT id, resultsdir " + \
+            "FROM " + dbJobsTable + " " + \
+            "WHERE timefinished > 0")
+    if result == None:
+        return
+
+    for job in result:
+        jobId = job[0]
+        resultsDir = os.path.abspath(job[1])
+        if not os.path.exists(resultsDir):
+            purgeJob(jobId)
+
 def checkForUnvalidatedEmailAddresses(lock):
     """Check if there are any jobs whose email addresses have not yet been checked"""
 
@@ -602,6 +615,7 @@ def main():
             checkForUnvalidatedEmailAddresses(lock)
             checkForCompleteJobs(lock)
             purgeHistoricalJobs(lock)
+            purgeJobsWhereResultsDirIsMissing(lock)
 
             # Wait a bit
             time.sleep(3)

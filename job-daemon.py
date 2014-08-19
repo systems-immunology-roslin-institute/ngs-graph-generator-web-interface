@@ -99,7 +99,8 @@ def getPathSize(path):
     for dirPath, dirNames, fileNames in os.walk(path):
         for fileName in fileNames:
             fqFileName = os.path.join(dirPath, fileName)
-            total += os.lstat(fqFileName).st_size
+            if os.path.exists(fqFileName):
+                total += os.lstat(fqFileName).st_size
 
     return total
 
@@ -202,10 +203,20 @@ class JobThread(threading.Thread):
                             
                     time.sleep(3)
 
+                    exitCode = scriptProcess.poll()
+
+                    # If still running, suspend
+                    if exitCode == None:
+                        os.kill(scriptProcess.pid, signal.SIGSTOP)
+
+                    # Update size
                     pathSize = getPathSize(resultsDir)
                     executeSQLQuery("UPDATE " + dbJobsTable + " SET size = '" + \
                         `pathSize` + "' WHERE id = '" + `int(jobId)` + "'")
-                    exitCode = scriptProcess.poll()
+
+                    # Resume
+                    if exitCode == None:
+                        os.kill(scriptProcess.pid, signal.SIGCONT)
 
                 # Wait for script to complete
                 consoleReadingThread.join()

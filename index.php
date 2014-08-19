@@ -114,9 +114,16 @@
                             "-c $cacheDirectory " . ($identical_unique ? "-u " : "") .
                             "-d \"$genes\" -p $similarity -l $coverage";
 
+                        $description = "$genes\n$similarity% similarity $coverage% coverage\n" .
+                            ($identical_unique ? "Identical reads discarded\n" : "") .
+                            basename($bam_file) . "\n" .
+                            basename($tab_file) . "\n" .
+                            basename($gtf_file);
+
                         // Add new job
-                        $query = $db->prepare( "INSERT INTO jobs ( email, arguments, resultsdir ) VALUES ( ?, ?, ? )" );
-                        $query->bind_param( "sss", $email, $arguments, $outputDirectory );
+                        $query = $db->prepare( "INSERT INTO jobs " .
+                            "( email, arguments, description, resultsdir ) VALUES ( ?, ?, ?, ? )" );
+                        $query->bind_param( "ssss", $email, $arguments, $description, $outputDirectory );
 
                         $query->execute( )
                             or die( "Query failed: " . $db->error );

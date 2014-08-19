@@ -66,6 +66,7 @@
         $queryText = "SELECT " .
                         "jobs.id, " .
                         "jobs.arguments, " .
+                        "jobs.description, " .
                         "jobs.timequeued, " .
                         "jobs.timestarted, " .
                         "jobs.timefinished, " .
@@ -120,7 +121,7 @@
             echo "<thead>\n";
             echo "<tr>\n";
             echo "<th>ID</th>";
-            echo "<th>Arguments</th><th>Time queued</th>" .
+            echo "<th>Description</th><th>Time queued</th>" .
                  "<th>Processing time</th><th>Result</th><th>Size</th>\n";
             echo "</tr>\n";
             echo "</thead>\n";
@@ -129,6 +130,7 @@
             {
                 $jobId              = $row[ 'id' ];
                 $arguments          = $row[ 'arguments' ];
+                $description        = $row[ 'description' ];
                 $queued             = $row[ 'timequeued' ];
                 $started            = $row[ 'timestarted' ];
                 $finished           = $row[ 'timefinished' ];
@@ -140,7 +142,7 @@
                 echo "<td>$jobId</td>\n";
 
                 if( $arguments != "" )
-                    echo "<td>$arguments</td>\n";
+                    echo "<td>" . nl2br($description) . "</td>\n";
                 else
                     echo "<td>None</td>\n";
 

@@ -55,7 +55,7 @@ dbResultsTable  = "results"
 dbInputsTable   = "inputs"
 
 exitNow         = 0
-activeJobs     = 0
+activeJobs      = 0
 activeThreads   = []
 
 def executeSQLQuery(query):
@@ -93,6 +93,31 @@ def isNumber(string):
         return False
 
     return True
+
+def getPathSize(path):
+    total = 0
+    for dirPath, dirNames, fileNames in os.walk(path):
+        for fileName in fileNames:
+            fqFileName = os.path.join(dirPath, fileName)
+            total += os.lstat(fqFileName).st_size
+
+    return total
+
+def updateJobSizes():
+    result = executeSQLQuery("SELECT id, resultsDir " + \
+            "FROM " + dbJobsTable + " " + \
+            "WHERE validated = '1' " + \
+            " AND size = '-1' " + \
+            "ORDER BY id")
+    if result == None:
+        return
+
+    for job in result:
+        jobId = job[0]
+        resultsDir = os.path.abspath(job[1])
+        pathSize = getPathSize(resultsDir)
+        executeSQLQuery("UPDATE " + dbJobsTable + " SET size = '" + \
+            `pathSize` + "' WHERE id = '" + `int(jobId)` + "'")
 
 class ConsoleReadingThread(threading.Thread):
     def __init__(self, out, jobId):
@@ -148,7 +173,7 @@ class JobThread(threading.Thread):
                 row = result[0]
                 jobId = row[0]
                 arguments = row[1]
-                resultsDir = row[2]
+                resultsDir = os.path.abspath(row[2])
 
                 scriptWithOptions = script + " " + arguments
 
@@ -176,6 +201,10 @@ class JobThread(threading.Thread):
                             break
                             
                     time.sleep(3)
+
+                    pathSize = getPathSize(resultsDir)
+                    executeSQLQuery("UPDATE " + dbJobsTable + " SET size = '" + \
+                        `pathSize` + "' WHERE id = '" + `int(jobId)` + "'")
                     exitCode = scriptProcess.poll()
 
                 # Wait for script to complete
@@ -190,7 +219,6 @@ class JobThread(threading.Thread):
 
                 print "Finished job " + `int(jobId)`
 
-                resultsDir = os.path.abspath(resultsDir)
                 if os.path.exists(resultsDir):
                     print "Finding results in " + resultsDir
                     layoutFilenames = glob.glob(resultsDir + "/*.layout") + glob.glob(resultsDir + "/*.zip")
@@ -497,7 +525,8 @@ def initialiseDb(formatDb, sqlFilename):
             "email TEXT NOT NULL, " + \
             "validated TINYINT NOT NULL, " + \
             "token TEXT NOT NULL, " + \
-            "output MEDIUMTEXT NOT NULL" + \
+            "output MEDIUMTEXT NOT NULL, " + \
+            "size INT NOT NULL DEFAULT -1" + \
             ")")
 
         cursor.execute("CREATE TABLE IF NOT EXISTS " + dbResultsTable + " (" + \
@@ -553,6 +582,8 @@ def main():
 
     if initialiseDb(options.formatDb, options.sqlFilename):
         lock = threading.Lock()
+
+        updateJobSizes()
 
         while exitNow == 0:
             updateAvailableInputFiles(lock)

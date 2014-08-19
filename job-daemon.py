@@ -543,6 +543,7 @@ def initialiseDb(formatDb, sqlFilename):
             "timefinished INT NOT NULL, " + \
             "exitcode INT NOT NULL, " + \
             "arguments TEXT NOT NULL, " + \
+            "description TEXT NOT NULL, " + \
             "resultsdir TEXT NOT NULL, " + \
             "abort INT NOT NULL, " + \
             "notified INT NOT NULL, " + \

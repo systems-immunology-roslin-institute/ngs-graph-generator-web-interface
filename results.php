@@ -27,6 +27,18 @@
             return $extA > $extB;
     }
 
+    function formatBytes($size, $precision = 2)
+    {
+        $suffixes = array('b', 'k', 'M', 'G', 'T');
+
+        if( $size <= 0 )
+            return "0" . $suffixes[0];
+
+        $base = log($size) / log(1024);
+
+        return round(pow(1024, $base - floor($base)), $precision) . $suffixes[floor($base)];
+    }
+
     if( $db = openDatabase( ) )
     {
 ?>
@@ -58,7 +70,8 @@
                         "jobs.timestarted, " .
                         "jobs.timefinished, " .
                         "jobs.exitcode, " .
-                        "jobs.abort " .
+                        "jobs.abort," .
+                        "jobs.size " .
                         "FROM jobs";
 
         if( $job != NULL )
@@ -108,7 +121,7 @@
             echo "<tr>\n";
             echo "<th>ID</th>";
             echo "<th>Arguments</th><th>Time queued</th>" .
-                 "<th>Processing time</th><th>Result</th>\n";
+                 "<th>Processing time</th><th>Result</th><th>Size</th>\n";
             echo "</tr>\n";
             echo "</thead>\n";
             echo "<tbody>\n";
@@ -121,6 +134,7 @@
                 $finished           = $row[ 'timefinished' ];
                 $exitcode           = $row[ 'exitcode' ];
                 $abort              = $row[ 'abort' ];
+                $size               = $row[ 'size' ];
 
                 echo "<tr>\n";
                 echo "<td>$jobId</td>\n";
@@ -228,6 +242,11 @@
                     {
                         echo "<td>In progress</td>\n";
                     }
+
+                    if( $size < 0 )
+                        echo "<td>Unknown</td>\n";
+                    else
+                        echo "<td>" . formatBytes($size) . "</td>\n";
                 }
                 else
                 {

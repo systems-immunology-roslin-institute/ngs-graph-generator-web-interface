@@ -20,7 +20,7 @@
                 $row = $result->fetch_assoc( );
                 $filename = $row[ 'filename' ];
                 mysql_free_result( $result );
-                $outputDirectory = "/WWW/source/seq-graph.roslin.ed.ac.uk/output";
+                $outputDirectory = getSetting("web-output-directory");
                 $jobDirectory = "$outputDirectory/job-$jobId";
                 $fqFilename = "$jobDirectory/$filename";
 
@@ -34,7 +34,7 @@
                 header('Content-Length: ' . filesize($fqFilename));
 
                 // Read it off in chunks as the alternative include
-                // or file_get_contents methods exahust PHP memory limits
+                // or file_get_contents methods exhaust PHP memory limits
                 $file = fopen($fqFilename, "r");
                 while( !feof($file) )
                     echo fread($file, 16 * 1024 * 1024);

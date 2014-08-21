@@ -4,24 +4,24 @@
 #
 # Copyright (C) The University of Edinburgh, 2013-2014. All Rights Reserved.
 
-import os
-import sys
-import string
-import MySQLdb
-import time
-import signal
-import threading
-import smtplib
 from email.mime.text import MIMEText
-import urlparse
-import traceback
-import subprocess
-import glob
 from optparse import OptionParser
-import warnings
+import glob
 import json
+import MySQLdb
+import os
+import shlex
 import shutil
+import signal
+import string
+import subprocess
+import sys
+import threading
+import time
+import traceback
 import urllib
+import urlparse
+import warnings
 
 dbHost = None
 dbUser = None
@@ -57,6 +57,8 @@ dbInputsTable   = "inputs"
 exitNow         = 0
 activeJobs      = 0
 activeThreads   = []
+
+maxJobSize = 10737418240 # 10Gb
 
 def executeSQLQuery(query):
     try:
@@ -104,12 +106,10 @@ def getPathSize(path):
 
     return total
 
-def updateJobSizes():
+def updateJobSize(jobId):
     result = executeSQLQuery("SELECT id, resultsDir " + \
             "FROM " + dbJobsTable + " " + \
-            "WHERE validated = '1' " + \
-            " AND size = '-1' " + \
-            "ORDER BY id")
+            "WHERE id = " + `int(jobId)`)
     if result == None:
         return
 
@@ -119,6 +119,18 @@ def updateJobSizes():
         pathSize = getPathSize(resultsDir)
         executeSQLQuery("UPDATE " + dbJobsTable + " SET size = '" + \
             `pathSize` + "' WHERE id = '" + `int(jobId)` + "'")
+
+def updateJobSizes():
+    print "Updating job sizes"
+    result = executeSQLQuery("SELECT id " + \
+            "FROM " + dbJobsTable + " " + \
+            "WHERE validated = '1' " + \
+            "ORDER BY id")
+    if result == None:
+        return
+
+    for job in result:
+        updateJobSize(job[0])
 
 class ConsoleReadingThread(threading.Thread):
     def __init__(self, out, jobId):
@@ -139,6 +151,7 @@ class ConsoleReadingThread(threading.Thread):
                     MySQLdb.escape_string(allOutput) + \
                     "' WHERE id = '" + `int(self.jobId)` + "'")
             self.out.close()
+            print "Output exhausted for job " + `int(self.jobId)`
 
         except:
             print "Warning, unhandled exception in console reading thread"
@@ -176,11 +189,12 @@ class JobThread(threading.Thread):
                 arguments = row[1]
                 resultsDir = os.path.abspath(row[2])
 
-                scriptWithOptions = script + " " + arguments
+                scriptWithOptionsText = script + " " + arguments
+                scriptWithOptionsArray = shlex.split(scriptWithOptionsText)
 
                 # Start script
-                scriptProcess = subprocess.Popen(scriptWithOptions, shell=True, \
-                    stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+                scriptProcess = subprocess.Popen(scriptWithOptionsArray, shell=False, \
+                    stdout=subprocess.PIPE, stderr=subprocess.STDOUT, preexec_fn=os.setsid)
 
                 consoleReadingThread = ConsoleReadingThread(scriptProcess.stdout, jobId)
                 consoleReadingThread.setName("job-" + `int(jobId)` + "-reader")
@@ -198,7 +212,9 @@ class JobThread(threading.Thread):
                             print "Aborting job " + `int(jobId)`
                             exitCode = 15
                             self.abort = True
-                            scriptProcess.terminate()
+
+                            # This is a bit rude, but reliable
+                            os.killpg(scriptProcess.pid, signal.SIGKILL)
                             break
                             
                     time.sleep(3)
@@ -209,10 +225,7 @@ class JobThread(threading.Thread):
                     if exitCode == None:
                         os.kill(scriptProcess.pid, signal.SIGSTOP)
 
-                    # Update size
-                    pathSize = getPathSize(resultsDir)
-                    executeSQLQuery("UPDATE " + dbJobsTable + " SET size = '" + \
-                        `pathSize` + "' WHERE id = '" + `int(jobId)` + "'")
+                    updateJobSize(jobId)
 
                     # Resume
                     if exitCode == None:
@@ -223,14 +236,14 @@ class JobThread(threading.Thread):
                 consoleReadingThread = None
                 scriptProcess.wait()
 
+                print "Finished job " + `int(jobId)`
+
                 # Set finished time stamp
                 executeSQLQuery("UPDATE " + dbJobsTable + " SET timefinished = '" + \
                     `int(time.time())` + "', exitcode = '" + `int(exitCode)` + \
                     "' WHERE id = '" + `int(jobId)` + "'")
 
-                print "Finished job " + `int(jobId)`
-
-                if os.path.exists(resultsDir):
+                if not self.abort and os.path.exists(resultsDir):
                     print "Finding results in " + resultsDir
                     layoutFilenames = glob.glob(resultsDir + "/*.layout") + glob.glob(resultsDir + "/*.zip")
 
@@ -313,7 +326,8 @@ def sendmail(recipient, subject, body):
     message["Subject"] = subject
 
     try:
-        sendmailProcess = subprocess.Popen(["sendmail", "-t"], stdin=subprocess.PIPE)
+        sendmailProcess = subprocess.Popen(["sendmail", "-t"], \
+            stdin=subprocess.PIPE, close_fds=True)
         sendmailProcess.communicate(message.as_string())
         if sendmailProcess.returncode != 0:
             print "WARNING: sendmail exit status", sendmailProcess.returncode
@@ -338,6 +352,60 @@ def purgeJob(jobId):
     executeSQLQuery("DELETE FROM " + dbJobsTable + " WHERE id='" + `int(jobId)` + "'")
     if os.path.exists(resultsDir):
         shutil.rmtree(resultsDir)
+
+def abortJob(jobId):
+    """Signal job thread to abort a job"""
+
+    print "Aborting job " + `int(jobId)`
+    result = executeSQLQuery("UPDATE " + dbJobsTable + \
+            " SET abort = 1" + \
+            " AND timefinished = 0" + \
+            " WHERE id = '" + `int(jobId)` + "'")
+
+def cleanResultsDirOfAbortedJobs(lock):
+    result = executeSQLQuery("SELECT id, resultsdir " + \
+            "FROM " + dbJobsTable + " " + \
+            "WHERE timefinished > 0 " + \
+            "AND abort = 1")
+    if result == None:
+        return
+
+    for job in result:
+        jobId = job[0]
+        resultsDir = os.path.abspath(job[1])
+
+        abortedIndicator = os.path.join(resultsDir, "aborted")
+        if not os.path.exists(abortedIndicator):
+            print "Cleaning aborted results from job " + `int(jobId)`
+
+            for root, dirs, files in os.walk(resultsDir, topdown=False):
+                for file in files:
+                    filepath = os.path.join(root, file)
+                    os.remove(filepath)
+                for dir in dirs:
+                    dirpath = os.path.join(root, dir)
+                    if os.path.islink(dirpath):
+                        os.unlink(dirpath)
+                    else:
+                        os.rmdir(dirpath)
+
+            # Indicate job was aborted
+            open(abortedIndicator, 'a').close()
+            updateJobSize(jobId)
+
+def checkForExcessivelyLargeJobs(lock):
+    result = executeSQLQuery("SELECT id, size " + \
+            "FROM " + dbJobsTable + " " + \
+            "WHERE timefinished = 0 " + \
+            "AND size >= " + `int(maxJobSize)` + " " \
+            "AND abort = 0")
+    if result == None:
+        return
+
+    for job in result:
+        jobId = job[0]
+        print "Job " + `int(jobId)` + " is too large"
+        abortJob(jobId)
 
 def purgeJobsWhereResultsDirIsMissing(lock):
     result = executeSQLQuery("SELECT id, resultsdir " + \
@@ -438,8 +506,8 @@ def checkForNewJobs(lock):
             result2 = executeSQLQuery("UPDATE " + dbJobsTable + " SET timequeued = '" + \
                 `int(time.time())` + "' WHERE id = '" + jobId + "'")
             if result2 == None:
-              lock.release()
-              break
+                lock.release()
+                break
 
         if validated != 0 and activeJobs < int(maxJobs):
             lock.release()
@@ -459,27 +527,30 @@ def checkForNewJobs(lock):
 def checkForCompleteJobs(lock):
     """Deal with any jobs that have just completed"""
 
-    # Set the finish time for any aborted jobs
-    result = executeSQLQuery("UPDATE " + dbJobsTable + \
-            " SET timefinished = '" + \
-            `int(time.time())` + "' " + \
-            "WHERE timefinished = '0' " + \
-            "AND abort = '1'")
-    if result == None:
-        return
-
-    result = executeSQLQuery("SELECT id, email, timefinished FROM " + dbJobsTable + \
+    result = executeSQLQuery("SELECT id, email, timefinished, abort, size FROM " + dbJobsTable + \
             " WHERE notified = '0'")
     for job in result:
         jobId = `int(job[0])`
         email = job[1]
+        abort = int(job[3])
+        size = int(job[4])
         if job[2] != 0:
             # Send an email
-            subject = "seq-graph job " + jobId + " results"
             url = getSetting("base-url")
-            body = "Results for job " + jobId + " are now available:\n" + \
-                url + "results.php?job=" + jobId + "\n\n" + \
-                "All of your results:\n" + \
+
+            if abort == 0:
+                subject = "seq-graph job " + jobId + " results"
+                body = "Results for job " + jobId + " are now available:\n" + \
+                    url + "results.php?job=" + jobId + "\n"
+            else:
+                subject = "seq-graph job " + jobId + " aborted"
+                if size > maxJobSize:
+                    body = "Job " + jobId +  " was automatically aborted " + \
+                        "because it was using too much storage.\n"
+                else:
+                    body = "Job " + jobId +  " was aborted.\n"
+
+            body = body + "\nAll of your results:\n" + \
                 url + "results.php?email=" + urllib.quote_plus(email) + "\n"
 
             sendmail(email, subject, body)
@@ -510,8 +581,8 @@ def sigHandler(signal, stackFrame):
     # Abort any jobs that aren't yet finished
     print "Caught signal, aborting jobs..."
     executeSQLQuery("UPDATE " + dbJobsTable + \
-            " SET abort = '1'" + \
-            " AND timefinished = 0")
+            " SET abort = 1" + \
+            " WHERE timefinished = 0")
     print "done."
 
 def initialiseDb(formatDb, sqlFilename):
@@ -551,7 +622,7 @@ def initialiseDb(formatDb, sqlFilename):
             "validated TINYINT NOT NULL, " + \
             "token TEXT NOT NULL, " + \
             "output MEDIUMTEXT NOT NULL, " + \
-            "size INT NOT NULL DEFAULT -1" + \
+            "size BIGINT NOT NULL DEFAULT -1" + \
             ")")
 
         cursor.execute("CREATE TABLE IF NOT EXISTS " + dbResultsTable + " (" + \
@@ -617,6 +688,8 @@ def main():
             checkForCompleteJobs(lock)
             purgeHistoricalJobs(lock)
             purgeJobsWhereResultsDirIsMissing(lock)
+            cleanResultsDirOfAbortedJobs(lock)
+            checkForExcessivelyLargeJobs(lock)
 
             # Wait a bit
             time.sleep(3)

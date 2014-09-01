@@ -253,6 +253,11 @@
                 else
                 {
                     echo "<td>Not started</td>\n";
+                    if( $abort )
+                        echo "<td>Aborted</td>\n";
+                    else
+                        echo "<td></td>\n";
+                    echo "<td></td>\n";
                 }
 
                 echo "</tr>\n";

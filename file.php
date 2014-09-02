@@ -24,20 +24,27 @@
                 $jobDirectory = "$outputDirectory/job-$jobId";
                 $fqFilename = "$jobDirectory/$filename";
 
-                header('Content-Description: File Transfer');
-                header('Content-Type: application/octet-stream');
-                header("Content-Disposition: attachment; filename=$filename");
-                header('Content-Transfer-Encoding: binary');
-                header('Expires: 0');
-                header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-                header('Pragma: public');
-                header('Content-Length: ' . filesize($fqFilename));
+                if( file_exists( $fqFilename ) )
+                {
+                    header('Content-Description: File Transfer');
+                    header('Content-Type: application/octet-stream');
+                    header("Content-Disposition: attachment; filename=$filename");
+                    header('Content-Transfer-Encoding: binary');
+                    header('Expires: 0');
+                    header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+                    header('Pragma: public');
+                    header('Content-Length: ' . filesize($fqFilename));
 
-                // Read it off in chunks as the alternative include
-                // or file_get_contents methods exhaust PHP memory limits
-                $file = fopen($fqFilename, "r");
-                while( !feof($file) )
-                    echo fread($file, 16 * 1024 * 1024);
+                    // Read it off in chunks as the alternative include
+                    // or file_get_contents methods exhaust PHP memory limits
+                    $file = fopen($fqFilename, "r");
+                    while( !feof($file) )
+                        echo fread($file, 16 * 1024 * 1024);
+                }
+                else
+                {
+                    echo $fqFilename . " not present.";
+                }
             }
         }
 

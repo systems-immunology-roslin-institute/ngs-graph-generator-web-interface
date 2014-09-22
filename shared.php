@@ -2,7 +2,7 @@
     function openDatabase( )
     {
         $scriptDirectory = realpath(dirname(__FILE__));
-        $dbSettingsFile = $scriptDirectory . "/dbSettings.json";
+        $dbSettingsFile = $scriptDirectory . "/../secure/dbSettings.json";
         $dbSettingsData = file_get_contents($dbSettingsFile);
         $dbSettings = json_decode($dbSettingsData, true);
 

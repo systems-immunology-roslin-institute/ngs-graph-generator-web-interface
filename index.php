@@ -90,7 +90,7 @@
                     if( eregi( $emailCheck, $email ) )
                     {
                         // Has the email address been checked that it is real
-                        $query = $db->prepare( "SELECT DISTINCT validated FROM jobs WHERE email = ? AND validated = '1'" );
+                        $query = $db->prepare( "SELECT DISTINCT validated, token FROM jobs WHERE email = ? AND validated = '1'" );
                         $query->bind_param( "s", $email );
 
                         $query->execute( )
@@ -98,6 +98,11 @@
 
                         $result = $query->get_result( );
                         $validated = ( $result->num_rows > 0 );
+                        if( $validated )
+                        {
+                            $row = $result->fetch_assoc( );
+                            $token = $row[ 'token' ];
+                        }
 
                         $result = $db->query( "SHOW TABLE STATUS LIKE 'jobs'" )
                             or die( "Query failed: " . $db->error );
@@ -131,7 +136,7 @@
                         $jobId = $db->insert_id;
 
                         if( $validated )
-                            echo "<p>Queuing <a href=\"results.php?job=$jobId\">job $jobId</a></p>\n";
+                            echo "<p>Queuing <a href=\"results.php?job=$jobId&token=$token\">job $jobId</a></p>\n";
                         else
                             echo "<p>Your email address requires validation, " .
                                 "please click on the link that has been sent to you</p>\n";
@@ -175,7 +180,7 @@
 
             $token = $_GET[ 'token' ];
 
-            $query = $db->prepare( "SELECT id, email FROM jobs WHERE token = ? AND validated = '0'" );
+            $query = $db->prepare( "SELECT id, email, token FROM jobs WHERE token = ? AND validated = '0'" );
             $query->bind_param( "s", $token );
 
             $query->execute( )
@@ -189,7 +194,8 @@
                 {
                     $jobId = $row[ 'id' ];
                     $email = $row[ 'email' ];
-                    echo "<a href=\"results.php?job=$jobId\">Job $jobId</a>\n";
+                    $token = $row[ 'token' ];
+                    echo "<a href=\"results.php?job=$jobId&token=$token\">Job $jobId</a>\n";
                 }
 
                 echo "</p>\n";

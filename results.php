@@ -39,6 +39,8 @@
         return round(pow(1024, $base - floor($base)), $precision) . $suffixes[floor($base)];
     }
 
+    $token = isset($_GET[ 'token' ]) ? $_GET[ 'token' ] : NULL;
+
     if( $db = openDatabase( ) )
     {
 ?>
@@ -48,8 +50,10 @@
                 <fieldset class="outer" id="filter">
                     <legend>Filter</legend>
                     <p>
-                        <a class="button" href="results.php">All results</a>
-                        <a class="button" href="results.php?inprogress=1">In progress</a>
+<?php
+    echo "<a class=\"button\" href=\"results.php?token=$token\">All results</a> ";
+    echo "<a class=\"button\" href=\"results.php?inprogress=1&token=$token\">In progress</a>";
+?>
                     </p>
                 </fieldset>
             </p>
@@ -59,10 +63,11 @@
                 <fieldset class="results">
                     <legend>Results</legend>
 <?php
-        $job        = isset($_GET[ 'job' ]) ? $_GET[ 'job' ] : NULL;
-        $inprogress = isset($_GET[ 'inprogress' ]) ? $_GET[ 'inprogress' ] : NULL;
-        $email      = isset($_GET[ 'email' ]) ? $_GET[ 'email' ] : NULL;
+    $job        = isset($_GET[ 'job' ]) ? $_GET[ 'job' ] : NULL;
+    $inprogress = isset($_GET[ 'inprogress' ]) ? $_GET[ 'inprogress' ] : NULL;
 
+    if( $token != NULL )
+    {
         $queryText = "SELECT " .
                         "jobs.id, " .
                         "jobs.arguments, " .
@@ -71,49 +76,38 @@
                         "jobs.timestarted, " .
                         "jobs.timefinished, " .
                         "jobs.exitcode, " .
-                        "jobs.abort," .
+                        "jobs.abort, " .
                         "jobs.size " .
-                        "FROM jobs";
+                        "FROM jobs WHERE ";
 
         if( $job != NULL )
         {
-            $queryText = $queryText . " WHERE id = ?";
+            $queryText = $queryText . "id = ? AND ";
             $param = $job;
         }
         else if( $inprogress != NULL )
         {
-            $queryText = $queryText . " WHERE timefinished = '0'";
-        }
-        else if( $email != NULL )
-        {
-            $queryText = $queryText . " WHERE email = ?";
-            $param = $email;
+            $queryText = $queryText . "timefinished = '0' AND ";
         }
         else
         {
-            $queryText = $queryText . " WHERE validated = '1'";
+            $queryText = $queryText . "validated = '1' AND ";
         }
 
-        $queryText = $queryText . " ORDER BY timequeued DESC, resultsdir ASC ";
+        $queryText = $queryText . "token = ? ORDER BY timequeued DESC, resultsdir ASC";
 
         $query = $db->prepare( $queryText );
 
         if( $param )
-            $query->bind_param( "s", $param );
+            $query->bind_param( "ss", $param, $token );
+        else
+            $query->bind_param( "s", $token );
 
         // Run query to get the total number of rows
         $query->execute( )
             or die( "Query failed: " . $db->error );
         $result = $query->get_result( );
         $totalRows = $result->num_rows;
-
-        $url = "results.php?";
-        if( $job != NULL )
-            $url = $url . "job=$job&";
-        if( $email != NULL )
-            $url = $url . "email=" . urlencode( $email ) . "&";
-        if( $inprogress != NULL )
-            $url = $url . "inprogress=$inprogress&";
 
         if( $result && $totalRows > 0 )
         {
@@ -272,6 +266,11 @@
         }
 
         $query->close( );
+    }
+    else
+    {
+      echo "<p>Invalid/missing token</p>\n";
+    }
 ?>
                 </fieldset>
             </p>

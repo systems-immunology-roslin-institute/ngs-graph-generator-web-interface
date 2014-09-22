@@ -38,14 +38,14 @@
 
             if( $alreadyAborted )
             {
-                echo "<p><a href=\"results.php?job=$job\">Job $job</a> already finished</p>\n";
-                echo "<a href=\"results.php?job=$job\">Back</a>\n";
+                echo "<p><a href=\"results.php?job=$job&token=$token\">Job $job</a> already finished</p>\n";
+                echo "<a href=\"results.php?job=$job&token=$token\">Back</a>\n";
             }
             else
             {
                 echo "<p>Abort job $job?</p>\n";
                 echo "<a href=\"" . $_SERVER[REQUEST_URI] . "&confirm=1\">Yes</a>\n";
-                echo "<a href=\"results.php?job=$job\">No</a>\n";
+                echo "<a href=\"results.php?job=$job&token=$token\">No</a>\n";
             }
         }
         else if( $job != NULL )
@@ -60,12 +60,12 @@
             if( $query->affected_rows > 0 )
             {
                 echo "<p>Job $job aborted</p>\n";
-                echo "<a href=\"results.php?job=$job\">Back</a>\n";
+                echo "<a href=\"results.php?job=$job&token=$token\">Back</a>\n";
             }
             else
             {
                 echo "<p>Could not abort job $job</p>\n";
-                echo "<a href=\"results.php?job=$job\">Back</a>\n";
+                echo "<a href=\"results.php?job=$job&token=$token\">Back</a>\n";
             }
         }
         else

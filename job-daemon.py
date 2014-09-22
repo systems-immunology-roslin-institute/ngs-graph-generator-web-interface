@@ -194,7 +194,8 @@ class JobThread(threading.Thread):
 
                 # Start script
                 scriptProcess = subprocess.Popen(scriptWithOptionsArray, shell=False, \
-                    stdout=subprocess.PIPE, stderr=subprocess.STDOUT, preexec_fn=os.setsid)
+                    stdout=subprocess.PIPE, stderr=subprocess.STDOUT, \
+                    close_fds=True, preexec_fn=os.setsid)
 
                 consoleReadingThread = ConsoleReadingThread(scriptProcess.stdout, jobId)
                 consoleReadingThread.setName("job-" + `int(jobId)` + "-reader")
@@ -410,7 +411,7 @@ def checkForExcessivelyLargeJobs(lock):
 def purgeJobsWhereResultsDirIsMissing(lock):
     result = executeSQLQuery("SELECT id, resultsdir " + \
             "FROM " + dbJobsTable + " " + \
-            "WHERE timefinished > 0")
+            "WHERE timefinished > 0 OR abort = 1")
     if result == None:
         return
 
@@ -527,13 +528,14 @@ def checkForNewJobs(lock):
 def checkForCompleteJobs(lock):
     """Deal with any jobs that have just completed"""
 
-    result = executeSQLQuery("SELECT id, email, timefinished, abort, size FROM " + dbJobsTable + \
+    result = executeSQLQuery("SELECT id, email, timefinished, abort, size, token FROM " + dbJobsTable + \
             " WHERE notified = '0'")
     for job in result:
         jobId = `int(job[0])`
         email = job[1]
         abort = int(job[3])
         size = int(job[4])
+        token = job[5]
         if job[2] != 0:
             # Send an email
             url = getSetting("base-url")
@@ -541,7 +543,7 @@ def checkForCompleteJobs(lock):
             if abort == 0:
                 subject = "seq-graph job " + jobId + " results"
                 body = "Results for job " + jobId + " are now available:\n" + \
-                    url + "results.php?job=" + jobId + "\n"
+                    url + "results.php?job=" + jobId + "&token=" + token + "\n"
             else:
                 subject = "seq-graph job " + jobId + " aborted"
                 if size > maxJobSize:
@@ -551,7 +553,7 @@ def checkForCompleteJobs(lock):
                     body = "Job " + jobId +  " was aborted.\n"
 
             body = body + "\nAll of your results:\n" + \
-                url + "results.php?email=" + urllib.quote_plus(email) + "\n"
+                url + "results.php?token=" + token + "\n"
 
             sendmail(email, subject, body)
 

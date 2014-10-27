@@ -1,6 +1,8 @@
 INSERT INTO settings (setting, value) VALUES
-    ('script-file', '/nfs_netapp/tangus2/pipeline/create-biolayout-file.sh'),
+    ('base-url', 'http://your.domain.ac.uk/'),
+    ('from-address', 'email@your.domain.ac.uk'),
+    ('input-directory', '/input-ngs-data/'),
     ('max-jobs', '8'),
-    ('from-address', 'seq-graph@roslin.ed.ac.uk'),
-    ('base-url', 'http://seq-graph.roslin.ed.ac.uk/'),
-    ('input-directory', '/nfs_netapp/tangus2/pipeline/')
+    ('output-directory', '/output-ngs-data/'),
+    ('script-file', '/ngs-graph-generator/create-biolayout-file.sh'),
+    ('web-output-directory', '/output-ngs-data/')

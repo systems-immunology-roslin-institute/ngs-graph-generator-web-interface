@@ -419,6 +419,7 @@ def purgeJobsWhereResultsDirIsMissing(lock):
         jobId = job[0]
         resultsDir = os.path.abspath(job[1])
         if not os.path.exists(resultsDir):
+            print "Job " + `int(jobId)` + " is missing results directory"
             purgeJob(jobId)
 
 def checkForUnvalidatedEmailAddresses(lock):

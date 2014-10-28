@@ -1,4 +1,4 @@
-#!/opt/apps/python/2.7.3/bin/python
+#! /usr/bin/python
 #
 # Daemon for seq graph web frontend
 #

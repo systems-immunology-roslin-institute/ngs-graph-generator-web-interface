@@ -25,6 +25,10 @@
 <body>
     <div class="headerfooter">
         <div class="header">NGS graph generator</div>
+        <a class="button" href=".">Home</a>
+        <a class="button" href="?action=settings">Generate a Graph</a>
+        <a class="button" href="?action=code">Code</a>
+        <a class="button" href="?action=contact">Contact Us</a>
     </div>
 <?php
     // This lock may not be strictly necessary, but
@@ -218,7 +222,7 @@
     </div>
 <?php
         }
-        else
+        else if( $_GET[ 'action' ] == 'settings' )
         {
 ?>
     <form name="queue" enctype="multipart/form-data" method="post" action="?action=submit">
@@ -228,6 +232,12 @@
                     <legend>
                         Settings
                     </legend>
+
+                    <div class="centered">
+                        <p>
+Run and visualise from our human fibroblast RNA-seq data. Choose your own genes of interest to generate graphs and visualise using <a href="http://www.biolayout.org/">BioLayout Express<sup>3D</sup></a>.
+                        </p>
+                    </div>
 
                     <p>
                         <label>BAM file</label>
@@ -305,6 +315,100 @@
             </p>
         </div>
     </form>
+<?php
+        }
+        else if( $_GET[ 'action' ] == 'code' )
+        {
+?>
+        <div id="code">
+            <p>
+                <fieldset class="outer">
+                    <legend>
+                        Code
+                    </legend>
+<div class="centered">
+<p>The steps outlined below will help you run the NGS graph generator and integrate this method into your transcriptomics analysis pipeline. The user can run the NGS graph generator using their own data by downloading the code through our <a href="https://github.com/ngs-graph-generator/ngs-graph-generator">Github repository</a>.</p>
+</div>
+                </fieldset>
+            </p>
+        </div>
+<?php
+        }
+        else if( $_GET[ 'action' ] == 'contact' )
+        {
+?>
+        <div id="contact">
+            <p>
+                <fieldset class="outer">
+                    <legend>
+                        Contact Us
+                    </legend>
+<div class="centered">
+If you have any comment or questions, please don't hesitate to contact us at <a href="mailto:support@seq-graph.roslin.ed.ac.uk">support@seq-graph.roslin.ed.ac.uk</a>.
+
+<h2>TEAM GRAPH GENERATOR</h2>
+
+<h3>FAHMI NAZARIE | TIM ANGUS | TOM FREEMAN</h3>
+<p>
+Systems Immunology Group<br>
+Division of Genetics and Genomics<br>
+The Roslin Institute and Royal (Dick) School of Veterinary Studies<br>
+University of Edinburgh<br>
+Easter Bush<br>
+Midlothian<br>
+EH25 9RG<br>
+</p>
+</div>
+                </fieldset>
+            </p>
+        </div>
+<?php
+        }
+        else
+        {
+?>
+        <div id="home">
+            <p>
+                <fieldset class="outer">
+                    <legend>
+                        Home
+                    </legend>
+<h3>Graph based visualisation of RNA-seq data</h3>
+<p>The NGS graph generator enables the graph based visualisation of RNA-seq data and provides a complementary approach to understanding transcript diversity and issues with assembly. Following the mapping of reads to the reference genome, read to read comparison is performed on portions of the data (e.g. all reads mapping to a given gene.) <a href="http://www.ncbi.nlm.nih.gov/blast/Blast.cgi?CMD=Web&PAGE_TYPE=BlastHome">BLAST</a> is used to provide a matrix of weighted similarity scores between reads.</p>
+
+<h3>Example graphs</h3>
+<p>These graphs of selected genes were generated using RNA-seq data of human fibroblast. The graph can be visualised using <a href="http://www.biolayout.org/">BioLayout Express<sup>3D</sup></a>. You can click on the graphs below to view them via <a href="http://www.biolayout.org/">BioLayout Express<sup>3D</sup></a> webstart.</p>
+
+<div class="figure">
+    <p><a href="examples/LRR1.jnlp"><img src="examples/LRR1.jpg" alt="LRR1"></a></p>
+    <p><a href="examples/LRR1.jnlp">
+        Leucine rich repeat (LRR1) - Splice variant
+    </a></p>
+</div>
+
+<div class="figure">
+    <p><a href="examples/PCM1.jnlp"><img src="examples/PCM1.jpg" alt="PCM1"></a></p>
+    <p><a href="examples/PCM1.jnlp">
+Pericentriolar material 1 (PCM1) - Splice variant
+    </a></p>
+</div>
+
+<div class="figure">
+    <p><a href="examples/TUBA1C.jnlp"><img src="examples/TUBA1C.jpg" alt="TUBA1C"></a></p>
+    <p><a href="examples/TUBA1C.jnlp">
+Tubulin, Alpha 1c (TUBA1C) - Redundant reads discarded
+    </a></p>
+</div>
+
+<div class="figure">
+    <p><a href="examples/MKI67.jnlp"><img src="examples/MKI67.jpg" alt="MKI67"></a></p>
+    <p><a href="examples/MKI67.jnlp">
+Marker of proliferation Ki-67 (MKI67) - Splice variant and protein domain repeat
+    </a></p>
+</div>
+                </fieldset>
+            </p>
+        </div>
 <?php
         }
 ?>

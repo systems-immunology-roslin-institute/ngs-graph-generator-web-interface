@@ -129,6 +129,27 @@ div.footer
     line-height: 60px;
 }
 
+div.centered
+{
+    text-align: center;
+}
+
+div.figure
+{
+  float: left;
+  border: thin silver solid;
+  margin: 0.5em;
+  padding: 0.5em;
+}
+
+div.figure p
+{
+  text-align: center;
+  font-style: italic;
+  font-size: smaller;
+  text-indent: 0;
+}
+
 table
 {
     border-collapse: collapse;

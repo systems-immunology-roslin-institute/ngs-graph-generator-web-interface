@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp
+  spec="1.0+"
+  codebase="http://seq-graph.roslin.ed.ac.uk/examples">
+  <information>
+    <title>BioLayout Express3D</title>
+    <vendor>The Roslin Institute</vendor>
+    <homepage href="http://www.biolayout.org"/>
+    <description>BioLayout Express3D</description>
+    <description kind="short">BioLayout Express3D: A tool for the visualization and analysis of network graphs</description>
+    <icon href="BioLayoutExpress3DIcon.png"/>
+    <icon kind="splash" href="BioLayoutExpress3DLogo.png"/>
+    <offline-allowed/>
+  </information> 
+  <security>
+	<all-permissions/>
+  </security>
+  <resources>
+    <j2se href="http://java.sun.com/products/autodl/j2se" version="1.6+" max-heap-size="920m"/>
+    <jar href="http://biolayout.org/download/current/BioLayoutExpress3D.jar" download="eager"/>
+  </resources>
+  <application-desc main-class="org.BioLayoutExpress3D.Layout">
+    <argument>-loadFromRepository</argument>
+    <argument>http://seq-graph.roslin.ed.ac.uk/examples/</argument>
+    <argument>-loadDataSets</argument>
+    <argument>MKI67.layout.zip 6621002</argument>
+  </application-desc>
+</jnlp>

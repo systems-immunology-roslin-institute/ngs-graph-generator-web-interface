@@ -348,7 +348,7 @@ If you have any comment or questions, please don't hesitate to contact us at <a 
 
 <h2>TEAM GRAPH GENERATOR</h2>
 
-<h3>FAHMI NAZARIE | TIM ANGUS | TOM FREEMAN</h3>
+<h3>Fahmi Nazarie | Tim Angus | Tom Freeman</h3>
 <p>
 Systems Immunology Group<br>
 Division of Genetics and Genomics<br>

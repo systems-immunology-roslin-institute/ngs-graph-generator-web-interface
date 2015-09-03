@@ -344,11 +344,11 @@ Run and visualise from our human fibroblast RNA-seq data. Choose your own genes 
                         Contact Us
                     </legend>
 <div class="centered">
-If you have any comment or questions, please don't hesitate to contact us at <a href="mailto:support@seq-graph.roslin.ed.ac.uk">support@seq-graph.roslin.ed.ac.uk</a>.
+If you have any comment or questions, please don't hesitate to contact us at <a href="mailto:wan.fahmi@roslin.ed.ac.uk">wan.fahmi@roslin.ed.ac.uk</a>.
 
-<h2>TEAM GRAPH GENERATOR</h2>
+<h2>Team NGS Graph Generator</h2>
 
-<h3>Fahmi Nazarie | Tim Angus | Tom Freeman</h3>
+<h2>Fahmi Nazarie | Tim Angus | Tom Freeman</h2>
 <p>
 Systems Immunology Group<br>
 Division of Genetics and Genomics<br>

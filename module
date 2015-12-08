@@ -1,0 +1,1 @@
+module add apps/gcc/R/2.15.2 apps/gcc/cufflinks/2.2.1 apps/gcc/samtools/0.1.19 apps/gcc/star/2.3.0e

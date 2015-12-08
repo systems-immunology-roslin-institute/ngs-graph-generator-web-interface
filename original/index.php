@@ -1,94 +1,23 @@
 <?php
     include( "shared.php" );
+
     // Store email cookie for a year
     $email = $_POST[ 'email' ];
     if( $email != NULL )
         setcookie( "seqgraph_email", "$email", time() + 60 * 60 * 24 * 365 );
 ?>
-#<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-#<html>
-#<head>
-#    <title>NGS graph generator</title>
-#    <link rel="stylesheet" type="text/css" href="style.css">
-#</head>
-
-<!DOCTYPE html>
-<html dir="ltr" lang="en-US">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
 <head>
-
-	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-	<meta name="author" content="SemiColonWeb" />
-
-	<!-- Stylesheets
-	============================================= -->
-	<link href="http://fonts.googleapis.com/css?family=Lato:300,400,400italic,600,700|Raleway:300,400,500,600,700|Crete+Round:400italic" rel="stylesheet" type="text/css" />
-	<link rel="stylesheet" href="css/bootstrap.css" type="text/css" />
-	<link rel="stylesheet" href="style.css" type="text/css" />
-	<link rel="stylesheet" href="css/dark.css" type="text/css" />
-	<link rel="stylesheet" href="css/font-icons.css" type="text/css" />
-	<link rel="stylesheet" href="css/animate.css" type="text/css" />
-	<link rel="stylesheet" href="css/magnific-popup.css" type="text/css" />
-
-	<link rel="stylesheet" href="css/responsive.css" type="text/css" />
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-	<!--[if lt IE 9]>
-		<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
-	<![endif]-->
-
-	<!-- External JavaScripts
-	============================================= -->
-	<script type="text/javascript" src="js/jquery.js"></script>
-	<script type="text/javascript" src="js/plugins.js"></script>
-
-	<!-- SLIDER REVOLUTION 4.x SCRIPTS  -->
-	<script type="text/javascript" src="include/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
-	<script type="text/javascript" src="include/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
-
-	<!-- SLIDER REVOLUTION 4.x CSS SETTINGS -->
-	<link rel="stylesheet" type="text/css" href="include/rs-plugin/css/settings.css" media="screen" />
-
-	<!-- Document Title
-	============================================= -->
-	<title>NGS Graph Generator</title>
-
-	<style>
-		.revo-slider-emphasis-text {
-			font-size: 64px;
-			font-weight: 700;
-			letter-spacing: -1px;
-			font-family: 'Raleway', sans-serif;
-			padding: 15px 20px;
-			border-top: 2px solid #FFF;
-			border-bottom: 2px solid #FFF;
-		}
-		.revo-slider-desc-text {
-			font-size: 20px;
-			font-family: 'Lato', sans-serif;
-			width: 650px;
-			text-align: center;
-			line-height: 1.5;
-		}
-		.revo-slider-caps-text {
-			font-size: 16px;
-			font-weight: 400;
-			letter-spacing: 3px;
-			font-family: 'Raleway', sans-serif;
-		}
-	</style>
+    <title>NGS graph generator</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
-
-
-
-
-
-
-
-
 <script language="JavaScript">
     function queueFormSubmit( action )
     {
         document.queue.action = action;
         document.queue.submit( );
+
         return true;
     }
 </script>
@@ -106,6 +35,7 @@
     // it's not doing any harm
     $lockFileName = "/tmp/seqgraph.php.lock";
     $lockFile = 0;
+
     /**
      * Take the lock
      */
@@ -113,9 +43,11 @@
     {
         global $lockFileName;
         global $lockFile;
+
         $lockFile = fopen( $lockFileName, "w" );
         flock( $lockFile, LOCK_EX );
     }
+
     /**
      * Release the lock
      */
@@ -123,12 +55,14 @@
     {
         global $lockFileName;
         global $lockFile;
+
         if( $lockFile != 0 )
         {
             flock( $lockFile, LOCK_UN );
             fclose( $lockFile );
         }
     }
+
     if( $db = openDatabase( ) )
     {
         if( $_GET[ 'action' ] == 'submit' )
@@ -140,6 +74,7 @@
                 <fieldset>
 <?php
             takeLock( );
+
             $bam_file = $_POST[ 'bam_file' ];
             $tab_file = $_POST[ 'tab_file' ];
             $gtf_file = $_POST[ 'gtf_file' ];
@@ -161,8 +96,10 @@
                         // Has the email address been checked that it is real
                         $query = $db->prepare( "SELECT DISTINCT validated, token FROM jobs WHERE email = ? AND validated = '1'" );
                         $query->bind_param( "s", $email );
+
                         $query->execute( )
                             or die( "Query failed: " . $db->error );
+
                         $result = $query->get_result( );
                         $validated = ( $result->num_rows > 0 );
                         if( $validated )
@@ -170,6 +107,7 @@
                             $row = $result->fetch_assoc( );
                             $token = $row[ 'token' ];
                         }
+
                         $result = $db->query( "SHOW TABLE STATUS LIKE 'jobs'" )
                             or die( "Query failed: " . $db->error );
                         $row = $result->fetch_array( );
@@ -179,27 +117,34 @@
                             $outputDirectory = ".";
                         $cacheDirectory = $outputDirectory;
                         $outputDirectory .= "/job-$nextJobId";
+
                         $arguments = 
                             "-b $bam_file -t $tab_file -g $gtf_file -o $outputDirectory " .
                             "-c $cacheDirectory " . ($identical_unique ? "-u " : "") .
                             "-d \"$genes\" -p $similarity -l $coverage";
+
                         $description = "$genes\n$similarity% similarity $coverage% coverage\n" .
                             ($identical_unique ? "Identical reads discarded\n" : "") .
                             basename($bam_file) . "\n" .
                             basename($tab_file) . "\n" .
                             basename($gtf_file);
+
                         // Add new job
                         $query = $db->prepare( "INSERT INTO jobs " .
                             "( email, arguments, description, resultsdir ) VALUES ( ?, ?, ?, ? )" );
                         $query->bind_param( "ssss", $email, $arguments, $description, $outputDirectory );
+
                         $query->execute( )
                             or die( "Query failed: " . $db->error );
+
                         $jobId = $db->insert_id;
+
                         if( $validated )
                             echo "<p>Queuing <a href=\"results.php?job=$jobId&token=$token\">job $jobId</a></p>\n";
                         else
                             echo "<p>Your email address requires validation, " .
                                 "please click on the link that has been sent to you</p>\n";
+
                         echo "<a href=\".\">Back</a>\n";
                     }
                     else
@@ -219,6 +164,7 @@
                 echo "<p>No gene list supplied or malformed</p>\n";
                 echo "<a href=\".\">Back</a>\n";
             }
+
             releaseLock( );
 ?>
                 </fieldset>
@@ -235,12 +181,16 @@
             <fieldset>
 <?php
             takeLock( );
+
             $token = $_GET[ 'token' ];
+
             $query = $db->prepare( "SELECT id, email, token FROM jobs WHERE token = ? AND validated = '0'" );
             $query->bind_param( "s", $token );
+
             $query->execute( )
                 or die( "Query failed: " . $db->error );
             $result = $query->get_result( );
+
             if( $result->num_rows > 0 )
             {
                 echo "<p>Your queued jobs will now be executed:</p><p>\n";
@@ -251,9 +201,12 @@
                     $token = $row[ 'token' ];
                     echo "<a href=\"results.php?job=$jobId&token=$token\">Job $jobId</a>\n";
                 }
+
                 echo "</p>\n";
+
                 $query = $db->prepare( "UPDATE jobs SET validated = '1' WHERE email = ?" );
                 $query->bind_param( "s", $email );
+
                 $query->execute( )
                     or die( "Query failed: " . $db->error );
             }
@@ -261,6 +214,7 @@
             {
                 echo "<p>This validation token has expired, please try again</p>\n";
             }
+
             releaseLock( );
 ?>
             </fieldset>
@@ -291,6 +245,7 @@ Run and visualise from our human fibroblast RNA-seq data. Choose your own genes 
 <?php
             $inputsResult = $db->query( "SELECT filename FROM inputs WHERE type = 'bam'" )
                 or die( "Query failed: " . $db->error );
+
             while( $row = $inputsResult->fetch_assoc( ) )
             {
                 $filename = $row[ 'filename' ];
@@ -306,6 +261,7 @@ Run and visualise from our human fibroblast RNA-seq data. Choose your own genes 
 <?php
             $inputsResult = $db->query( "SELECT filename FROM inputs WHERE type = 'tab'" )
                 or die( "Query failed: " . $db->error );
+
             while( $row = $inputsResult->fetch_assoc( ) )
             {
                 $filename = $row[ 'filename' ];
@@ -322,6 +278,7 @@ Run and visualise from our human fibroblast RNA-seq data. Choose your own genes 
 <?php
             $inputsResult = $db->query( "SELECT filename FROM inputs WHERE type = 'gtf'" )
                 or die( "Query failed: " . $db->error );
+
             while( $row = $inputsResult->fetch_assoc( ) )
             {
                 $filename = $row[ 'filename' ];
@@ -457,10 +414,9 @@ Marker of proliferation Ki-67 (MKI67) - Splice variant and protein domain repeat
 ?>
     <div class="headerfooter footer"></div>
 <?php
+
         closeDatabase( $db );
     }
 ?>
 </body>
 </html>
-Status API Training Shop Blog About Pricing
-© 2015 GitHub, Inc. Terms Privacy Security Contact Help

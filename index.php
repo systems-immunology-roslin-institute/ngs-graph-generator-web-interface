@@ -52,6 +52,10 @@
 	<title>NGS Graph Generator</title>
 
 	<style>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 		.revo-slider-emphasis-text {
 			font-size: 64px;
 			font-weight: 700;
@@ -61,6 +65,10 @@
 			border-top: 2px solid #FFF;
 			border-bottom: 2px solid #FFF;
 		}
+<<<<<<< HEAD
+=======
+
+>>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 		.revo-slider-desc-text {
 			font-size: 20px;
 			font-family: 'Lato', sans-serif;
@@ -68,6 +76,10 @@
 			text-align: center;
 			line-height: 1.5;
 		}
+<<<<<<< HEAD
+=======
+
+>>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 		.revo-slider-caps-text {
 			font-size: 16px;
 			font-weight: 400;

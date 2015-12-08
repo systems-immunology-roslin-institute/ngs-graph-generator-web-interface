@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-
-=======
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 dl, dt, dd, ol, ul, li {
 	margin: 0;
 	padding: 0;
@@ -40,13 +36,8 @@ dl, dt, dd, ol, ul, li {
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Typography
  * 	-----------------------------------------------------------------*/
-=======
-	Typography
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 
 body {
@@ -70,13 +61,8 @@ iframe { border: none !important; }
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Basic Layout Styles
  * 	-----------------------------------------------------------------*/
-=======
-	Basic Layout Styles
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 
 h1,
@@ -352,13 +338,8 @@ span.middot {
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Sections
  * 	-----------------------------------------------------------------*/
-=======
-	Sections
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 
 .section {
@@ -400,13 +381,8 @@ span.middot {
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Columns & Grids
  * 	-----------------------------------------------------------------*/
-=======
-	Columns & Grids
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 
 .postcontent { width: 860px; }
@@ -470,13 +446,8 @@ body.stretched .container-fullwidth {
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Flex Slider
  * 	-----------------------------------------------------------------*/
-=======
-	Flex Slider
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 
 .fslider,
@@ -513,7 +484,6 @@ body.stretched .container-fullwidth {
 .slider-wrap:after {content: "."; display: block; clear: both; visibility: hidden; line-height: 0; height: 0;}
 html[xmlns] .slider-wrap {display: block;}
 * html .slider-wrap {height: 1%;}
-<<<<<<< HEAD
 *
 * .no-js .slider-wrap > .slide:first-child {display: block;}
 *
@@ -559,53 +529,6 @@ html[xmlns] .slider-wrap {display: block;}
 *
 *
 */* ----------------------------------------------------------------
-=======
-
-.no-js .slider-wrap > .slide:first-child {display: block;}
-
-.flex-viewport {
-	max-height: 2000px;
-	-webkit-transition: all 1s ease;
-	-o-transition: all 1s ease;
-	transition: all 1s ease;
-}
-
-.flex-control-nav {
-	position: absolute;
-	z-index: 10;
-	text-align: center;
-	top: 14px;
-	right: 10px;
-	margin: 0;
-}
-
-.flex-control-nav li {
-	float: left;
-	display: block;
-	margin: 0 3px;
-	width: 10px;
-	height: 10px;
-}
-
-.flex-control-nav li a {
-	display: block;
-	cursor: pointer;
-	text-indent: -9999px;
-	width: 10px !important;
-	height: 10px !important;
-	border: 1px solid #FFF;
-	border-radius: 50%;
-	transition: all .3s ease-in-out;
-	-webkit-transition: all .3s ease-in-out;
-	-o-transition: all .3s ease-in-out;
-}
-
-.flex-control-nav li:hover a,
-.flex-control-nav li a.flex-active { background-color: #FFF; }
-
-
-/* ----------------------------------------------------------------
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 	Swiper Slider
 -----------------------------------------------------------------*/
 
@@ -662,13 +585,8 @@ html[xmlns] .slider-wrap {display: block;}
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Top Bar
  * 	-----------------------------------------------------------------*/
-=======
-	Top Bar
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 
 #top-bar {
@@ -684,13 +602,8 @@ html[xmlns] .slider-wrap {display: block;}
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Top Links
  * 	-----------------------------------------------------------------*/
-=======
-	Top Links
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 
 .top-links {
@@ -812,13 +725,8 @@ html[xmlns] .slider-wrap {display: block;}
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Top Social
  * 	-----------------------------------------------------------------*/
-=======
-	Top Social
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 #top-social,
 #top-social ul { margin: 0; }
@@ -863,13 +771,8 @@ html[xmlns] .slider-wrap {display: block;}
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Top Login
  * 	-----------------------------------------------------------------*/
-=======
-	Top Login
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 #top-login { margin-bottom: 0; }
 
@@ -897,13 +800,8 @@ html[xmlns] .slider-wrap {display: block;}
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Header
  * 	-----------------------------------------------------------------*/
-=======
-	Header
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 
 #header {
@@ -971,13 +869,8 @@ body.stretched #header.full-header .container {
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Logo
  * 	-----------------------------------------------------------------*/
-=======
-	Logo
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 
 #logo {
@@ -1013,13 +906,8 @@ body.stretched #header.full-header .container {
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Header Right Area
  * 	-----------------------------------------------------------------*/
-=======
-	Header Right Area
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 
 .header-extras {
@@ -1055,13 +943,8 @@ body.stretched #header.full-header .container {
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Primary Menu
  * 	-----------------------------------------------------------------*/
-=======
-	Primary Menu
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 
 #primary-menu {
@@ -1219,13 +1102,8 @@ body.stretched #header.full-header .container {
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Mega Menu
  * 	-----------------------------------------------------------------*/
-=======
-	Mega Menu
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 
 #primary-menu ul li .mega-menu-content,
@@ -1339,11 +1217,7 @@ body.stretched #header.full-header #primary-menu ul li.mega-menu .mega-menu-cont
 
 
 /* Primary Menu - Style 2
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 #primary-menu.style-2 {
 	float: none;
@@ -1392,11 +1266,7 @@ body:not(.device-sm):not(.device-xs):not(.device-xxs) #primary-menu.style-2.cent
 
 
 /* Primary Menu - Style 3
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 #primary-menu.style-3 > ul > li > a {
 	height: 44px;
@@ -1420,11 +1290,7 @@ body:not(.device-sm):not(.device-xs):not(.device-xxs) #primary-menu.style-2.cent
 
 
 /* Primary Menu - Style 4
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 #primary-menu.style-4 > ul > li > a {
 	height: 44px;
@@ -1441,11 +1307,7 @@ body:not(.device-sm):not(.device-xs):not(.device-xxs) #primary-menu.style-2.cent
 
 
 /* Primary Menu - Style 5
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 #primary-menu.style-5 > ul {
 	padding-right: 10px;
@@ -1476,11 +1338,7 @@ body:not(.device-sm):not(.device-xs):not(.device-xxs) #primary-menu.style-2.cent
 
 
 /* Primary Menu - Style 6
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 #primary-menu.style-6 > ul > li > a { position: relative; }
 
@@ -1503,11 +1361,7 @@ body:not(.device-sm):not(.device-xs):not(.device-xxs) #primary-menu.style-2.cent
 
 
 /* Primary Menu - Sub Title
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 #primary-menu.sub-title > ul > li,
 #primary-menu.sub-title.style-2 > div > ul > li {
@@ -1559,11 +1413,7 @@ body:not(.device-sm):not(.device-xs):not(.device-xxs) #primary-menu.style-2.cent
 
 
 /* Primary Menu - Style 2 with Sub Title
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 #primary-menu.sub-title.style-2 > div > ul > li { background-position: left center; }
 
@@ -1596,11 +1446,7 @@ body:not(.device-sm):not(.device-xs):not(.device-xxs) #primary-menu.style-2.cent
 
 
 /* Primary Menu - Overlay Menu
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 
 @media (min-width: 992px) {
@@ -1709,13 +1555,8 @@ body:not(.device-sm):not(.device-xs):not(.device-xxs) #primary-menu.style-2.cent
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Top Search
  * 	-----------------------------------------------------------------*/
-=======
-	Top Search
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 
 #top-search,
@@ -1829,13 +1670,8 @@ body:not(.device-sm):not(.device-xs):not(.device-xxs) #header.transparent-header
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Top Cart
  * 	-----------------------------------------------------------------*/
-=======
-	Top Cart
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 
 #top-cart { margin-right: 0; }
@@ -1975,13 +1811,8 @@ body:not(.device-sm):not(.device-xs):not(.device-xxs) #header.transparent-header
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Sticky Header
  * 	-----------------------------------------------------------------*/
-=======
-	Sticky Header
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 #header,
 #header-wrap,
@@ -2079,11 +1910,7 @@ body.top-search-open #side-panel-trigger { opacity: 0; }
 #header.sticky-header.sticky-style-2 #primary-menu { border-top: 0; }
 
 /* Primary Menu - Style 3
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 #header.sticky-header:not(.static-sticky) #primary-menu.style-3 > ul > li > a {
 	margin: 0;
@@ -2091,11 +1918,7 @@ body.top-search-open #side-panel-trigger { opacity: 0; }
 }
 
 /* Primary Menu - Style 4
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 #header.sticky-header:not(.static-sticky) #primary-menu.style-4 > ul > li > a {
 	height: 36px;
@@ -2106,11 +1929,7 @@ body.top-search-open #side-panel-trigger { opacity: 0; }
 #header.sticky-header:not(.static-sticky) #primary-menu.style-4 > ul > li > a i { line-height: 33px; }
 
 /* Primary Menu - Style 5
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 #header.sticky-header:not(.static-sticky) #primary-menu.style-5 > ul > li { margin-left: 2px; }
 
@@ -2133,11 +1952,7 @@ body.top-search-open #side-panel-trigger { opacity: 0; }
 }
 
 /* Primary Menu - Sub Title
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 #header.sticky-header:not(.static-sticky) #primary-menu.sub-title > ul > li,
 #header.sticky-header:not(.static-sticky) #primary-menu.sub-title.style-2 > div > ul > li {
@@ -2167,13 +1982,8 @@ body.top-search-open #side-panel-trigger { opacity: 0; }
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Page Menu
  * 	-----------------------------------------------------------------*/
-=======
-	Page Menu
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 #page-menu,
 #page-menu-wrap {
@@ -2252,11 +2062,7 @@ body:not(.device-touch) #page-menu nav li a {
 
 
 /* Page Menu - Dots Style
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 #page-menu.dots-menu,
 #page-menu.dots-menu #page-menu-wrap {
@@ -2351,13 +2157,8 @@ body:not(.device-touch) #page-menu.dots-menu nav li .dots-menu-caption {
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	One Page
  * 	-----------------------------------------------------------------*/
-=======
-	One Page
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .one-page-arrow {
 	position: absolute;
@@ -2374,13 +2175,8 @@ body:not(.device-touch) #page-menu.dots-menu nav li .dots-menu-caption {
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Side Header
  * 	-----------------------------------------------------------------*/
-=======
-	Side Header
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 @media (min-width: 992px) {
 
@@ -2534,11 +2330,7 @@ body:not(.device-touch) #page-menu.dots-menu nav li .dots-menu-caption {
 
 
 /* Side Header - Push Header
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .side-header.open-header.push-wrapper { overflow-x: hidden; }
 
@@ -2587,11 +2379,7 @@ body:not(.device-touch) #page-menu.dots-menu nav li .dots-menu-caption {
 
 
 /* Side Header - Right Aligned
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .side-header.side-header-right #header {
 	left: auto;
@@ -2636,13 +2424,8 @@ body:not(.device-touch) #page-menu.dots-menu nav li .dots-menu-caption {
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Side Push Panel
  * 	-----------------------------------------------------------------*/
-=======
-	Side Push Panel
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 body.side-push-panel { overflow-x: hidden; }
 
@@ -2765,13 +2548,8 @@ body.side-panel-open:not(.device-xxs):not(.device-xs):not(.device-sm) .body-over
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Slider
  * 	-----------------------------------------------------------------*/
-=======
-	Slider
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 
 #slider {
@@ -2792,21 +2570,13 @@ body.side-panel-open:not(.device-xxs):not(.device-xs):not(.device-sm) .body-over
 
 
 /* Boxed Slider
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .boxed-slider { padding-top: 40px; }
 
 
 /* Flex Slider - Thumbs
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .fslider[data-animation="fade"] .flexslider { height: auto !important; }
 
@@ -2848,11 +2618,7 @@ body.side-panel-open:not(.device-xxs):not(.device-xs):not(.device-sm) .body-over
 
 
 /* Flex Thumbs - Flexible
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .fslider.flex-thumb-grid .flex-control-nav.flex-control-thumbs {
 	margin: 2px -2px -2px 0;
@@ -2880,11 +2646,7 @@ body.side-panel-open:not(.device-xxs):not(.device-xs):not(.device-sm) .body-over
 
 
 /* Swiper Slider
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .swiper_wrapper {
 	width: 100%;
@@ -2939,11 +2701,7 @@ body.side-panel-open:not(.device-xxs):not(.device-xs):not(.device-sm) .body-over
 
 
 /* Revolution Slider
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .boxedcontainer {
 	max-width: 1140px;
@@ -2973,11 +2731,7 @@ body.side-panel-open:not(.device-xxs):not(.device-xs):not(.device-sm) .body-over
 
 
 /* Video Overlay
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .video-wrap {
 	overflow: hidden;
@@ -3010,11 +2764,7 @@ body.side-panel-open:not(.device-xxs):not(.device-xs):not(.device-sm) .body-over
 
 
 /* Slider Caption
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .slider-caption,
 .nivo-caption,
@@ -3102,11 +2852,7 @@ body.side-panel-open:not(.device-xxs):not(.device-xs):not(.device-sm) .body-over
 
 
 /* Slider Arrows
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 #slider .owl-theme .owl-controls { margin: 0; }
 
@@ -3247,11 +2993,7 @@ body.side-panel-open:not(.device-xxs):not(.device-xs):not(.device-sm) .body-over
 
 
 /* Slide Number
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 #slide-number {
 	position: absolute;
@@ -3297,11 +3039,7 @@ body.side-panel-open:not(.device-xxs):not(.device-xs):not(.device-sm) .body-over
 
 
 /* Pagination
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 #slider .owl-dots {
 	position: absolute;
@@ -3326,13 +3064,8 @@ body.side-panel-open:not(.device-xxs):not(.device-xs):not(.device-sm) .body-over
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Page Title
  * 	-----------------------------------------------------------------*/
-=======
-	Page Title
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 
 #page-title {
@@ -3386,11 +3119,7 @@ body.stretched .container-fullwidth .breadcrumb { right: 60px !important; }
 .breadcrumb i { width: auto !important; }
 
 /* Page Title - Dark
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 #page-title.page-title-dark {
 	background-color: #333;
@@ -3409,11 +3138,7 @@ body.stretched .container-fullwidth .breadcrumb { right: 60px !important; }
 #page-title.page-title-dark .breadcrumb a:hover { color: rgba(255,255,255,0.95); }
 
 /* Page Title - Right Aligned
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 #page-title.page-title-right { text-align: right; }
 
@@ -3423,11 +3148,7 @@ body.stretched .container-fullwidth .breadcrumb { right: 60px !important; }
 }
 
 /* Page Title - Center Aligned
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 #page-title.page-title-center { text-align: center; }
 
@@ -3446,11 +3167,7 @@ body.stretched .container-fullwidth .breadcrumb { right: 60px !important; }
 }
 
 /* Page Title - Background Pattern
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 #page-title.page-title-pattern {
 	background-image: url('images/pattern.png');
@@ -3459,11 +3176,7 @@ body.stretched .container-fullwidth .breadcrumb { right: 60px !important; }
 }
 
 /* Page Title - Parallax Background
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 #page-title.page-title-parallax {
 	padding: 100px 0;
@@ -3491,11 +3204,7 @@ body.stretched .container-fullwidth .breadcrumb { right: 60px !important; }
 
 
 /* Page Title - Mini
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 #page-title.page-title-mini { padding: 20px 0; }
 
@@ -3509,11 +3218,7 @@ body.stretched .container-fullwidth .breadcrumb { right: 60px !important; }
 
 
 /* Page Title - No Background
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 #page-title.page-title-nobg {
 	background: transparent !important;
@@ -3522,11 +3227,7 @@ body.stretched .container-fullwidth .breadcrumb { right: 60px !important; }
 
 
 /* Page Title - Video
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 #page-title.page-title-video {
 	background: none;
@@ -3547,13 +3248,8 @@ body.stretched .container-fullwidth .breadcrumb { right: 60px !important; }
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Content
  * 	-----------------------------------------------------------------*/
-=======
-	Content
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 
 #content {
@@ -3573,21 +3269,12 @@ body.stretched .container-fullwidth .breadcrumb { right: 60px !important; }
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Portfolio
  * 	-----------------------------------------------------------------*/
 
 
 /* Portfolio - Filter
  * -----------------------------------------------------------------*/
-=======
-	Portfolio
------------------------------------------------------------------*/
-
-
-/* Portfolio - Filter
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 #portfolio-filter {
 	position: relative;
@@ -3638,11 +3325,7 @@ body.stretched .container-fullwidth .breadcrumb { right: 60px !important; }
 
 
 /* Portfolio - Shuffle Icon
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 #portfolio-shuffle {
 	float: right;
@@ -3668,11 +3351,7 @@ body.stretched .container-fullwidth .breadcrumb { right: 60px !important; }
 
 
 /* Portfolio - Items
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 #portfolio {
 	position: relative;
@@ -3716,11 +3395,7 @@ body:not(.device-touch):not(.device-xs):not(.device-xxs) .portfolio-notitle .por
 
 
 /* Portfolio - Item Title
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .portfolio-desc {
 	z-index: 3;
@@ -3799,11 +3474,7 @@ body.device-touch.device-xxs .portfolio-notitle .portfolio-desc { display: none 
 
 
 /* Portfolio - No Margin
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 #portfolio.portfolio-nomargin,
 #portfolio.portfolio-full { margin: 0 !important; }
@@ -3824,11 +3495,7 @@ body.device-touch.device-xxs .portfolio-notitle .portfolio-desc { display: none 
 
 
 /* Portfolio - 100% Full Width
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 #portfolio.portfolio-full {
 	margin: 0 !important;
@@ -3855,11 +3522,7 @@ body.device-touch.device-xxs .portfolio-notitle .portfolio-desc { display: none 
 
 
 /* Portfolio - Sidebar
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .postcontent #portfolio { margin: 0 -12px -12px 0; }
 
@@ -3881,11 +3544,7 @@ body.device-touch.device-xxs .portfolio-notitle .portfolio-desc { display: none 
 
 
 /* Portfolio - Sidebar - No Margin
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .postcontent .portfolio-nomargin .portfolio-item { width: 214px; }
 
@@ -3898,11 +3557,7 @@ body.device-touch.device-xxs .portfolio-notitle .portfolio-desc { display: none 
 
 
 /* Portfolio - Sidebar - No Title
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .postcontent .portfolio-notitle .portfolio-desc {
 	height: 70px;
@@ -3916,11 +3571,7 @@ body.device-touch.device-xxs .portfolio-notitle .portfolio-desc { display: none 
 
 
 /* Portfolio - Both Sidebars
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .bothsidebar #portfolio { margin: 0; }
 
@@ -3940,11 +3591,7 @@ body.device-touch.device-xxs .portfolio-notitle .portfolio-desc { display: none 
 
 
 /* Portfolio - Masonry
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .portfolio-masonry .portfolio-item .portfolio-image,
 .portfolio-masonry .portfolio-item .portfolio-image > a,
@@ -3961,11 +3608,7 @@ body.device-touch.device-xxs .portfolio-notitle .portfolio-desc { display: none 
 
 
 /* Portfolio - Items - 3 Columns
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 #portfolio.portfolio-3 { margin: 0 -15px -15px 0; }
 
@@ -3983,11 +3626,7 @@ body.device-touch.device-xxs .portfolio-notitle .portfolio-desc { display: none 
 
 
 /* Portfolio - Items - 3 Columns - No Margin
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .portfolio-3.portfolio-nomargin .portfolio-item { width: 379px; }
 
@@ -4000,11 +3639,7 @@ body.device-touch.device-xxs .portfolio-notitle .portfolio-desc { display: none 
 
 
 /* Portfolio - Sidebar - Items - 3 Columns
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .postcontent #portfolio.portfolio-3 { margin: 0 -16px -16px 0; }
 
@@ -4026,11 +3661,7 @@ body.device-touch.device-xxs .portfolio-notitle .portfolio-desc { display: none 
 
 
 /* Portfolio - Sidebar - Items - 3 Columns - No Margin
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .postcontent .portfolio-3.portfolio-nomargin .portfolio-item { width: 285px; }
 
@@ -4043,11 +3674,7 @@ body.device-touch.device-xxs .portfolio-notitle .portfolio-desc { display: none 
 
 
 /* Portfolio - Sidebar - Items - 3 Columns - No Title
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .postcontent .portfolio-3.portfolio-notitle .portfolio-desc {
 	height: 72px;
@@ -4061,11 +3688,7 @@ body.device-touch.device-xxs .portfolio-notitle .portfolio-desc { display: none 
 
 
 /* Portfolio - Both Sidebars - Items - 3 Columns
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .bothsidebar #portfolio.portfolio-3 { margin: 0 -11px -11px 0; }
 
@@ -4089,11 +3712,7 @@ body.device-touch.device-xxs .portfolio-notitle .portfolio-desc { display: none 
 
 
 /* Portfolio - Both Sidebars - Items - 3 Columns - No Margin
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .bothsidebar .portfolio-3.portfolio-nomargin .portfolio-item { width: 192px; }
 
@@ -4106,11 +3725,7 @@ body.device-touch.device-xxs .portfolio-notitle .portfolio-desc { display: none 
 
 
 /* Portfolio - Both Sidebars - Items - 3 Columns - No Title
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .bothsidebar .portfolio-3.portfolio-notitle .portfolio-desc {
 	height: 68px;
@@ -4124,11 +3739,7 @@ body.device-touch.device-xxs .portfolio-notitle .portfolio-desc { display: none 
 
 
 /* Portfolio - Items - 2 Columns
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 #portfolio.portfolio-2 { margin: 0 -20px -20px 0; }
 
@@ -4155,11 +3766,7 @@ body.device-touch.device-xxs .portfolio-notitle .portfolio-desc { display: none 
 
 
 /* Portfolio - Items - 2 Columns - No Margin
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .portfolio-2.portfolio-nomargin .portfolio-item { width: 569px; }
 
@@ -4174,11 +3781,7 @@ body.device-touch.device-xxs .portfolio-notitle .portfolio-desc { display: none 
 
 
 /* Portfolio - Items - 2 Columns - No Title
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .portfolio-2.portfolio-notitle .portfolio-desc {
 	height: 90px;
@@ -4190,11 +3793,7 @@ body.device-touch.device-xxs .portfolio-notitle .portfolio-desc { display: none 
 
 
 /* Portfolio - Sidebar - Items - 2 Columns
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .postcontent #portfolio.portfolio-2 { margin: 0 -20px -20px 0; }
 
@@ -4216,11 +3815,7 @@ body.device-touch.device-xxs .portfolio-notitle .portfolio-desc { display: none 
 
 
 /* Portfolio - Sidebar - Items - 2 Columns - No Margin
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .postcontent .portfolio-2.portfolio-nomargin .portfolio-item { width: 429px; }
 
@@ -4235,11 +3830,7 @@ body.device-touch.device-xxs .portfolio-notitle .portfolio-desc { display: none 
 
 
 /* Portfolio - Sidebar - Items - 2 Columns - No Title
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .postcontent .portfolio-2.portfolio-notitle .portfolio-desc {
 	height: 90px;
@@ -4253,11 +3844,7 @@ body.device-touch.device-xxs .portfolio-notitle .portfolio-desc { display: none 
 
 
 /* Portfolio - Both Sidebars - Items - 2 Columns
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .bothsidebar #portfolio.portfolio-2 { margin: 0 -20px -20px 0; }
 
@@ -4285,11 +3872,7 @@ body.device-touch.device-xxs .portfolio-notitle .portfolio-desc { display: none 
 
 
 /* Portfolio - Both Sidebars - Items - 2 Columns - No Margin
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .bothsidebar .portfolio-2.portfolio-nomargin .portfolio-item { width: 289px; }
 
@@ -4304,11 +3887,7 @@ body.device-touch.device-xxs .portfolio-notitle .portfolio-desc { display: none 
 
 
 /* Portfolio - Both Sidebars - Items - 2 Columns - No Title
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .bothsidebar .portfolio-2.portfolio-notitle .portfolio-desc {
 	height: 75px;
@@ -4322,11 +3901,7 @@ body.device-touch.device-xxs .portfolio-notitle .portfolio-desc { display: none 
 
 
 /* Portfolio - Items - 5 Columns
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 #portfolio.portfolio-5 { margin: 0 -10px -10px 0; }
 
@@ -4346,11 +3921,7 @@ body.device-touch.device-xxs .portfolio-notitle .portfolio-desc { display: none 
 
 
 /* Portfolio - Items - 5 Columns - No Margin
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .portfolio-5.portfolio-nomargin .portfolio-item { width: 227px; }
 
@@ -4363,11 +3934,7 @@ body.device-touch.device-xxs .portfolio-notitle .portfolio-desc { display: none 
 
 
 /* Portfolio - Items - 5 Columns - No Title
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .portfolio-5.portfolio-notitle .portfolio-desc {
 	height: 71px;
@@ -4381,11 +3948,7 @@ body.device-touch.device-xxs .portfolio-notitle .portfolio-desc { display: none 
 
 
 /* Portfolio - Sidebar - Items - 5 Columns
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .postcontent #portfolio.portfolio-5 { margin: 0; }
 
@@ -4409,11 +3972,7 @@ body.device-touch.device-xxs .portfolio-notitle .portfolio-desc { display: none 
 
 
 /* Portfolio - Sidebar - Items - 5 Columns - No Title
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .postcontent .portfolio-5.portfolio-notitle .portfolio-desc {
 	height: 68px;
@@ -4427,11 +3986,7 @@ body.device-touch.device-xxs .portfolio-notitle .portfolio-desc { display: none 
 
 
 /* Portfolio - Items - 6 Columns
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 #portfolio.portfolio-6 { margin: 0 -6px -6px 0; }
 
@@ -4453,11 +4008,7 @@ body.device-touch.device-xxs .portfolio-notitle .portfolio-desc { display: none 
 
 
 /* Portfolio - Items - 6 Columns - No Margin
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .portfolio-6.portfolio-nomargin .portfolio-item { width: 189px; }
 
@@ -4470,11 +4021,7 @@ body.device-touch.device-xxs .portfolio-notitle .portfolio-desc { display: none 
 
 
 /* Portfolio - Items - 6 Columns - No Title
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .portfolio-6.portfolio-notitle .portfolio-desc {
 	height: 68px;
@@ -4488,11 +4035,7 @@ body.device-touch.device-xxs .portfolio-notitle .portfolio-desc { display: none 
 
 
 /* Portfolio - Items - 1 Column
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 #portfolio.portfolio-1 { margin: 0 0px -40px 0; }
 
@@ -4546,11 +4089,7 @@ body.device-touch.device-xxs .portfolio-notitle .portfolio-desc { display: none 
 
 
 /* Portfolio - Items - 1 Column - Sidebar
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .postcontent .portfolio-1 .portfolio-item .portfolio-image,
 .postcontent .portfolio-1 .portfolio-item .portfolio-image a,
@@ -4563,11 +4102,7 @@ body.device-touch.device-xxs .portfolio-notitle .portfolio-desc { display: none 
 
 
 /* Portfolio - Items - 1 Column - Both Sidebar
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .bothsidebar .portfolio-1 .portfolio-item .portfolio-image { margin-right: 20px; }
 
@@ -4602,11 +4137,7 @@ body.device-touch.device-xxs .portfolio-notitle .portfolio-desc { display: none 
 
 
 /* Portfolio - Items - 1 Column - Full Width
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 #portfolio.portfolio-1.portfolio-fullwidth { margin: 0 0 -60px 0; }
 
@@ -4693,11 +4224,7 @@ body:not(.device-touch):not(.device-xs):not(.device-xxs) .portfolio-1.portfolio-
 
 
 /* Portfolio - Items - 1 Column - Full Width - Sidebar
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .postcontent #portfolio.portfolio-1.portfolio-fullwidth { margin: 0 0 -40px 0; }
 
@@ -4746,11 +4273,7 @@ body:not(.device-touch):not(.device-xs):not(.device-xxs) .portfolio-1.portfolio-
 
 
 /* Portfolio - Items - 1 Column - Full Width - Both Sidebar
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .bothsidebar #portfolio.portfolio-1.portfolio-fullwidth { margin: 0 0 -40px 0; }
 
@@ -4799,11 +4322,7 @@ body:not(.device-touch):not(.device-xs):not(.device-xxs) .portfolio-1.portfolio-
 
 
 /* Portfolio - Parallax
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 #portfolio.portfolio-parallax { margin: 0 !important; }
 
@@ -4885,11 +4404,7 @@ body:not(.device-touch):not(.device-xs):not(.device-xxs) #portfolio.portfolio-pa
 
 
 /* Portfolio - Overlay
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .portfolio-overlay {
 	position: absolute;
@@ -5035,21 +4550,13 @@ body.device-touch.device-xxs .portfolio-notitle .portfolio-overlay { display: no
 
 
 /* Portfolio Single
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .portfolio-single {}
 
 
 /* Portfolio Single - Image
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .portfolio-single-image > a,
 .portfolio-single-image .slide a,
@@ -5071,11 +4578,7 @@ body.device-touch.device-xxs .portfolio-notitle .portfolio-overlay { display: no
 
 
 /* Portfolio Single - Gallery Thumbs
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .portfolio-single-image-full .swiper-container {
 	width:100%;
@@ -5095,11 +4598,7 @@ body.device-touch.device-xxs .portfolio-notitle .portfolio-overlay { display: no
 
 
 /* Portfolio & Blog Single - Masonry
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .masonry-thumbs { position: relative; }
 
@@ -5137,11 +4636,7 @@ body.device-touch.device-xxs .portfolio-notitle .portfolio-overlay { display: no
 
 
 /* Portfolio Single - Content
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .portfolio-single-content { font-size: 14px; }
 
@@ -5189,11 +4684,7 @@ body.device-touch.device-xxs .portfolio-notitle .portfolio-overlay { display: no
 
 
 /* Portfolio Single - Meta
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .portfolio-meta,
 .portfolio-share {
@@ -5230,11 +4721,7 @@ body.device-touch.device-xxs .portfolio-notitle .portfolio-overlay { display: no
 
 
 /* Portfolio Single Navigation
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 #portfolio-navigation {
 	position: absolute;
@@ -5301,11 +4788,7 @@ body.device-touch.device-xxs .portfolio-notitle .portfolio-overlay { display: no
 
 
 /* Individual Portfolio Item
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .iportfolio {
 	position: relative;
@@ -5329,13 +4812,8 @@ body.device-touch.device-xxs .portfolio-notitle .portfolio-overlay { display: no
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Blog
  * 	-----------------------------------------------------------------*/
-=======
-	Blog
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 
 #posts { position: relative; }
@@ -5476,11 +4954,7 @@ body:not(.device-touch) .entry-link {
 
 
 /* Small Thumbs
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .small-thumbs .entry-image,
 .ievent .entry-image {
@@ -5510,11 +4984,7 @@ body:not(.device-touch) .entry-link {
 
 
 /* Small Thumbs - Right
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .small-thumbs.alt .entry-image {
 	float: right;
@@ -5528,11 +4998,7 @@ body:not(.device-touch) .entry-link {
 
 
 /* Small Thumbs - Both Sidebar
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .bothsidebar .small-thumbs .entry-image {
 	width: 200px;
@@ -5550,11 +5016,7 @@ body:not(.device-touch) .entry-link {
 
 
 /* Blog - Grid
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .post-grid { margin-right: -28px; }
 
@@ -5580,11 +5042,7 @@ body:not(.device-touch) .entry-link {
 
 
 /* Blog - Grid - 3 Columns
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .post-grid.grid-3 { margin-right: -30px; }
 
@@ -5600,11 +5058,7 @@ body:not(.device-touch) .entry-link {
 
 
 /* Blog - Grid - 3 Columns - Sidebar
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .postcontent .post-grid.grid-3 { margin-right: -25px; }
 
@@ -5620,11 +5074,7 @@ body:not(.device-touch) .entry-link {
 
 
 /* Blog - Grid - 2 Columns
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .post-grid.grid-2 { margin-right: -40px; }
 
@@ -5640,11 +5090,7 @@ body:not(.device-touch) .entry-link {
 
 
 /* Blog - Grid - 2 Columns - Sidebar
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .postcontent .post-grid.grid-2 .entry { width: 410px; }
 
@@ -5655,11 +5101,7 @@ body:not(.device-touch) .entry-link {
 
 
 /* Blog - Grid - 2 Columns - Both Sidebar
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .bothsidebar .post-grid.grid-2 .entry { width: 270px; }
 
@@ -5670,22 +5112,14 @@ body:not(.device-touch) .entry-link {
 
 
 /* Blog - Masonry
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .post-masonry .entry-image,
 .post-masonry .entry-image img { height: auto !important; }
 
 
 /* Blog - Masonry Full
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .post-masonry-full { margin: -80px 0 -80px -1px !important; }
 
@@ -5702,11 +5136,7 @@ body:not(.device-touch) .entry-link {
 
 
 /* Blog - Timeline
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .timeline-border {
 	position: absolute;
@@ -5807,11 +5237,7 @@ body:not(.device-touch) .entry-link {
 
 
 /* Blog - Timeline - Sidebar
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .postcontent .timeline-border {
 	left: 32px;
@@ -5850,11 +5276,7 @@ body:not(.device-touch) .entry-link {
 
 
 /* Individual Post
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .ipost .entry-image img { border-radius: 0; }
 
@@ -5897,11 +5319,7 @@ body:not(.device-touch) .entry-link {
 
 
 /* Related Posts
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .overlay-icon {
 	position: absolute;
@@ -5924,11 +5342,7 @@ body:not(.device-touch) .entry-link {
 
 
 /* Small Post
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .spost,
 .mpost {
@@ -5995,11 +5409,7 @@ body:not(.device-touch) .entry-link {
 
 
 /* Medium Post
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .mpost .entry-image { margin-right: 20px; }
 
@@ -6035,13 +5445,8 @@ body:not(.device-touch) .entry-link {
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Blog - Author
  * 	-----------------------------------------------------------------*/
-=======
-	Blog - Author
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .author-image {
 	float: left;
@@ -6057,13 +5462,8 @@ body:not(.device-touch) .entry-link {
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Comments List
  * 	-----------------------------------------------------------------*/
-=======
-	Comments List
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 
 #comments {
@@ -6212,13 +5612,8 @@ body:not(.device-touch) .entry-link {
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Comment Form
  * 	-----------------------------------------------------------------*/
-=======
-	Comment Form
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 
 #respond,
@@ -6256,11 +5651,7 @@ body:not(.device-touch) .entry-link {
 
 
 /* Post Elements
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 img.alignleft,
 div.alignleft {
@@ -6328,11 +5719,7 @@ p.wp-caption-text {
 
 
 /* Infinity Scroll - Message Style
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 #infscr-loading,
 #portfolio-ajax-loader {
@@ -6365,13 +5752,8 @@ p.wp-caption-text {
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Shop
  * 	-----------------------------------------------------------------*/
-=======
-	Shop
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 
 #shop {
@@ -6523,11 +5905,7 @@ body:not(.device-touch):not(.device-xs):not(.device-xxs) .product-overlay a {
 
 
 /* Shop - 3 Columns
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 #shop.product-3 { margin: 0 -30px -30px 0; }
 
@@ -6540,11 +5918,7 @@ body:not(.device-touch):not(.device-xs):not(.device-xxs) .product-overlay a {
 
 
 /* Shop - 3 Columns - Sidebar
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .postcontent #shop.product-3 { margin: 0 -25px -25px 0; }
 
@@ -6557,11 +5931,7 @@ body:not(.device-touch):not(.device-xs):not(.device-xxs) .product-overlay a {
 
 
 /* Shop - 2 Columns - Sidebar
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .postcontent #shop.product-2 { margin: 0 -40px -40px 0; }
 
@@ -6574,11 +5944,7 @@ body:not(.device-touch):not(.device-xs):not(.device-xxs) .product-overlay a {
 
 
 /* Shop - 2 Columns - Both Sidebar
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .bothsidebar #shop.product-2 { margin: 0 -40px -20px 0; }
 
@@ -6591,11 +5957,7 @@ body:not(.device-touch):not(.device-xs):not(.device-xxs) .product-overlay a {
 
 
 /* Shop - 1 Column
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 #shop.product-1 { margin: 0 0 -40px 0; }
 
@@ -6631,11 +5993,7 @@ body:not(.device-touch):not(.device-xs):not(.device-xxs) .product-overlay a {
 
 
 /* Shop - 1 Column - Both Sidebar
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .bothsidebar .product-1 .product {
 	border-top: 1px solid #F5F5F5;
@@ -6658,11 +6016,7 @@ body:not(.device-touch):not(.device-xs):not(.device-xxs) .product-overlay a {
 
 
 /* Shop - Single
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .single-product .product {
 	width: 100%;
@@ -6784,11 +6138,7 @@ body:not(.device-touch):not(.device-xs):not(.device-xxs) .product-overlay a {
 
 
 /* Individual Product
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .product.iproduct {
 	float: none;
@@ -6802,13 +6152,8 @@ body:not(.device-touch):not(.device-xs):not(.device-xxs) .product-overlay a {
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Cart
  * 	-----------------------------------------------------------------*/
-=======
-	Cart
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 
 .cart .remove {
@@ -6872,13 +6217,8 @@ td.actions {
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Events
  * 	-----------------------------------------------------------------*/
-=======
-	Events
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 
 .events .entry,
@@ -7028,11 +6368,7 @@ td.actions {
 
 
 /* Individual Events
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .ievent {
 	position: relative;
@@ -7062,13 +6398,8 @@ td.actions {
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Countdown
  * 	-----------------------------------------------------------------*/
-=======
-	Countdown
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .countdown { display: block; }
 
@@ -7105,11 +6436,7 @@ td.actions {
 
 
 /* Countdown - Medium
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .countdown-medium .countdown-section { font-size: 14px; }
 
@@ -7120,11 +6447,7 @@ td.actions {
 
 
 /* Countdown - Large
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .countdown-large .countdown-section { font-size: 18px; }
 
@@ -7136,11 +6459,7 @@ td.actions {
 
 
 /* Countdown - Inline
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .countdown.countdown-inline { display: inline-block; }
 
@@ -7177,11 +6496,7 @@ td.actions {
 
 
 /* Countdown - Coming Soon
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 body:not(.device-xs):not(.device-xxs) .countdown.countdown-large.coming-soon .countdown-section {
 	border: none;
@@ -7198,13 +6513,8 @@ body:not(.device-xs):not(.device-xxs) .countdown.countdown-large.coming-soon .co
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Buttons
  * 	-----------------------------------------------------------------*/
-=======
-	Buttons
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 
 .button {
@@ -7338,11 +6648,7 @@ body:not(.device-touch) .button {
 
 
 /* Buttons - Border
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .button.button-border {
 	border: 2px solid #444;
@@ -7383,11 +6689,7 @@ body:not(.device-touch) .button {
 
 
 /* Buttons - Border
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .button.button-3d {
 	border-radius: 3px;
@@ -7410,11 +6712,7 @@ body:not(.device-touch) .button {
 
 
 /* Buttons - Icon Reveal
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .button.button-reveal {
 	padding: 0 28px;
@@ -7545,11 +6843,7 @@ body:not(.device-touch) .button.button-reveal span {
 
 
 /* Buttons - Promo 100% Width
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .button.button-full {
 	display: block !important;
@@ -7584,11 +6878,7 @@ body:not(.device-touch) .button.button-full strong {
 
 
 /* Buttons - Colors
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .button-red { background-color: #C02942; }
 .button-3d.button-red:hover,
@@ -7652,11 +6942,7 @@ body:not(.device-touch) .button.button-full strong {
 
 
 /* Buttons - No Hover
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .button.button-nohover:hover {
 	opacity: inherit !important;
@@ -7667,13 +6953,8 @@ body:not(.device-touch) .button.button-full strong {
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Promo Boxes
  * 	-----------------------------------------------------------------*/
-=======
-	Promo Boxes
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 
 .promo {
@@ -7716,11 +6997,7 @@ body:not(.device-touch) .button.button-full strong {
 
 
 /* Promo Uppercase
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .promo-uppercase { text-transform: uppercase; }
 
@@ -7731,11 +7008,7 @@ body:not(.device-touch) .button.button-full strong {
 
 
 /* Promo - with Border
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .promo.promo-border {
 	border: 1px solid #E5E5E5;
@@ -7747,11 +7020,7 @@ body:not(.device-touch) .button.button-full strong {
 
 
 /* Promo - Light
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .promo.promo-light {
 	background-color: #F5F5F5;
@@ -7763,11 +7032,7 @@ body:not(.device-touch) .button.button-full strong {
 
 
 /* Promo - Dark
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .promo.promo-dark {
 	border: 0 !important;
@@ -7798,11 +7063,7 @@ body:not(.device-touch) .button.button-full strong {
 
 
 /* Promo - Flat
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .promo.promo-flat { background-color: #1ABC9C; }
 
@@ -7823,11 +7084,7 @@ body:not(.device-touch) .button.button-full strong {
 
 
 /* Promo - 100% Full Width
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .promo-full {
 	border-radius: 0 !important;
@@ -7844,21 +7101,13 @@ body:not(.device-touch) .button.button-full strong {
 }
 
 /* Promo - Parallax
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .promo.parallax { padding: 80px 0 !important; }
 
 
 /* Promo - Right Align
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .promo.promo-right {
 	text-align: right;
@@ -7872,11 +7121,7 @@ body:not(.device-touch) .button.button-full strong {
 
 
 /* Promo - with Border & Right Align
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .promo.promo-right.promo-border:not(.promo-mini),
 .promo.promo-dark.promo-right:not(.promo-mini) { padding-right: 30px; }
@@ -7886,11 +7131,7 @@ body:not(.device-touch) .button.button-full strong {
 
 
 /* Promo - Center Align
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .promo.promo-center {
 	text-align: center;
@@ -7907,11 +7148,7 @@ body:not(.device-touch) .button.button-full strong {
 
 
 /* Promo - Mini
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .promo.promo-mini {
 	text-align: left;
@@ -7937,33 +7174,20 @@ body:not(.device-touch) .button.button-full strong {
 
 
 /* Promo - Mini - Center Align
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .promo.promo-mini.promo-center { text-align: center; }
 
 
 /* Promo - Mini - Right Align
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .promo.promo-mini.promo-right { text-align: right; }
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Featured Boxes
  * 	-----------------------------------------------------------------*/
-=======
-	Featured Boxes
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 
 .feature-box {
@@ -8024,11 +7248,7 @@ body:not(.device-touch) .button.button-full strong {
 
 
 /* Feature Box - Icon Large
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .feature-box.fbox-large { padding: 0 0 0 115px; }
 
@@ -8044,11 +7264,7 @@ body:not(.device-touch) .button.button-full strong {
 
 
 /* Feature Box - Icon Outline
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .feature-box.fbox-outline .fbox-icon {
 	border: 1px solid #1ABC9C;
@@ -8060,11 +7276,7 @@ body:not(.device-touch) .button.button-full strong {
 
 
 /* Feature Box - Icon Outline Large
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .feature-box.fbox-outline.fbox-large .fbox-icon { padding: 4px; }
 
@@ -8072,11 +7284,7 @@ body:not(.device-touch) .button.button-full strong {
 
 
 /* Feature Box - Icon Rounded
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .feature-box.fbox-rounded .fbox-icon { border-radius: 3px !important; }
 
@@ -8085,11 +7293,7 @@ body:not(.device-touch) .button.button-full strong {
 
 
 /* Feature Box - Icon Rounded & Large
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .feature-box.fbox-rounded.fbox-large .fbox-icon { border-radius: 4px !important; }
 
@@ -8098,11 +7302,7 @@ body:not(.device-touch) .button.button-full strong {
 
 
 /* Feature Box - Light Background
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .feature-box.fbox-light.fbox-outline .fbox-icon { border-color: #E5E5E5; }
 
@@ -8123,11 +7323,7 @@ body:not(.device-touch) .button.button-full strong {
 
 
 /* Feature Box - Dark Background
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .feature-box.fbox-dark.fbox-outline .fbox-icon { border-color: #444; }
 
@@ -8136,11 +7332,7 @@ body:not(.device-touch) .button.button-full strong {
 
 
 /* Feature Box - Border
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .feature-box.fbox-border .fbox-icon {
 	border: 1px solid #1ABC9C;
@@ -8162,11 +7354,7 @@ body:not(.device-touch) .button.button-full strong {
 
 
 /* Feature Box - Border - Light
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .feature-box.fbox-border.fbox-light .fbox-icon { border-color: #E5E5E5; }
 
@@ -8175,11 +7363,7 @@ body:not(.device-touch) .button.button-full strong {
 
 
 /* Feature Box - Border - Dark
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .feature-box.fbox-border.fbox-dark .fbox-icon { border-color: #333; }
 
@@ -8188,11 +7372,7 @@ body:not(.device-touch) .button.button-full strong {
 
 
 /* Feature Box - Plain
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .feature-box.fbox-plain .fbox-icon {
 	border: none !important;
@@ -8249,11 +7429,7 @@ body:not(.device-touch) .button.button-full strong {
 
 
 /* Feature Box - Center
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .feature-box.fbox-center {
 	padding: 0;
@@ -8283,11 +7459,7 @@ body:not(.device-touch) .button.button-full strong {
 
 
 /* Feature Box - Center & Large Icons
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .feature-box.fbox-center.fbox-large .fbox-icon {
 	width: 128px;
@@ -8321,11 +7493,7 @@ body:not(.device-touch) .button.button-full strong {
 
 
 /* Feature Box - Center & Large Icons
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .feature-box.fbox-center.fbox-small .fbox-icon {
 	width: 64px;
@@ -8356,11 +7524,7 @@ body:not(.device-touch) .button.button-full strong {
 
 
 /* Feature Box - Right
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .feature-box.fbox-right {
 	padding: 0 80px 0 0;
@@ -8380,11 +7544,7 @@ body:not(.device-touch) .button.button-full strong {
 
 
 /* Feature Box - Subtitle
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .feature-box h3 + .fbox-icon { margin-top: 20px !important; }
 
@@ -8419,11 +7579,7 @@ body:not(.device-touch) .button.button-full strong {
 
 
 /* Feature Box - Background
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .feature-box.fbox-bg.fbox-center {
 	margin-top: 68px;
@@ -8461,11 +7617,7 @@ body:not(.device-touch) .button.button-full strong {
 
 
 /* Animated Icon Hovers
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .fbox-effect .fbox-icon i { z-index: 1; }
 
@@ -8525,11 +7677,7 @@ body:not(.device-touch) .button.button-full strong {
 }
 
 /* Icon Effects - Bordered
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .fbox-border.fbox-effect .fbox-icon i {
 	-webkit-transition: color 0.5s, box-shadow 0.5s, background-color 0.5s;
@@ -8584,11 +7732,7 @@ body:not(.device-touch) .button.button-full strong {
 
 
 /* Media Featured Box
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .feature-box.media-box { padding: 0; }
 
@@ -8621,13 +7765,8 @@ body:not(.device-touch) .button.button-full strong {
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Process Steps
  * 	-----------------------------------------------------------------*/
-=======
-	Process Steps
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .process-steps {
 	margin: 0 0 40px;
@@ -8692,13 +7831,8 @@ body:not(.device-touch) .button.button-full strong {
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Alerts
  * 	-----------------------------------------------------------------*/
-=======
-	Alerts
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 
 .style-msg,
@@ -8777,13 +7911,8 @@ body:not(.device-touch) .button.button-full strong {
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Styled Icons
  * 	-----------------------------------------------------------------*/
-=======
-	Styled Icons
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 
 .i-rounded,
@@ -8873,11 +8002,7 @@ body:not(.device-touch) .social-icon {
 
 
 /* Icon Size - Small
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .i-small.i-rounded,
 .i-small.i-plain,
@@ -8906,11 +8031,7 @@ body:not(.device-touch) .social-icon {
 
 
 /* Icon Size - Small
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .i-medium.i-rounded,
 .i-medium.i-plain,
@@ -8939,11 +8060,7 @@ body:not(.device-touch) .social-icon {
 
 
 /* Icon Size - Large
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .i-large.i-rounded,
 .i-large.i-plain,
@@ -8972,11 +8089,7 @@ body:not(.device-touch) .social-icon {
 
 
 /* Icon Size - Extra Large
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .i-xlarge.i-rounded,
 .i-xlarge.i-plain,
@@ -9005,13 +8118,8 @@ body:not(.device-touch) .social-icon {
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Icon Overlay
  * 	-----------------------------------------------------------------*/
-=======
-	Icon Overlay
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .i-overlay {
 	display: block;
@@ -9059,13 +8167,8 @@ body:not(.device-touch) .on-hover.i-overlay {
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Social Icons
  * 	-----------------------------------------------------------------*/
-=======
-	Social Icons
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 
 .social-icon {
@@ -9083,29 +8186,17 @@ body:not(.device-touch) .on-hover.i-overlay {
 
 
 /* Social Icons - Rounded
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .si-rounded { border-radius: 50%; }
 
 /* Social Icons - Borderless
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .si-borderless { border-color: transparent !important; }
 
 /* Social Icons - Dark
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .si-dark {
 	background-color: #444;
@@ -9114,11 +8205,7 @@ body:not(.device-touch) .on-hover.i-overlay {
 }
 
 /* Social Icons - Light
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .si-light {
 	background-color: rgba(0,0,0,0.05);
@@ -9127,22 +8214,14 @@ body:not(.device-touch) .on-hover.i-overlay {
 }
 
 /* Social Icons - Colored
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .si-colored { border-color: transparent !important; }
 
 .si-colored i { color: #FFF; }
 
 /* Social Icons - Large
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .social-icon.si-large {
 	margin: 0 10px 10px 0;
@@ -9153,11 +8232,7 @@ body:not(.device-touch) .on-hover.i-overlay {
 }
 
 /* Social Icons - Small
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .social-icon.si-small {
 	width: 32px;
@@ -9193,11 +8268,7 @@ body:not(.device-touch) .social-icon i {
 .si-colored.social-icon { border-color: transparent; }
 
 /* Social Icons - Sticky
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .si-sticky {
 	position: fixed;
@@ -9208,11 +8279,7 @@ body:not(.device-touch) .social-icon i {
 }
 
 /* Social Icons - Sticky Right
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .si-sticky.si-sticky-right {
 	left: auto;
@@ -9220,11 +8287,7 @@ body:not(.device-touch) .social-icon i {
 }
 
 /* Social Icons - Share
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .si-share {
 	position: relative;
@@ -9398,13 +8461,8 @@ body:not(.device-touch) .social-icon i {
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Toggle
  * 	-----------------------------------------------------------------*/
-=======
-	Toggle
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 
 .toggle {
@@ -9451,11 +8509,7 @@ body:not(.device-touch) .social-icon i {
 
 
 /* Toggle - with Title Background
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .toggle.toggle-bg .togglet,
 .toggle.toggle-bg .toggleta {
@@ -9474,11 +8528,7 @@ body:not(.device-touch) .social-icon i {
 
 
 /* Toggle - Bordered
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .toggle.toggle-border {
 	border: 1px solid #CCC;
@@ -9500,11 +8550,7 @@ body:not(.device-touch) .social-icon i {
 
 
 /* Toggle - FAQs
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .faqs .toggle {
 	border-bottom: 1px solid #EEE;
@@ -9524,13 +8570,8 @@ body:not(.device-touch) .social-icon i {
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Accordions
  * 	-----------------------------------------------------------------*/
-=======
-	Accordions
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .accordion { margin-bottom: 20px; }
 
@@ -9573,11 +8614,7 @@ body:not(.device-touch) .social-icon i {
 
 
 /* Accordion - with Title Background
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .accordion.accordion-bg .acctitle,
 .accordion.accordion-bg .acctitlec {
@@ -9597,11 +8634,7 @@ body:not(.device-touch) .social-icon i {
 
 
 /* Accordion - Bordered
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .accordion.accordion-border {
 	border: 1px solid #DDD;
@@ -9624,11 +8657,7 @@ body:not(.device-touch) .social-icon i {
 
 
 /* Accordion - Large
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .accordion.accordion-lg .acctitle {
 	font-size: 23px;
@@ -9647,13 +8676,8 @@ body:not(.device-touch) .social-icon i {
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Tabs
  * 	-----------------------------------------------------------------*/
-=======
-	Tabs
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 
 .tabs {
@@ -9700,11 +8724,7 @@ ul.tab-nav:not(.tab-nav-lg) li.ui-tabs-active a {
 
 
 /* Tabs - Alternate Nav
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .tabs.tabs-alt ul.tab-nav li { border-color: transparent; }
 
@@ -9719,11 +8739,7 @@ ul.tab-nav:not(.tab-nav-lg) li.ui-tabs-active a {
 
 
 /* Tabs - Top Border
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .tabs.tabs-tb ul.tab-nav li.ui-tabs-active a {
 	top: -1px;
@@ -9736,11 +8752,7 @@ ul.tab-nav:not(.tab-nav-lg) li.ui-tabs-active a {
 
 
 /* Tabs - Bottom Border
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .tabs.tabs-bb ul.tab-nav li {
 	border: 0;
@@ -9761,11 +8773,7 @@ ul.tab-nav:not(.tab-nav-lg) li.ui-tabs-active a {
 
 
 /* Tabs - Navigation Style 2
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 
 ul.tab-nav.tab-nav2 {
@@ -9796,11 +8804,7 @@ ul.tab-nav.tab-nav2 li.ui-state-active a {
 
 
 /* Tabs - Large Navigation
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 
 ul.tab-nav-lg {
@@ -9863,11 +8867,7 @@ ul.tab-nav-lg.tab-nav-section li.ui-tabs-active:before {
 
 
 /* Tabs - Content Area
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .tab-container {
 	position: relative;
@@ -9882,11 +8882,7 @@ ul.tab-nav li a i {
 }
 
 /* Tabs - Bordered
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .tabs-bordered ul.tab-nav li:first-child { margin-left: 0; }
 
@@ -9898,11 +8894,7 @@ ul.tab-nav li a i {
 
 
 /* Tabs - Side Tabs
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .side-tabs ul.tab-nav {
 	float: left;
@@ -9950,11 +8942,7 @@ ul.tab-nav li a i {
 
 
 /* Tabs - Side Tabs & Nav Style 2
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .side-tabs ul.tab-nav.tab-nav2 { border: 0; }
 
@@ -9971,11 +8959,7 @@ ul.tab-nav li a i {
 
 
 /* Tabs - Side Tabs & Bordered
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .tabs-bordered.side-tabs ul.tab-nav {
 	position: relative;
@@ -10002,13 +8986,8 @@ ul.tab-nav li a i {
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Side Navigation
  * 	-----------------------------------------------------------------*/
-=======
-	Side Navigation
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 
 .sidenav {
@@ -10077,13 +9056,8 @@ ul.tab-nav li a i {
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	FAQ List
  * 	-----------------------------------------------------------------*/
-=======
-	FAQ List
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 
 .faqlist li {
@@ -10097,13 +9071,8 @@ ul.tab-nav li a i {
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Clients
  * 	-----------------------------------------------------------------*/
-=======
-	Clients
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 
 .clients-grid,
@@ -10179,19 +9148,11 @@ body:not(.device-touch) .clients-grid li a {
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Testimonials
  * 	-----------------------------------------------------------------*/
 
 /* Testimonials - Grid
  * -----------------------------------------------------------------*/
-=======
-	Testimonials
------------------------------------------------------------------*/
-
-/* Testimonials - Grid
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .testimonials-grid li {
 	width: 50%;
@@ -10209,11 +9170,7 @@ body:not(.device-touch) .clients-grid li a {
 
 
 /* Testimonials - Item
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .testimonial {
 	position: relative;
@@ -10284,11 +9241,7 @@ body:not(.device-touch) .clients-grid li a {
 
 
 /* Twitter - Small Scroller
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .testimonial.twitter-scroll .testi-content p:before,
 .testimonial.twitter-scroll .testi-content p:after,
@@ -10302,11 +9255,7 @@ body:not(.device-touch) .clients-grid li a {
 
 
 /* Testimonials - Full Width
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .testimonial.testimonial-full { padding: 30px; }
 
@@ -10341,11 +9290,7 @@ body:not(.device-touch) .clients-grid li a {
 
 
 /* Testimonial - Section Scroller
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .section > .testimonial {
 	padding: 0;
@@ -10365,11 +9310,7 @@ body:not(.device-touch) .clients-grid li a {
 
 
 /* Testimonial - Pagination
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .testimonial .flex-control-nav {
 	top: auto;
@@ -10396,11 +9337,7 @@ body:not(.device-touch) .clients-grid li a {
 
 
 /* Testimonial - Full Scroller
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .testimonial.testimonial-full .flex-control-nav {
 	position: relative;
@@ -10419,13 +9356,8 @@ body:not(.device-touch) .clients-grid li a {
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Team
  * 	-----------------------------------------------------------------*/
-=======
-	Team
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 
 .team,
@@ -10522,11 +9454,7 @@ body:not(.device-touch) .team-overlay {
 
 
 /* Team Center
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .team.center .team-title:after {
 	left: 50%;
@@ -10535,11 +9463,7 @@ body:not(.device-touch) .team-overlay {
 
 
 /* Team List
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .team.team-list .team-image {
 	float: left;
@@ -10568,13 +9492,8 @@ body:not(.device-touch) .team-overlay {
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Pricing Boxes
  * 	-----------------------------------------------------------------*/
-=======
-	Pricing Boxes
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .pricing { position: relative; }
 
@@ -10585,11 +9504,7 @@ body:not(.device-touch) .team-overlay {
 
 
 /* Pricing Boxes
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .pricing-box {
 	position: relative;
@@ -10602,11 +9517,7 @@ body:not(.device-touch) .team-overlay {
 
 
 /* Pricing Boxes - Title
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .pricing-title {
 	padding: 15px 0;
@@ -10636,11 +9547,7 @@ body:not(.device-touch) .team-overlay {
 
 
 /* Pricing Boxes - Price
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .pricing-price {
 	position: relative;
@@ -10680,11 +9587,7 @@ body:not(.device-touch) .team-overlay {
 
 
 /* Pricing Boxes - Features
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .pricing-features { border-bottom: 1px solid rgba(0,0,0,0.075); }
 
@@ -10701,21 +9604,13 @@ body:not(.device-touch) .team-overlay {
 
 
 /* Pricing Boxes - Action
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .pricing-action { padding: 15px 30px; }
 
 
 /* Pricing Boxes - Best Price
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .pricing-box.best-price {
 	background-color: #FFF;
@@ -10739,11 +9634,7 @@ body:not(.device-touch) .team-overlay {
 
 
 /* Pricing Boxes - Minimal
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .pricing-box.pricing-minimal .pricing-price {
 	background-color: #FFF;
@@ -10754,11 +9645,7 @@ body:not(.device-touch) .team-overlay {
 
 
 /* Pricing Boxes - 5 Columns
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .pricing.pricing-5 .pricing-box {
 	float: left;
@@ -10776,11 +9663,7 @@ body:not(.device-touch) .team-overlay {
 
 
 /* Pricing Boxes - Extended
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .pricing-box.pricing-extended {
 	background-color: #FFF;
@@ -10866,13 +9749,8 @@ body:not(.device-touch) .team-overlay {
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Counter
  * 	-----------------------------------------------------------------*/
-=======
-	Counter
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 
 .counter {
@@ -10924,13 +9802,8 @@ body:not(.device-touch) .team-overlay {
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Animated Rounded Skills
  * 	-----------------------------------------------------------------*/
-=======
-	Animated Rounded Skills
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 
 .rounded-skill {
@@ -10965,13 +9838,8 @@ body:not(.device-touch) .rounded-skill {
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Skills Bar
  * 	-----------------------------------------------------------------*/
-=======
-	Skills Bar
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 
 .skills {
@@ -11062,13 +9930,8 @@ body:not(.device-touch) .rounded-skill {
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Owl Carousel CSS
  * 	-----------------------------------------------------------------*/
-=======
-	Owl Carousel CSS
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .owl-carousel .animated {
 	-webkit-animation-duration: 1000ms;
@@ -11263,11 +10126,7 @@ body:not(.device-touch) .rounded-skill {
 
 
 /* Owl Carousel - Controls
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .owl-theme .owl-controls {
 	text-align: center;
@@ -11275,11 +10134,7 @@ body:not(.device-touch) .rounded-skill {
 }
 
 /* Owl Carousel - Controls - Arrows
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .owl-theme .owl-controls .owl-nav [class*=owl-] {
 	position: absolute;
@@ -11348,11 +10203,7 @@ body:not(.device-touch) .rounded-skill {
 
 
 /* Owl Carousel - Controls - Dots
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .owl-theme .owl-dots .owl-dot {
 	display: inline-block;
@@ -11379,13 +10230,8 @@ body:not(.device-touch) .rounded-skill {
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Overlays
  * 	-----------------------------------------------------------------*/
-=======
-	Overlays
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 
 .overlay {
@@ -11485,11 +10331,7 @@ body:not(.device-touch) .text-overlay {
 
 
 /* News Carousel Overlays
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .news-carousel .text-overlay { padding: 40px 30px 25px; }
 
@@ -11516,13 +10358,8 @@ body:not(.device-touch) .text-overlay {
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Forms
  * 	-----------------------------------------------------------------*/
-=======
-	Forms
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .sm-form-control {
 	display: block;
@@ -11607,13 +10444,8 @@ form .col_five_sixth { margin-bottom: 25px; }
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Contact Form
  * 	-----------------------------------------------------------------*/
-=======
-	Contact Form
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 
 #contact-form-overlay,
@@ -11647,13 +10479,8 @@ label.error { display: none !important; }
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Google Maps
  * 	-----------------------------------------------------------------*/
-=======
-	Google Maps
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 
 #google-map {
@@ -11683,13 +10510,8 @@ label.error { display: none !important; }
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Google Custom Search
  * 	-----------------------------------------------------------------*/
-=======
-	Google Custom Search
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 
 #content .cse .gsc-control-cse,
@@ -11719,21 +10541,12 @@ label.error { display: none !important; }
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Heading Styles
  * 	-----------------------------------------------------------------*/
 
 
 /* Block Titles
  * -----------------------------------------------------------------*/
-=======
-	Heading Styles
------------------------------------------------------------------*/
-
-
-/* Block Titles
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .title-block {
 	padding: 2px 0 3px 20px;
@@ -11773,11 +10586,7 @@ label.error { display: none !important; }
 
 
 /* Heading Block - with Subtitle
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .heading-block { margin-bottom: 50px; }
 
@@ -11861,11 +10670,7 @@ label.error { display: none !important; }
 
 
 /* Emphasis Title
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .emphasis-title { margin: 0 0 50px; }
 
@@ -11880,11 +10685,7 @@ label.error { display: none !important; }
 
 
 /* Justify Border Title
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .fancy-title {
 	position: relative;
@@ -11934,11 +10735,7 @@ label.error { display: none !important; }
 
 
 /* Fancy Title - Center Align
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .title-center { text-align: center; }
 
@@ -11952,11 +10749,7 @@ label.error { display: none !important; }
 
 
 /* Fancy Title - Right Align
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .title-right { text-align: right; }
 
@@ -11970,11 +10763,7 @@ label.error { display: none !important; }
 
 
 /* Fancy Title - Bottom Short Border
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .fancy-title.title-bottom-border h1,
 .fancy-title.title-bottom-border h2,
@@ -11990,21 +10779,13 @@ label.error { display: none !important; }
 
 
 /* Fancy Title - Bottom Short Border
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .fancy-title.title-dotted-border { background: url('images/icons/dotted.png') repeat-x center; }
 
 
 /* Sub Heading
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .before-heading {
 	display: block;
@@ -12018,13 +10799,8 @@ label.error { display: none !important; }
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Divider
  * 	-----------------------------------------------------------------*/
-=======
-	Divider
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 
 .divider {
@@ -12079,11 +10855,7 @@ label.error { display: none !important; }
 
 
 /* Divider - Icon Align Right
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .divider.divider-right { text-align: right; }
 
@@ -12094,11 +10866,7 @@ label.error { display: none !important; }
 
 
 /* Divider - Icon Align Center
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .divider.divider-center,
 .divider.divider-center.divider-short { text-align: center; }
@@ -12117,11 +10885,7 @@ label.error { display: none !important; }
 
 
 /* Short Divider - Icon Align Center
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .divider.divider-center.divider-short:before {
 	left: auto !important;
@@ -12142,11 +10906,7 @@ label.error { display: none !important; }
 
 
 /* Divider - Rounded Icon
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .divider.divider-rounded { color: #BBB; }
 
@@ -12177,11 +10937,7 @@ label.error { display: none !important; }
 
 
 /* Divider - Rounded & Border
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .divider.divider-border { color: #E5E5E5; }
 
@@ -12193,11 +10949,7 @@ label.error { display: none !important; }
 
 
 /* Divider - Line Only
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .divider.divider-line:before,
 .divider.divider-line:after {
@@ -12208,13 +10960,8 @@ label.error { display: none !important; }
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Quotes & Blockquotes
  * 	-----------------------------------------------------------------*/
-=======
-	Quotes & Blockquotes
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 
 blockquote p { margin-bottom: 15px; }
@@ -12263,13 +11010,8 @@ blockquote.pull-right {
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Dropcaps & Highlights
  * 	-----------------------------------------------------------------*/
-=======
-	Dropcaps & Highlights
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 
 .dropcap {
@@ -12289,13 +11031,8 @@ blockquote.pull-right {
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Magazine Specific Classes
  * 	-----------------------------------------------------------------*/
-=======
-	Magazine Specific Classes
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .top-advert {
 	float: right;
@@ -12324,13 +11061,8 @@ blockquote.pull-right {
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Text Rotater
  * 	-----------------------------------------------------------------*/
-=======
-	Text Rotater
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .text-rotater {}
 
@@ -12338,13 +11070,8 @@ blockquote.pull-right {
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Go To Top
  * 	-----------------------------------------------------------------*/
-=======
-	Go To Top
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 
 #gotoTop {
@@ -12379,13 +11106,8 @@ body:not(.device-touch) #gotoTop {
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Error 404
  * 	-----------------------------------------------------------------*/
-=======
-	Error 404
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 
 .error404 {
@@ -12420,13 +11142,8 @@ body:not(.device-touch) #gotoTop {
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Landing Pages
  * 	-----------------------------------------------------------------*/
-=======
-	Landing Pages
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .landing-wide-form {
 	background: rgba(0,0,0,0.3);
@@ -12459,13 +11176,8 @@ body:not(.device-touch) #gotoTop {
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Preloaders
  * 	-----------------------------------------------------------------*/
-=======
-	Preloaders
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 
 .preloader,
@@ -12488,13 +11200,8 @@ body:not(.device-touch) #gotoTop {
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Toastr Notifications
  * 	-----------------------------------------------------------------*/
-=======
-	Toastr Notifications
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 
 .toast-title { font-weight: bold; }
@@ -12646,13 +11353,8 @@ button.toast-close-button {
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Footer
  * 	-----------------------------------------------------------------*/
-=======
-	Footer
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 
 #footer {
@@ -12728,13 +11430,8 @@ button.toast-close-button {
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Widgets
  * 	-----------------------------------------------------------------*/
-=======
-	Widgets
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 
 .widget {
@@ -12768,11 +11465,7 @@ button.toast-close-button {
 
 
 /* Tag Cloud
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 
 .tagcloud { margin-bottom: -2px; }
@@ -12802,11 +11495,7 @@ body:not(.device-touch) .tagcloud a {
 
 
 /* Widget - Links
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .widget_nav_menu ul,
 .widget_nav_menu li,
@@ -12922,11 +11611,7 @@ body:not(.device-touch) .tagcloud a {
 
 
 /* Widget - Testimonial & Twitter
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .widget .testimonial.no-image .testi-image { display: none; }
 
@@ -12958,11 +11643,7 @@ body:not(.device-touch) .tagcloud a {
 
 
 /* Widget - Quick Contact Form
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .quick-contact-widget .form-control,
 .quick-contact-widget .input-group,
@@ -12975,11 +11656,7 @@ body:not(.device-touch) .tagcloud a {
 
 
 /* Newsletter Widget
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .subscribe-widget h5 {
 	font-weight: 300;
@@ -12989,11 +11666,7 @@ body:not(.device-touch) .tagcloud a {
 
 
 /* Twitter Feed Widget
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .widget-twitter-feed li { margin: 15px 0 0 0; }
 
@@ -13008,11 +11681,7 @@ body:not(.device-touch) .tagcloud a {
 
 
 /* Small Post
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .widget-twitter-feed li { margin: 15px 0 0 0; }
 
@@ -13027,11 +11696,7 @@ body:not(.device-touch) .tagcloud a {
 
 
 /* Navigation Tree
-<<<<<<< HEAD
  * -----------------------------------------------------------------*/
-=======
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 
 .nav-tree {
@@ -13099,13 +11764,8 @@ body:not(.device-touch) .tagcloud a {
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Wedding
  * 	-----------------------------------------------------------------*/
-=======
-	Wedding
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 
 .wedding-head {
@@ -13151,13 +11811,8 @@ body:not(.device-touch) .tagcloud a {
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Bootstrap Specific
  * 	-----------------------------------------------------------------*/
-=======
-	Bootstrap Specific
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 .table .success { color: #3c763d; }
 
@@ -13219,13 +11874,8 @@ label.checkbox { padding-left: 20px; }
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Stretched Layout
  * 	-----------------------------------------------------------------*/
-=======
-	Stretched Layout
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 
 .stretched #wrapper {
@@ -13236,13 +11886,8 @@ label.checkbox { padding-left: 20px; }
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	Page Transitions
  * 	-----------------------------------------------------------------*/
-=======
-	Page Transitions
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 body:not(.no-transition) #wrapper,
 .animsition-overlay {
@@ -14212,13 +12857,8 @@ body:not(.no-transition) #wrapper,
 
 
 /* ----------------------------------------------------------------
-<<<<<<< HEAD
  * 	HTML5 Youtube Video Backgrounds
  * 	-----------------------------------------------------------------*/
-=======
-	HTML5 Youtube Video Backgrounds
------------------------------------------------------------------*/
->>>>>>> 46b5077df66c80a4fa42338abf61e22f4af7ff16
 
 
 .mb_YTVPlayer :focus { outline: 0; }
@@ -14490,3 +13130,4 @@ td.failure
 {
     width: 40%;
 }
+

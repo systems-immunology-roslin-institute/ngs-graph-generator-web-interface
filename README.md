@@ -14,3 +14,4 @@ Authors
 -------
 
 * Tim Angus
+* Wan Fahmi Wan Nazarie

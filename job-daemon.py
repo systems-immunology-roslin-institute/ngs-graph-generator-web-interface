@@ -58,7 +58,7 @@ exitNow         = 0
 activeJobs      = 0
 activeThreads   = []
 
-maxJobSize = 10737418240 # 10Gb
+maxJobSize = 30737418240 # 30Gb
 
 def executeSQLQuery(query):
     try:

@@ -458,12 +458,10 @@ def checkForUnvalidatedEmailAddresses(lock):
             print "Validating " + email + " with token " + newToken
 
             # Send email
-            subject = "seq-graph needs to validate your email address"
+            subject = "NGS Graph Generator needs to validate your email address"
             url = getSetting("base-url")
-            body = "Click the following URL to proceed:\n" + \
-                url + "index.php?action=validate" + \
-                "&token=" + newToken
-
+            body = "Dear User,\n\n" + "Thank you for using our NGS Grapah Generator to analyse and visualise your RNA-seq data. To ensure that you can use our pipeline, you need to click the following link to start building your graph.\n\n" + url + "generate.php?action=validate" + "&token=" + newToken 
+	    
             sendmail(email, subject, body)
 
             # Update table with token
@@ -516,12 +514,22 @@ def checkForNewJobs(lock):
             startJob(job[0], lock)
 
             # Send email
-            subject = "seq-graph job " + jobId + " started"
+            # subject = "NGS Graph Generator job " + jobId + " started"
+            # url = getSetting("base-url")
+            # body = "If you happened to run a wrong job and want to abort the recent run please click the following URL to abort the job:\n" + \
+            #    url + "abort.php?job=" + jobId + \
+            #    "&token=" + token
+		
+		# Send email
+            subject = "NGS Graph Generator job " + jobId + " started"
             url = getSetting("base-url")
-            body = "Click the following URL to abort the job:\n" + \
-                url + "abort.php?job=" + jobId + \
+            body = "View all your results:\n" + \
+                url + "results.php?job=" + jobId + \
                 "&token=" + token
+		
 
+
+	
             sendmail(email, subject, body)
         else:
             lock.release()
@@ -542,11 +550,11 @@ def checkForCompleteJobs(lock):
             url = getSetting("base-url")
 
             if abort == 0:
-                subject = "seq-graph job " + jobId + " results"
+                subject = "NGS Graph Generator - seq-graph job " + jobId + " results"
                 body = "Results for job " + jobId + " are now available:\n" + \
                     url + "results.php?job=" + jobId + "&token=" + token + "\n"
             else:
-                subject = "seq-graph job " + jobId + " aborted"
+                subject = "NGS Graph Generator - seq-graph job " + jobId + " aborted"
                 if size > maxJobSize:
                     body = "Job " + jobId +  " was automatically aborted " + \
                         "because it was using too much storage.\n"

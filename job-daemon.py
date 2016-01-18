@@ -58,7 +58,7 @@ exitNow         = 0
 activeJobs      = 0
 activeThreads   = []
 
-maxJobSize = 30737418240 # 30Gb
+maxJobSize = 107374182400 # 100Gb
 
 def executeSQLQuery(query):
     try:
@@ -349,7 +349,7 @@ def purgeJob(jobId):
 
     resultsDir = result[0][0]
 
-    executeSQLQuery("DELETE FROM " + dbResultsTable + " WHERE id='" + `int(jobId)` + "'")
+    executeSQLQuery("DELETE FROM " + dbResultsTable + " WHERE jobid='" + `int(jobId)` + "'")
     executeSQLQuery("DELETE FROM " + dbJobsTable + " WHERE id='" + `int(jobId)` + "'")
     if os.path.exists(resultsDir):
         shutil.rmtree(resultsDir)
@@ -460,7 +460,7 @@ def checkForUnvalidatedEmailAddresses(lock):
             # Send email
             subject = "NGS Graph Generator needs to validate your email address"
             url = getSetting("base-url")
-            body = "Dear User,\n\n" + "Thank you for using our NGS Grapah Generator to analyse and visualise your RNA-seq data. To ensure that you can use our pipeline, you need to click the following link to start building your graph.\n\n" + url + "generate.php?action=validate" + "&token=" + newToken 
+            body = "Dear User,\n\n" + "Thank you for using our NGS Grapah Generator to analyse and visualise your RNA-seq data. To ensure that you can use our pipeline, you need to click the following link to start building up your graph.\n\n" + url + "generate.php?action=validate" + "&token=" + newToken 
 	    
             sendmail(email, subject, body)
 
@@ -527,9 +527,6 @@ def checkForNewJobs(lock):
                 url + "results.php?job=" + jobId + \
                 "&token=" + token
 		
-
-
-	
             sendmail(email, subject, body)
         else:
             lock.release()
@@ -573,7 +570,7 @@ def purgeHistoricalJobs(lock):
     """Remove old jobs in order to save disk space"""
 
     now = time.time()
-    cutoff = now - (60 * 60 * 24 * 7) # 1 week
+    cutoff = now - (60 * 60 * 24 * 7 * 8) # 2 months
 
     result = executeSQLQuery("SELECT id, resultsdir FROM " + dbJobsTable + \
             " WHERE timefinished > 0 AND timefinished < '" + `int(cutoff)` + "'")
